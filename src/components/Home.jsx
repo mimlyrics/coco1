@@ -32,10 +32,6 @@ const Home = () => {
 
   //console.log("IS: ", isActiveModalNavbar);
 
-  const onScrollHeaderEvent = () => {
-    const header = document.getElementById("header");
-    header.style.backgroundColor = "brown";
-  };
   const handleLogout = async (e) => {
     e.preventDefault();
     try {
@@ -60,8 +56,7 @@ const Home = () => {
 
   return ( 
     <div className="">
-
-        <div className="h-[60vh] md:h-[400px] relative" id="header" onScroll="onScrollHeaderEvent()">
+        <div className="h-[60vh] md:h-[400px] relative">
           {/* <img className="w-[100%] h-[100%]" src={coco1} alt="x"/> */}
           <div className="w-[100%] h-[100%] rounded-bl-[100px]" 
             style={{ backgroundImage: `url(${coco1})`, backgroundSize: `cover`, backgroundAttachment: `fixed`, backgroundPosition: `center` }}>
@@ -147,25 +142,25 @@ const Home = () => {
                 <div className="flex flex-row border-y-2 py-3 float-end my-3 items-center justify-between">
                   <img src={ coco1 } className="border mr-8 w-20 h-20 md:w-40 md:h-40"/>
                   <div>
-                    <h1 className="text-center text-[brown] text-lg md:text-2xl">Effectuer un achat</h1>
+                    <h1 className="text-center text-black text-lg md:text-2xl"><strong>Effectuer un achat</strong></h1>
                     Vous êtes un producteur et vous souhaitez acheter des parcelles à une coopérative pour débuter votre activité. Alors, cette rubrique est faite pour vous.<br/>
-                    <a href="" className="text-blue-700 underline font-bold">Plus...</a>
+                    <a href="/admin/purchase" className="text-blue-700 underline font-bold">Plus...</a>
                   </div>
                 </div>
 
                 <div className="flex flex-row border-y-2 py-3 float-end my-3 items-center justify-between">
                   <div>
-                    <h1 className="text-center text-[brown] text-lg md:text-2xl">Effectuer une vente</h1>
+                    <h1 className="text-center text-black text-lg md:text-2xl"><strong>Effectuer une vente</strong></h1>
                     Vous êtes un producteur et vous souhaitez vendre vos produits. Cette rubrique est faite pour vous.<br/>
                     <a href="" className="text-blue-700 underline font-bold">Plus...</a>
                   </div>
                   <img src={ coco1 } className="border mr-8 w-20 h-20 md:w-40 md:h-40"/>
                 </div>
 
-                <div className="flex flex-row border-y-2 py-3 float-end my-3 items-center justify-between">
+                <div className="flex flex-row w-full border-y-2 py-3 float-end my-3 items-center justify-between">
                   <img src={ coco1 } className="border mr-8 w-20 h-20 md:w-40 md:h-40"/>
                   <div>
-                    <h1 className="text-center text-[brown] text-lg md:text-2xl">Parcelles</h1>
+                    <h1 className="text-center text-black text-lg md:text-2xl"><strong>Voir les parcelles</strong></h1>
                     Ici vous pourrez visualiser les données de votre parcelle dans une carte. <br/>
                     <a href="" className="text-blue-700 underline font-bold">Plus...</a>
                   </div>
@@ -173,7 +168,7 @@ const Home = () => {
 
                 <div className="flex flex-row border-y-2 py-3 float-end my-3 items-center justify-between">
                   <div>
-                    <h1 className="text-center text-[brown] text-lg md:text-2xl">Module de statistiques</h1>
+                    <h1 className="text-center text-black text-lg md:text-2xl"><strong>Module Statistique</strong></h1>
                     Ici vous aurez un compte rendu de votre activité (nombre/quantité de ventes, nombre/quantité d'achats, ...).<br/>
                     <a href="" className="text-blue-700 underline font-bold">Plus...</a>
                   </div>
@@ -190,31 +185,28 @@ const Home = () => {
 
 
 
-        <div className="m-0 box-border flex flex-col md:text-lg md:py-1 bg-amber-100">
-          <div>
-            <div className="px-8">
-              <div className=" text-sky-950 font-mono w-[40%] flex flex-col mx-2 mb-1">
-                <p className=''> _______</p>
-                <Link to="/producer" className="">
-                  Producer
-                </Link>
-                <Link to="/cooperative" className="text-lg">
-                Cooperative
-                </Link>
-                <Link to="/exporter" className="">
-                  Exporter
-                </Link>
-                <Link to="/purchase" className="">Purchase</Link>
-                <Link to="/sales" className="" >Sales</Link>
-                <Link className="text-gray-700" to="/admin/dashboard" >Admin DashBoard</Link>
-              </div>
+        <div className="m-0 box-border flex flex-col md:text-lg md:py-1 text-white bg-[brown]">
+          <div className="flex justify-around text-gray-100 jus p-4 flex-wrap">
+            <div class="mx-2">
+              <h2 class="text-center text-gray-300 mt-3">Contacts</h2>
+              (+237) 6xx xx xx xx<br/>
+              (+237) 6xx xx xx xx<br/>
             </div>
-            <div>
+            <div class="mx-2">
+                <h2 class="text-center text-gray-300 mt-3">Adresses email</h2>
+                tracecocoa.camer@gmail.com<br/>
+                adresseemail2@gmail.com<br/>
+            </div>
+            <div class="mx-2">
+                <h2 class="text-center text-gray-300 mt-3">Infos supplémentaires</h2>
+                Ministère de l'agriculture<br/>
 
+                <h2 class="text-center text-gray-300 mt-2">QR Code producteur</h2>
+                
             </div>
           </div>
           <div className="text-center border-t">
-            Tous droits reservés
+            Copyright © 2024 Tous droits reservés
           </div>
           {/* <div className=" text-sky-950 font-mono w-[40%] flex flex-col mx-2 mb-1">
             <p className=''> _______</p>

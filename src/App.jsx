@@ -54,7 +54,7 @@ function App() {
   //console.log(isAdmin, isEditor);
   return (
     <Router>    
-        <Navbar/>
+      <Navbar/>
       <Routes>        
       {/**Public routes */}    
         <Route path="/" element={<Home/>} />       

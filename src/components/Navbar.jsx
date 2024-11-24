@@ -15,7 +15,6 @@ const IMAGE_URL = "/api/v1/upload/avatar";
 import axios from "./api/axios";
 import AudioLogo from "../assets/audiologo.png"
 import { selectCurrentUser } from "../slices/auth/authSlice";
-
 import logo from "../assets/logo.png";
 
 
@@ -25,6 +24,31 @@ const Navbar = () => {
   const location = useLocation();
   const {pathname} = location;
   const {isActiveModalNavbar, setIsActiveModalNavbar} = useMimlyrics();
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    const onScrollHeaderEvent = (e) => {
+      const header = document.getElementById("header");
+      if(window.scrollY <= 0)
+      {
+        header.style.backgroundColor = "transparent";
+        header.classList.remove("text-white");
+        header.classList.add("text-blue-600");
+      } else {
+        header.classList.add("text-white");
+        header.classList.remove("text-blue-600");
+        header.style.backgroundColor = "brown";
+      }
+    };
+  
+    window.addEventListener("scroll", (e) => {
+      onScrollHeaderEvent(e);
+    });
+
+    document.getElementById("logo").addEventListener("click", (e) => {
+      navigate("/");
+    });
+  }, []);
 
   const handleModalNavbar = async () => {
     setShowModal(!showModal); 
@@ -32,32 +56,28 @@ const Navbar = () => {
   }
 
    return (    
-      <div className="z-50 fixed top-0 left-0 right-0 py-3 transition-all">
-       <nav className="md:py-1 bg-transparent relative md:flex-row md:justify-between flex">
-          <img src={logo} className="w-20 h-20 md:w-28 md:h-28 ml-5 md:ml-20"></img>
+      <div className="z-50 fixed top-0 left-0 right-0 text-blue-600">
+       <nav id="header" className=" transition-all md:py-1 bg-transparent relative md:flex-row md:justify-between flex items-center">
+          <img src={logo} id="logo" className="cursor-pointer w-20 h-20 md:w-28 md:h-28 ml-5 md:ml-20"></img>
 
-          <div className="flex flex-row flex-1 justify-end mr-3 items-center">
-            <div className="">
-              <Link className=" flex hover:bg-slate-300 hover:border hover:rounded-full hover:text-indigo-800 w-24 hover:text-center " to="/register "> 
-                  <IoMdLogIn className=" mx-1 w-5 h-5 md:w-6 md:h-7"/>
-                  <p className=" ">Sign Up</p>
-                </Link>
-            </div>
-            <div className="">
-              <Link className=" flex hover:bg-slate-300 hover:border hover:rounded-full hover:text-indigo-800 w-24 hover:text-center" to="/login "> 
-                  <IoMdLogIn className=" mx-1 w-5 h-5 md:w-6 md:h-7"/>
-                  <p className="  ">Sign In</p>
-                </Link>
-            </div>
+          <div className="flex flex-row flex-1 justify-end mr-5 items-center">
+              <Link className="flex flex-row items-center justify-center mr-4 transition-transform hover:scale-110 hover:text-green-300" to="/register "> 
+                <IoMdLogIn className="mr-2 text-xl md:text-3xl"/>
+                <div>Inscription</div>
+              </Link>
+              <Link className="flex flex-row items-center justify-center ml-4 transition-transform hover:scale-110 hover:text-green-300" to="/login "> 
+                <IoMdLogIn className="mr-2 text-xl md:text-3xl"/>
+                <div>Connexion</div>
+              </Link>
           </div>
          {showModal ? (
-           <div className=" absolute top-5 left-2 md:invisible">
+           <div className=" absolute top-1/2 -translate-y-1/2 left-3 md:invisible">
              <button className="" onClick={() => handleModalNavbar()}>
                <FaX />
              </button>
            </div>
          ) : (
-           <div className="absolute top-5 left-2 md:invisible">
+           <div className="absolute top-1/2 -translate-y-1/2 left-3 md:invisible">
              <button className="" onClick={() => handleModalNavbar()}>
                <FaAlignJustify />
              </button>
