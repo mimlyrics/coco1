@@ -15,6 +15,10 @@ const IMAGE_URL = "/api/v1/upload/avatar";
 import axios from "./api/axios";
 import AudioLogo from "../assets/audiologo.png"
 import { selectCurrentUser } from "../slices/auth/authSlice";
+
+import logo from "../assets/logo.png";
+
+
 const Navbar = () => {
   const [showModal, setShowModal] = useState(false);
   const [errMsg, setErrMsg] = useState("");
@@ -28,13 +32,24 @@ const Navbar = () => {
   }
 
    return (    
-      <div className=" z-50 md:w-[75%] lg:w-[65%]   ">
-       <nav className=" w-[100vw] md:py-1 z-50 shadow shadow-amber-900 border 
-       bg-[rgba(119,85,84)] h-16 relative md:flex-row md:justify-between">
-        <div className=" mx-16 md:mx-32 mt-4 md:mt-3 text-[17px] flex md:text-lg">
-          <FaMusic className=" mr-[2px] text-cyan-100 w-5 h-5"/>
-          <h1 className=" text-cyan-200 mt-1 font-serif font-semibold shadow-sky-100 ">COCO</h1>
-        </div>
+      <div className="z-50 fixed top-0 left-0 right-0 py-3 transition-all">
+       <nav className="md:py-1 bg-transparent relative md:flex-row md:justify-between flex">
+          <img src={logo} className="w-20 h-20 md:w-28 md:h-28 ml-5 md:ml-20"></img>
+
+          <div className="flex flex-row flex-1 justify-end mr-3 items-center">
+            <div className="">
+              <Link className=" flex hover:bg-slate-300 hover:border hover:rounded-full hover:text-indigo-800 w-24 hover:text-center " to="/register "> 
+                  <IoMdLogIn className=" mx-1 w-5 h-5 md:w-6 md:h-7"/>
+                  <p className=" ">Sign Up</p>
+                </Link>
+            </div>
+            <div className="">
+              <Link className=" flex hover:bg-slate-300 hover:border hover:rounded-full hover:text-indigo-800 w-24 hover:text-center" to="/login "> 
+                  <IoMdLogIn className=" mx-1 w-5 h-5 md:w-6 md:h-7"/>
+                  <p className="  ">Sign In</p>
+                </Link>
+            </div>
+          </div>
          {showModal ? (
            <div className=" absolute top-5 left-2 md:invisible">
              <button className="" onClick={() => handleModalNavbar()}>
@@ -50,7 +65,7 @@ const Navbar = () => {
          )}
         
             
-         <div className=" invisible md:visible">
+         {/* <div className=" invisible md:visible">
            <ul className=" mx-1 mt-1 px-3 absolute top-16
                flex-col lg:text-lg bg-zinc-100 shadow-lg shadow-zinc-500">              
              <Link className="flex py-2 hover:bg-slate-200 " to="/">
@@ -100,7 +115,7 @@ const Navbar = () => {
              <span className="border-b-2"></span>
              {pathname.startsWith("/language") ? <p className=" mx-2 border-b-4 border-blue-200  "></p> : null }
            </ul>          
-         </div>
+         </div> */}
 
         </nav>
 
@@ -174,7 +189,7 @@ const Navbar = () => {
            </ul>
           
          ) : null}
-        </section>
+       </section>
         <Outlet/>
       </div>    
    );

@@ -1,5 +1,5 @@
+import axios from "axios";
 import{useState, useRef, useEffect} from "react";
-import axios from "../../../../myprojects/mimlyrics/client/mimlyrics5/src/components/api/axios";
 const COOPERATIVE_URL = "/api/v1/cooperatives/cooperatives";
 const AdminAddCooperative = () => {
   const [name, setName] = useState("");

@@ -32,6 +32,10 @@ const Home = () => {
 
   //console.log("IS: ", isActiveModalNavbar);
 
+  const onScrollHeaderEvent = () => {
+    const header = document.getElementById("header");
+    header.style.backgroundColor = "brown";
+  };
   const handleLogout = async (e) => {
     e.preventDefault();
     try {
@@ -57,20 +61,20 @@ const Home = () => {
   return ( 
     <div className="">
 
-        <div className="h-[60vh] relative">
+        <div className="h-[60vh] md:h-[400px] relative" id="header" onScroll="onScrollHeaderEvent()">
           {/* <img className="w-[100%] h-[100%]" src={coco1} alt="x"/> */}
-          <div className="w-[100%] h-[100%]" 
+          <div className="w-[100%] h-[100%] rounded-bl-[100px]" 
             style={{ backgroundImage: `url(${coco1})`, backgroundSize: `cover`, backgroundAttachment: `fixed`, backgroundPosition: `center` }}>
-            <div className="text-white font-bold text-center font-mono text-4xl">
-              <h1>COCOC Cameroun</h1>
+            <div className="text-white font-bold text-center font-mono text-4xl flex items-center justify-center w-full h-full">
+              <h1 className="text-4xl md:text-[80px] text-[#00000067]">CACAO Cameroun</h1>
             </div>
           </div>
-          <div className="  bg-[rgba(119,85,84)] absolute top-0 left-0 bottom-0 right-0 opacity-20">
+          <div className=" bg-[rgba(119,85,84)] absolute top-0 left-0 bottom-0 right-0 opacity-40 rounded-bl-[100px]">
 
           </div>
         </div>
         
-      <nav className=" ml-[90%]">
+      {/* <nav className="md:w-[80%]">
         {isLoading ? <h1 className=" items-center font-mono mt-40 text-center h-36 ">LOADING...</h1> : null}
 
         {userInfo ? 
@@ -125,26 +129,94 @@ const Home = () => {
         </div>
         </div> : null}
         </div>}         
-      </nav>
+      </nav> */}
 
-      <section className={ isActiveModalNavbar ? " relative opacity-60 -z-50 " :  "  z-50 font-medium space-x-1 mx-1 mt-1 md:ml-[17%] lg:ml-[14%] xl:ml-[12%]" }>
-        <div className=' mt-2 md:mt-2 pl-2 pr-14 md:pr-20 py-1'>
+      <section className={ isActiveModalNavbar ? " relative opacity-60 -z-50 " :  "flex flex-col z-50 font-medium space-x-1 mx-1 mt-5" }>
+        <div className=' mt-2 md:mt-2 pl-2 pr-14 py-1'>
           <div className=" ">
-            <p className="text-gray-900 ">
-              Welcome to coco ! a web app where you can watch and get lyrics video in four languages (english, french, spanish, german)
-              for entertainment or post .
-            </p>
+            <h1 className="border-l text-4xl md:text-[2.5rem]">Bienvenue sur  <strong>Trace Cocoa</strong></h1>
+              <p className="text-gray-900 ">
+              Plateforme de vente et d'achat de cacao en ligne chez des commerçants de confiance<br/>
 
-          <p className=" pt-2 ">
-            This web app is subdivided into categories 
-          </p>
+              Que souhaitez vous faire ?
+              </p>
+
+            <div id="operations"
+              className="w-[90vw] m-auto md:w-4/5 p-5 relative">
+
+                <div className="flex flex-row border-y-2 py-3 float-end my-3 items-center justify-between">
+                  <img src={ coco1 } className="border mr-8 w-20 h-20 md:w-40 md:h-40"/>
+                  <div>
+                    <h1 className="text-center text-[brown] text-lg md:text-2xl">Effectuer un achat</h1>
+                    Vous êtes un producteur et vous souhaitez acheter des parcelles à une coopérative pour débuter votre activité. Alors, cette rubrique est faite pour vous.<br/>
+                    <a href="" className="text-blue-700 underline font-bold">Plus...</a>
+                  </div>
+                </div>
+
+                <div className="flex flex-row border-y-2 py-3 float-end my-3 items-center justify-between">
+                  <div>
+                    <h1 className="text-center text-[brown] text-lg md:text-2xl">Effectuer une vente</h1>
+                    Vous êtes un producteur et vous souhaitez vendre vos produits. Cette rubrique est faite pour vous.<br/>
+                    <a href="" className="text-blue-700 underline font-bold">Plus...</a>
+                  </div>
+                  <img src={ coco1 } className="border mr-8 w-20 h-20 md:w-40 md:h-40"/>
+                </div>
+
+                <div className="flex flex-row border-y-2 py-3 float-end my-3 items-center justify-between">
+                  <img src={ coco1 } className="border mr-8 w-20 h-20 md:w-40 md:h-40"/>
+                  <div>
+                    <h1 className="text-center text-[brown] text-lg md:text-2xl">Parcelles</h1>
+                    Ici vous pourrez visualiser les données de votre parcelle dans une carte. <br/>
+                    <a href="" className="text-blue-700 underline font-bold">Plus...</a>
+                  </div>
+                </div>
+
+                <div className="flex flex-row border-y-2 py-3 float-end my-3 items-center justify-between">
+                  <div>
+                    <h1 className="text-center text-[brown] text-lg md:text-2xl">Module de statistiques</h1>
+                    Ici vous aurez un compte rendu de votre activité (nombre/quantité de ventes, nombre/quantité d'achats, ...).<br/>
+                    <a href="" className="text-blue-700 underline font-bold">Plus...</a>
+                  </div>
+                  <img src={ coco1 } className="border mr-8 w-20 h-20 md:w-40 md:h-40"/>
+                </div>
+
+
+            </div>
+            {/* <p className=" pt-2 ">
+              This web app is subdivided into categories 
+            </p> */}
+          </div>
         </div>
-        </div>
 
 
 
-        <div className=" flex flex-col md:text-lg md:py-1 ">
-          <div className=" text-sky-950 font-mono w-[40%] flex flex-col mx-2 mb-1">
+        <div className="m-0 box-border flex flex-col md:text-lg md:py-1 bg-amber-100">
+          <div>
+            <div className="px-8">
+              <div className=" text-sky-950 font-mono w-[40%] flex flex-col mx-2 mb-1">
+                <p className=''> _______</p>
+                <Link to="/producer" className="">
+                  Producer
+                </Link>
+                <Link to="/cooperative" className="text-lg">
+                Cooperative
+                </Link>
+                <Link to="/exporter" className="">
+                  Exporter
+                </Link>
+                <Link to="/purchase" className="">Purchase</Link>
+                <Link to="/sales" className="" >Sales</Link>
+                <Link className="text-gray-700" to="/admin/dashboard" >Admin DashBoard</Link>
+              </div>
+            </div>
+            <div>
+
+            </div>
+          </div>
+          <div className="text-center border-t">
+            Tous droits reservés
+          </div>
+          {/* <div className=" text-sky-950 font-mono w-[40%] flex flex-col mx-2 mb-1">
             <p className=''> _______</p>
             <Link to="/producer" className="">
               Producer
@@ -208,7 +280,7 @@ const Home = () => {
                 <Link>Github</Link>
               </div>
             </div>
-          </div>
+          </div> */}
         </div>
       </section>
     </div>

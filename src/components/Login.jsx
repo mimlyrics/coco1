@@ -69,14 +69,14 @@ const Login = () => {
   }
 
   return (
-    <section className={ isActiveModalNavbar ? " relative -z-50 " : " relative my-1 h-screen"}>
+    <section className={ isActiveModalNavbar ? " relative -z-50 mt-24" : " relative my-1 h-screen mt-24"}>
       <form
         className=" py-6 md:w-6/12 md:ml-64 bg-white mx-3 shadow-2xl shadow-indigo-300 rounded flex-col "
         onSubmit={handleSubmit}
       >
         <div className=" ml-[30%] flex space-x-32">
           <h2 className="text-center italic text-2xl">
-            Choose a Login Method
+            Connexion
           </h2>
           <FaX onClick={() => CloseLogin()} className=" cursor-pointer w-6 h-6 text-cyan-500 hover:text-cyan-900 "/>  
         </div>   
@@ -84,14 +84,14 @@ const Login = () => {
       {success ? <h1 className="font-medium text-center my-3 text-xl text-blue-800 md:text-lg ">{success}</h1> : null}
       {hi ? null : null}
         <p className="mb-3 mt-2 text-center">
-          Don't have an account ?{" "}
+          Vous n'avez pas de compte ?{" "}
           <Link to="/register" className="bg-purple-200 rounded">
             Sign Up
           </Link>
         </p>
 
       <div className="form-group p-2">
-        <label htmlFor="email">Username</label>
+        <label htmlFor="email">Nom d'utilisateur</label>
         <input
           type="text"
           autoComplete="off"
@@ -104,7 +104,7 @@ const Login = () => {
       <div className="form-group p-2">
         {showPassword ? (
           <div className="">
-            <label htmlFor="password">Password</label>
+            <label htmlFor="password">Mot de passe</label>
             <div className="relative">
               <input
                 type="text"
@@ -124,7 +124,7 @@ const Login = () => {
           </div>
           ) : (
           <div className="">
-            <label htmlFor="password">Password</label>
+            <label htmlFor="password">Mot de passe</label>
               <div className="relative">
               <input
                 type="password"
