@@ -219,22 +219,12 @@ const Home = () => {
           <div className="text-center border-t">
             Copyright © 2024 Tous droits reservés
           </div>
-          {/* <div className=" text-sky-950 font-mono w-[40%] flex flex-col mx-2 mb-1">
-            <p className=''> _______</p>
-            <Link to="/producer" className="">
-              Producer
-            </Link>
-            <Link to="/cooperative" className="text-lg">
-            Cooperative
-            </Link>
-            <Link to="/exporter" className="">
-              Exporter
-            </Link>
-            <Link to="/purchase" className="">Purchase</Link>
-            <Link to="/sales" className="" >Sales</Link>
-            <Link className="text-gray-700" to="/admin/dashboard" >Admin DashBoard</Link>
-          </div>
 
+           <div className=" text-white font-mono w-[80%] flex space-x-24 mx-2 mb-1">
+            <p className=''> _______</p>
+            <Link className="text-gray-200" to="/admin/dashboard" >Admin DashBoard</Link>
+          </div>
+{/*
           <div className=" text-gray-800 w-[100%] px-3 bg-gradient-to-r from-[rgba(30,30,30,0.1)] to-[rgba(20,50,50,0.2)] md:flex md:space-x-28">
             <div className="flex flex-col mb-3 py-1">
               <p>About Us</p>

@@ -11,7 +11,6 @@ const AdminDashBoard = () => {
       </div>
       <ul className='flex flex-col  border text-center text-amber-900 text-lg'>
         <Link className='border-b-2 py-3 md:py-5 hover:bg-indigo-100' to="/admin/user">Utilisateurs</Link>
-        <Link className='border-b-2 py-3 md:py-5 hover:bg-indigo-100' to="/admin/produce">Producteurs</Link>
         <Link className='border-b-2 py-3 md:py-5 hover:bg-indigo-100' to="/admin/plot">Plot</Link>
         <Link className='border-b-2 py-3 md:py-5 hover:bg-indigo-100' to="/admin/cooperative">Cooperatives</Link>
         <Link className='border-b-2 py-3 md:py-5 hover:bg-indigo-100' to="/admin/sale">Ventes</Link>
