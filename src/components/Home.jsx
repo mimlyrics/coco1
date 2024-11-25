@@ -215,18 +215,20 @@ const Home = () => {
                 <h2 className="text-center text-gray-300 mt-3">Infos supplémentaires</h2>
                 Ministère de l'agriculture<br/>
 
-                <h2 className="text-center text-gray-300 mt-2">QR Code producteur</h2>
-                { url ? 
+                { userCode ? 
                     <div>
-                    <QRCodeCanvas
-                      value={ url }
-                      size={200}
-                      bgColor="white"
-                      fgColor="brown"
-                      className="border rounded mt-2"
-                    />
-                  </div>
-                : "" }
+                      <h2 className="text-center text-gray-300 mt-2">QR Code producteur</h2>
+                      <div>
+                        <QRCodeCanvas
+                          value={ url }
+                          size={200}
+                          bgColor="white"
+                          fgColor="brown"
+                          className="border rounded mt-2"
+                        />
+                      </div>
+                    </div>
+                  : "" }
                 
             </div>
           </div>

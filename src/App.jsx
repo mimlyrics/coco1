@@ -48,7 +48,6 @@ import Profile from "./components/Profile";
 import AdminExporter from "./components/admin/exporter/AdminExporter";
 import AdminEditExporter from "./components/admin/exporter/AdminEditExporter";
 import AdminAddExporter from "./components/admin/exporter/AdminAddExporter";
-import Component1 from "./components/example/Component1";
 import 'leaflet/dist/leaflet.css';
 
 function App() {
@@ -111,7 +110,6 @@ function App() {
               <Route path="/admin/exporter" element={<AdminExporter/>} />
               <Route path="/admin/exporter/add" element={<AdminAddExporter/>} />
               <Route path="/admin/exporter/edit" element={<AdminEditExporter/>} />
-              <Route path="/co" element={<Component1/>}/>
             </Route>      
         </Routes>
 
