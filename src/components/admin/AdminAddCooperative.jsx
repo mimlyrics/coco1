@@ -1,12 +1,16 @@
 import{useState, useRef, useEffect} from "react";
-import axios from "../../../../myprojects/mimlyrics/client/mimlyrics5/src/components/api/axios";
+import axios from "../api/axios";
 const COOPERATIVE_URL = "/api/v1/cooperatives/cooperatives";
+import { selectCurrentToken } from "../../slices/auth/authSlice";
+import { useSelector } from "react-redux";
 const AdminAddCooperative = () => {
   const [name, setName] = useState("");
   const [errMsg, setErrMsg] = useState("");
   const [success, setSuccess] = useState("");
   const [nameFocus, setNameFocus] = useState(false);
   const nameRef = useRef();
+
+  const token = useSelector(selectCurrentToken);
 
   useEffect(() => {
     nameRef.current.focus();
@@ -25,7 +29,7 @@ const AdminAddCooperative = () => {
     //formData.append("name", name);
     console.log(name);
     try {
-        const postCooperative = await axios.post(COOPERATIVE_URL, {name: name} , {headers: {withCredentials: true}});
+        const postCooperative = await axios.post(COOPERATIVE_URL, {name: name} , {Authorization: `Bearer ${token}`,headers: {withCredentials: true}});
         if(postCooperative) {
             setSuccess(`${name} has been added successfully`);
             setName("");

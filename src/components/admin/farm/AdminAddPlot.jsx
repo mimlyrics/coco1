@@ -6,16 +6,17 @@ import { FaUpDown, FaUpload } from "react-icons/fa6";
 import axios from "../../api/axios";
 import { BsArrowDown, BsX } from "react-icons/bs";
 import { Link } from "react-router-dom";
-const PLOT_URL = "/api/v1/plot";
-const LYRIC_URL = "/api/v1/lyric";
-const LYRIC_READ_URL = "/api/v1/lyric/reaad";
-const APP_DATA_URL = "/api/v1/appData";
+import { selectCurrentToken } from "../../../slices/auth/authSlice";
+const PLOT_URL = "/api/v1/plots/plots";
+const USER_PROFILE_URL = "/api/v1/users/users";
 
 const regions = ["centre", "littoral", "Ouest", "Est", "ngoundere", "sud est", "north ouest"];
-const codes = ["r435", "5678j", "657krf"]
+const codes = ["r435", "5678j", "657krf"];
+const COOPERATIVE_URL = "api/v1/cooperatives/cooperatives";
 const AdminAddPlot = () => {
 
   const [code, setCode] = useState("");
+  const [userCode, setUserCode] = useState("");
   const [region, setRegion] = useState("");
   const [dept, setDept] = useState("");
   const [village, setVillage] = useState("");
@@ -34,27 +35,75 @@ const AdminAddPlot = () => {
   const [cIYearUseFrequency, setCIYearUseFrequency ] = useState("");
   const [difficulties, setDifficulties] = useState("");
 
-  const [errMsg, setErrMsg] = useState("");
- 
-  console.log(regions, codes);
+  const [cooperativeId, setCooperativeId] = useState("");
+  const [cooperatives, setCooperatives] = useState("");
+  const token = useSelector(selectCurrentToken);
+
+  const [usersCode, setUsersCode] = useState([]);
+
+  const [errMsg, setErrMsg] = useState(false);
+  const [success, setSuccess] = useState(false);
+
+  useEffect(() => {
+
+    setRegion(regions[0])
+
+  const searchUser = async () => {
+    try {
+        const res = await axios.get(`${USER_PROFILE_URL}`, {headers: {Authorization: `Bearer ${token}`,withCredentials: true}});
+        setUsersCode(res.data);
+        setUserCode(res.data[0].code);
+        console.log(code);
+    }catch(err) {
+        console.log(err?.data?.message);
+        setErrMsg(err?.data?.message);
+    }
+  }
+
+  searchUser()
+  }, [])
+
+  useEffect(() => {
+
+  const searchCooperative = async () => {
+    try {
+        const res = await axios.get(`${COOPERATIVE_URL}`, {headers: {Authorization: `Bearer ${token}`,withCredentials: true}});
+        console.log(res.data);
+        setCooperatives(res.data);
+        setCooperativeId(res.data[0].id);
+    }catch(err) {
+        console.log(err?.data?.message);
+        setErrMsg(err?.data?.message);
+    }
+  }
+
+  searchCooperative()
+  }, [])
+
  
 
   const handlePostSubmit = async (e) => {
     e.preventDefault();
 
     try {
-      const res = await axios.post(PLOT_URL, {
-           code, region, dept, village, area, arr,
-           location, xcoord, ycoord, plantingAge, 
+      const res = await axios.post(PLOT_URL, {code: code,
+           userCode: userCode, cooperativeId: cooperativeId, region, dept, village, area, arr,
+           location, xCoord: xcoord, yCoord: ycoord, plantingAge, 
            plantsNumber, productionPerYear, chemistryIntrants: chemistryInstrants, fertilizer, 
            fYearUseFrequency, cIYearUseFrequency, difficulties     
-      }, {headers: {"Content-Type": "application/json"}});
-      
+      }, {headers: {Authorization: `Bearer ${token}`, "Content-Type": "application/json"}});
+      console.log(res?.data?.plot);
       if(res) {
-        window.location.href = "http://localhost:3000/api/admin/plot"
+        setSuccess(res?.data?.message);
+        setTimeout(()=> {
+          window.location.href = "http://localhost:3000/admin/plot"
+        }, [1000])
+        
       }
     }catch(err) {
-      setErrMsg(err?.data);
+      console.log(err);
+      setErrMsg(err?.response?.data?.message);
+      window.scrollTo(0,50);
     }
   }
   return (
@@ -64,15 +113,37 @@ const AdminAddPlot = () => {
       <div className=" my-2 mt-1 bg-gradient-to-l from-amber-400 ">
         <h1 className="text-2xl text-center ">Admin Plot DashBoard</h1>
       </div>
-            
+
+        {errMsg? <div className=" animate-bounce font-bold text-lg text-red-500"><h1>{errMsg}</h1></div> : null}
+        {success? <div className=" animate-bounce font-bold text-lg text-green-500"><h1>{success}</h1></div> : null}
+        <div className="my-2 md:my-3 ">
+            <label htmlFor="code">Code</label>
+            <input className=" rounded-md shadow-sm px-2 py-2
+             md:py-3  w-[80%] block focus:outline 
+             focus:outline-[0.16rem] outline-sky-300
+             border-sky-300 " type="text" value={code} 
+             onChange={e=> setCode(e.target.value)}  
+            />
+        </div>            
 
         <div className="my-3 text-lg ">
-          <label htmlFor='code'>Code</label>
+          <label htmlFor='code'>User Code</label>
           <select className="h-11 px-5 text-gray-700 font-semibold rounded-md shadow-sm border outline-none
-            w-[80%] block" value={code} onChange={e=>setCode(e.target.value)}
+            w-[80%] block" value={userCode} onChange={e=>setUserCode(e.target.value)}
           > 
-            {codes ? codes.map(code => {
+            {usersCode ? usersCode.map(code => {
               return (<option className=" rounded-lg font-sans m-3" key={code.code} value={code.code}>{code.code} </option>)
+            }) : null}
+          </select>
+        </div>
+
+        <div className="my-3 text-lg ">
+          <label htmlFor='code'>Cooperative Id</label>
+          <select className="h-11 px-5 text-gray-700 font-semibold rounded-md shadow-sm border outline-none
+            w-[80%] block" value={cooperativeId} onChange={e=>setCooperativeId(e.target.value)}
+          > 
+            {cooperatives ? cooperatives.map(cooperative => {
+              return (<option className=" rounded-lg font-sans m-3" key={cooperative.id} value={cooperative.id}> {cooperative.name} {cooperative.id} </option>)
             }) : null}
           </select>
         </div>
@@ -81,11 +152,13 @@ const AdminAddPlot = () => {
           <select className="h-11 px-5 text-gray-700 font-semibold rounded-md shadow-sm border outline-none
             w-[80%] block" value={region} onChange={e=>setRegion(e.target.value)}
           > 
-            {regions ? regions.map((genre,i) => {
+            {regions ? regions.map((region,i) => {
               return (<option className=" rounded-lg font-sans m-3" key={i} value={region}>{region}</option>)
             }) : null}
           </select>
         </div>
+
+
         <div className="my-2 md:my-3 ">
             <label htmlFor="dept">Dept</label>
             <input className=" rounded-md shadow-sm px-2 py-2
@@ -124,7 +197,7 @@ const AdminAddPlot = () => {
             <input className=" rounded-md shadow-sm px-2 py-2
              md:py-3  w-[80%] block focus:outline 
              focus:outline-[0.16rem] outline-sky-300
-             border-sky-300 " type="number" value={village} 
+             border-sky-300 " type="text" value={village} 
              onChange={e=> setVillage(e.target.value)}  
             />
         </div>
@@ -241,8 +314,6 @@ const AdminAddPlot = () => {
             type="submit">Post
           </button>
         </div>
-
-
     </section> 
     </>
   )

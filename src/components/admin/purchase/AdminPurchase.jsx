@@ -1,11 +1,10 @@
 import {useState, useEffect} from "react";
-const SALES_URL = "api/plot";
 import axios from "../../api/axios";
 import { Link } from "react-router-dom";
 import { IoIosArrowDropup, IoMdArrowDropdown, IoMdArrowDropup } from "react-icons/io";
+import { useSelector } from "react-redux";
+import { selectCurrentToken } from "../../../slices/auth/authSlice";
 const PURCHASE_URL = "/api/v1/purchases/purchases";
-const USERS_URL = "/api/v1/users/users";
-const COOPERATIVES_URL = "/api/v1/cooperatives/cooperatives";
 
 const AdminPurchase = () => {
 
@@ -13,10 +12,8 @@ const AdminPurchase = () => {
     {userCode: "1", price: 123, quantity: 3, date: "Mon 4 20234"},
     {userCode: "2", price: 9000, quantity: 3, date: "Mon 4 20234"},
   ]
-    const [sales, setSales] = useState(salesJson);
+    const [sales, setSales] = useState([]);
     const [errMsg, setErrMsg] = useState("");
-
-    const [searchplots, setSearchplots] = useState(null);
 
     const [searchId, setSearchId] = useState("");
 
@@ -28,44 +25,19 @@ const AdminPurchase = () => {
     const [usersCode, setUsersCode] = useState([]);
     const [cooperativesId, setCooperativesId] = useState([]);
 
-    useEffect(() => {
-      const getUsersCode = async () => {
-        try {
-          const res = await axios.get(USERS_URL, {});
-          if(res) {
-            setUsersCode(res?.data?.users);
-          }
-        }catch(err) {
-          setErrMsg(err?.data?.message);
-        }
-      }
+    const [searchSales, setSearchSales] = useState(null);
 
-      getUsersCode();
-    }, [])
-
-    useEffect(() => {
-      const getCooperativesId = async () => {
-        try {
-          const res = await axios.get(COOPERATIVES_URL, {});
-          if(res) {
-            setCooperativesId(res?.data?.cooperatives);
-          }
-        }catch(err) {
-          setErrMsg(err?.data?.message);
-        }
-      }
-
-      getCooperativesId();
-    }, [])
-
+    const token = useSelector(selectCurrentToken);
 
     useEffect(() => {
         const getSales = async () => {
             try {
-                const res = axios.get(PURCHASE_URL, {headers:{withCredentials: true}});
-                setSales(res.data.plots);
+                const res = await axios.get(PURCHASE_URL, {headers:{Authorization: `Bearer ${token}`, withCredentials: true}});
+                console.log(res);
+                setSales(res.data);
             }catch(err) {
-                setErrMsg(err?.data?.msg);
+              console.log(err);
+                setErrMsg(err?.response?.data?.message);
             }
         }
 
@@ -73,18 +45,32 @@ const AdminPurchase = () => {
 
     }, [])
 
-    const searchSale = async () => {
-
+  const SearchPurchase = async (e, name) => {
+    console.log(name);
+    e.preventDefault();
+    try { 
+        const res = await axios.get(`${PURCHASE_URL}`, {headers: {Authorization: `Bearer ${token}`,withCredentials: true}});
+        console.log(res.data);
+        //setPlots(null);
+        setSearchSales(res?.data.filter(el => el.userCode.toLowerCase().includes(name.toLowerCase())));
+        console.log(searchSales);
+    }catch(err) {
+        console.log(err);
+        setErrMsg(err?.response?.data?.message);
     }
+  }
 
     const deleteSales = async (id) => {
+      console.log(id);
       try {
-        const res = await axios.delete(SALES_URL, {id: id}, {});
+        const res = await axios.delete(`${PURCHASE_URL}/${id}`, {headers: {Authorization: `Bearer ${token}`, withCredentials: true}});
+        console.log(res.data);
+        setSales(sales.filter(sal => sal.id !==id));
         if(res) {
-          setSuccessMsg("Plot has been deleted successfully");
+          setSuccessMsg("purchase has been deleted successfully");
         }
       }catch(err) {
-        setErrMsg(err?.data?.message);
+        setErrMsg(err?.response?.data?.message);
       }
     }
 
@@ -95,64 +81,52 @@ const AdminPurchase = () => {
             <h1 className=" text-lg md:text-xl text-center bg-amber-200 font-semibold">Admin Sale DashBoard</h1>
         </div>
 
+        {searchSales ? <h1 className="text-center font-bold py-3 text-amber-600 bg-amber-200">Achats trouves</h1> : null}
+        <button className=" m-1 p-3 bg-amber-300 rounded-md" onClick={()=>setSearchSales(null)}>All Achats</button>
+
         <div className="md:w-[100%]">
             <input 
-              onKeyDown={(e)=>(e.key === "Enter" ? searchSale(e,searchId) : null)} 
+              onKeyDown={(e)=>(e.key === "Enter" ? SearchPurchase(e,searchId) : null)} 
               placeholder="search..." className=" w-96 text-lg p-2 h-11 bg-amber-200 text-gray-700" 
               type="text" value={searchId} onChange={e=>setSearchId(e.target.value)}/>
             <button 
-             onClick={(e) => searchSale(e, searchId)} 
+             onClick={(e) => SearchPurchase(e, searchId)} 
              className="h-11 py-2 px-3 md:px-10 ml-1 text-lg bg-amber-300 rounded-md text-gray-700 hover:bg-blue-500 hover:translate-y-[1px] ">
               Search
             </button>
         </div>
 
         <div className="my-3">
-            <Link  to= "/admin/sale/add"  className=" w-11 h-4 p-2 border shadow rounded-lg bg-blue-100 hover:bg-blue-300 hover:translate-y-1" >Ajouter achats</Link>
+            <Link  to= "/admin/purchase/add"  className=" w-11 h-4 p-2 border shadow rounded-lg bg-blue-100 hover:bg-blue-300 hover:translate-y-1" >Ajouter achats</Link>
         </div>
 
         <div className="font-bold text-lg ">
             <h1>Plot Info</h1>
         </div>
 
+
+        {searchSales ?
         <div>
           <table className=" border-4">
             <thead>
               
-              <th>Code|</th>
+              <th>User Code</th>
+              <th>Cooperative Id</th>
               <th>quantity</th>
               <th>price</th>
               <th>date</th>
             </thead>
-            {sales? sales.map((sale, i) => {
+            <tbody>
+            {searchSales? searchSales.map((sale, i) => {
               return (
                 <tr className="" key={sale.id}>
-                  <td>{sale.price}</td>
+                  <td>{sale.userCode}</td>
+                  <td>{sale.cooperativeId}</td>
                   <td>{sale.quantity}</td>
-                  <td className="">{sale.date}</td>
-
-
-
-                  {/*!showMore ? 
-                    <div onClick={()=>ShowMore(plot)} className=" cursor-pointer items-center justify-center text-[18px] flex bg-stone-300 hover:bg-slate-300 text-white">
-                      <p>More: </p>
-                      <IoMdArrowDropdown className=" ml-[5px] w-8 h-8 text-slate-100 hover:text-sltate-300"/>
-                    </div> :
-                    <div>
-                            
-                      <div className=" mt-1 grid grid-cols-2 ">
-                           
-                      </div>
-   
-                    <div onClick={() => RemoveMore(plot, plot.id)} className=" mt-1 cursor-pointer items-center justify-center text-[18px] flex bg-stone-300 hover:bg-slate-300 text-white">
-                        <p>--- </p>
-                        <IoIosArrowDropup className=" ml-[5px] w-7 h-7 text-slate-100 hover:text-sltate-300"/>
-                      </div> 
-                    </div>
-                  */}
-                  
+                  <td>{sale.price}</td>
+                  <td>D{sale.date}</td>    
                   <div className=" flex mt-3">
-                      <button><Link onClick={e=> !sale.id ? e.preventDefault(): null}  to= {`/admin/plot/edit?searchId=${sale.id}`}  
+                      <button><Link onClick={e=> !sale.id ? e.preventDefault(): null}  to= {`/admin/purchase/edit?searchId=${sale.id}`}  
                         className=" p-3 border shadow rounded-lg bg-green-200 hover:bg-green-400" >Edit</Link>
                       </button>
                       <button onClick={()=>deleteSales(sale.id)} 
@@ -163,8 +137,48 @@ const AdminPurchase = () => {
                 </tr>
               )
             }) : null}
+            </tbody>
           </table>
-        </div>
+        </div>        
+        
+         : 
+        <div>
+          <table className=" border-4">
+            <thead>
+              
+              <th>User Code</th>
+              <th>Cooperative Id</th>
+              <th>quantity</th>
+              <th>price</th>
+              <th>date</th>
+            </thead>
+            <tbody>
+            {sales? sales.map((sale, i) => {
+              return (
+                <tr className="" key={sale.id}>
+                  <td>{sale.userCode}</td>
+                  <td>{sale.cooperativeId}</td>
+                  <td>{sale.quantity}</td>
+                  <td>{sale.price}</td>
+                  <td>D{sale.date}</td>    
+                  <div className=" flex mt-3">
+                      <button><Link onClick={e=> !sale.id ? e.preventDefault(): null}  to= {`/admin/purchase/edit?searchId=${sale.id}`}  
+                        className=" p-3 border shadow rounded-lg bg-green-200 hover:bg-green-400" >Edit</Link>
+                      </button>
+                      <button onClick={()=>deleteSales(sale.id)} 
+                        className=" ml-4 p-2 border shadow rounded-lg bg-red-200 hover:bg-red-400">Delete
+                      </button>
+                  </div>
+
+                </tr>
+              )
+            }) : null}
+            </tbody>
+          </table>
+        </div>        
+        }
+
+
     </section> 
     
     </>

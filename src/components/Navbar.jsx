@@ -27,6 +27,18 @@ const Navbar = () => {
     setIsActiveModalNavbar(!showModal);        
   }
 
+
+  /*(function getUserInfo () {
+    if(localStorage.getItem('userInfo')) {
+      let {user} = useSelector(selectCurrentUser); 
+      return {token}
+    }
+  }
+
+   let {user} = getUserInfo() || {};
+   const userInfo = user*/
+ 
+
    return (    
       <div className=" z-50 md:w-[75%] lg:w-[65%]   ">
        <nav className=" w-[100vw] md:py-1 z-50 shadow shadow-amber-900 border 

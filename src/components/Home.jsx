@@ -15,13 +15,27 @@ import axios from "./api/axios";
 import AudioLogo from "../assets/audiologo.png"
 import { selectCurrentUser } from "../slices/auth/authSlice";
 import coco1 from "../../assets/cocoa-1529746_1920.jpg";
+
 const Home = () => {
   const [showProfile, setShowProfile] = useState(false);
   const [file, setFile] = useState();
   const [image, setImage] = useState("");
   const navigate = useNavigate();
-  const dispatch = useDispatch();  
-  const userInfo = useSelector(selectCurrentUser);
+  const dispatch = useDispatch();
+  const [userInfo ,setUserInfo] = useState(null);
+  var user = null;
+
+  if(localStorage.getItem('userInfo')) {
+    console.log('userinfo');
+    var {user} = useSelector(selectCurrentUser);
+    console.log(user);
+  }
+
+  useEffect(() => {
+      setUserInfo(user);
+      console.log(userInfo);
+  }, [userInfo])
+
   const [isRun, setIsRun] = useState(true);  
   const [logOutApiCall, {isLoading}] = useLogoutMutation();
   const [errMsg, setErrMsg] = useState("");
@@ -48,7 +62,6 @@ const Home = () => {
   const handleShowProfile = () => {
     setShowProfile(!showProfile);
   }
-
 
   console.log(showProfile, userInfo);
 

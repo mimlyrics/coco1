@@ -2,13 +2,17 @@ import queryString from "query-string"
 import {useState, useEffect, useRef} from "react";
 import axios from "../../api/axios";
 const EXPORTERS_URL = "/api/v1/exporters/exporters";
+import { selectCurrentToken } from "../../../slices/auth/authSlice";
+import { useSelector } from "react-redux";
 const AdminEditExporter = () => {
   const [name, setName] = useState("");
   const [errMsg, setErrMsg] = useState("");
   const [success, setSuccess] = useState(false);
   const [id, setId] = useState("");
+  const token = useSelector(selectCurrentToken);
   useEffect(() => {
     const {cooperativeId} = queryString.parse(location.search);
+    console.log(location.search)
     setId(cooperativeId);
   }, [id])
 
@@ -17,7 +21,7 @@ const AdminEditExporter = () => {
   useEffect(() => {
     const getRoom = async () => {
         try {
-            const res = await axios.get(`${EXPORTERS_URL}/${id}`, {headers: {withCredentials: true}});
+            const res = await axios.get(`${EXPORTERS_URL}/${id}`, {headers: {Authorization: `Bearer ${token}`,withCredentials: true}});
             console.log(res.data.name);
             setName(res.data.name);
         }catch(err) {
@@ -32,7 +36,7 @@ const AdminEditExporter = () => {
     e.preventDefault();
     
     try {
-        const editCooperative = await axios.put(`${EXPORTERS_URL}/${id}`, {name:name},  {headers: {withCredentials: true, "Content-Type": "application/json"}});
+        const editCooperative = await axios.put(`${EXPORTERS_URL}/${id}`, {name:name},  { headers: {Authorization: `Bearer ${token}`, withCredentials: true, "Content-Type": "application/json"}});
         if(editCooperative) {
             setSuccess(`${name} has been edited successfully`);
             setErrMsg("");
