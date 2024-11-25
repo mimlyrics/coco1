@@ -1,4 +1,3 @@
-import axios from "axios";
 import{useState, useRef, useEffect} from "react";
 import axios from "../api/axios";
 const COOPERATIVE_URL = "/api/v1/cooperatives/cooperatives";
@@ -10,7 +9,6 @@ const AdminAddCooperative = () => {
   const [success, setSuccess] = useState("");
   const [nameFocus, setNameFocus] = useState(false);
   const nameRef = useRef();
-
   const token = useSelector(selectCurrentToken);
 
   useEffect(() => {
