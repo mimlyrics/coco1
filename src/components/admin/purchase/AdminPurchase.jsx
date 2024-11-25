@@ -76,9 +76,10 @@ const AdminPurchase = () => {
 
   return (
     <>
-    <section className=" md:absolute md:top-16 md:w-[90vw] mx-1 md:ml-[19%] xl:ml-[9%]">
+    <section className=" md:absolute md:top-16 md:w-[90vw] mx-1 md:ml-[19%] xl:ml-[9%] mt-24">
         <div className="my-1 md:w-[90vw]">
-            <h1 className=" text-lg md:text-xl text-center bg-amber-200 font-semibold">Admin Sale DashBoard</h1>
+            {/* <h1 className=" text-lg md:text-xl text-center bg-amber-200 font-semibold">Achats</h1> */}
+            <h1 className="border-l text-4xl md:text-[2.5rem]"><strong>Achats</strong></h1>
         </div>
 
         {searchSales ? <h1 className="text-center font-bold py-3 text-amber-600 bg-amber-200">Achats trouves</h1> : null}

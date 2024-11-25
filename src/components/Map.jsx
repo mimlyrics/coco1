@@ -90,12 +90,16 @@ const Map = () => {
         
         let tmp_lat = feature.geometry.coordinates[0][0][0][1];
         let tmp_long = feature.geometry.coordinates[0][0][0][0];
-        setZoom(15);
-        setLat(tmp_lat);
-        setLong(tmp_long);
 
         console.log({ "tmp_lat": tmp_lat, "tmp_long": tmp_long });
         map.setView([tmp_lat, tmp_long], 15);
+
+        layer.bindPopup(`
+            <h2>Parcelle</h2>
+            <b>Surface :</b> ${feature.properties.Surface} m<sup>2</sup><br>
+            <b>Proprietaire :</b> ${feature.properties["Noms(s)"] == undefined ? "" : feature.properties["Noms(s)"]} ${feature.properties["Prenom(s)"] == undefined ? "" : feature.properties["Prenom(s)"]}<br>
+            <b>Téléphone :</b> ${feature.properties.Tel}<br>
+            `).openPopup();
     });
   };
 
@@ -146,7 +150,7 @@ const Map = () => {
         </MapContainer>
 
         <div className="mt-8">
-            <h1 className="border-l text-2xl md:text-[1.5rem] "><strong>Détails Parcelle</strong></h1>
+            <h1 className="border-l text-2xl md:text-[1.5rem] "><strong>Plus de détails sur la Parcelle</strong></h1>
         <div className="flex flex-col md:flex-row justify-between ml-8">
             <div className="flex-1 mt-3">
                 <b>Numéro Opérateur : </b> { numOperat }<br />
