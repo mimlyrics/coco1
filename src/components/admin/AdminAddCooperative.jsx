@@ -1,4 +1,3 @@
-import axios from "axios";
 import{useState, useRef, useEffect} from "react";
 import axios from "../api/axios";
 const COOPERATIVE_URL = "/api/v1/cooperatives/cooperatives";
