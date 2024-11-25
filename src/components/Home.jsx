@@ -15,6 +15,8 @@ import axios from "./api/axios";
 import AudioLogo from "../assets/audiologo.png"
 import { selectCurrentUser } from "../slices/auth/authSlice";
 import coco1 from "../../assets/cocoa-1529746_1920.jpg";
+import { QRCodeCanvas } from "qrcode.react";
+
 
 const Home = () => {
   const [showProfile, setShowProfile] = useState(false);
@@ -42,8 +44,21 @@ const Home = () => {
   const location = useLocation();
   const {pathname} = location;
   //console.log(location);
+  let userStorage = JSON.parse(window.localStorage.getItem("userInfo"));
+  let [userCode, setUserCode] = useState(null);
+  const [url, setUrl] = useState(null);
 
+  useEffect(() => {
+    if(userStorage != null)
+    {
+      setUserCode(userStorage.user.code);
+      console.log({"userCode": userCode});
+    }
+  }, []); //http://localhost:3000/map/${userCode}
 
+  useEffect(() => {
+    setUrl(`http://localhost:3000/map?code=${userCode}`);
+  }, [userCode]);
   //console.log("IS: ", isActiveModalNavbar);
 
   const handleLogout = async (e) => {
@@ -199,13 +214,13 @@ const Home = () => {
         <div className="m-0 box-border flex flex-col md:text-lg md:py-1 text-white bg-[brown]">
           <div className="flex justify-around text-gray-100 jus p-4 flex-wrap">
             <div className="mx-2">
-              <h2 className="text-center text-gray-300 mt-3">Contacts</h2>
-              (+237) 6xx xx xx xx<br/>
+              <h2 className="text-center text-gray-300 mt-3">Contacts</h2><br/>
+              (+237) 6xx xx xx xx<br/><br/>
               (+237) 6xx xx xx xx<br/>
             </div>
             <div className="mx-2">
-                <h2 className="text-center text-gray-300 mt-3">Adresses email</h2>
-                tracecocoa.camer@gmail.com<br/>
+                <h2 className="text-center text-gray-300 mt-3">Adresses email</h2><br/>
+                tracecocoa.camer@gmail.com<br/><br/>
                 adresseemail2@gmail.com<br/>
             </div>
             <div className="mx-2">
@@ -213,6 +228,17 @@ const Home = () => {
                 Ministère de l'agriculture<br/>
 
                 <h2 className="text-center text-gray-300 mt-2">QR Code producteur</h2>
+                { url ? 
+                    <div>
+                    <QRCodeCanvas
+                      value={ url }
+                      size={200}
+                      bgColor="white"
+                      fgColor="brown"
+                      className="border rounded mt-2"
+                    />
+                  </div>
+                : "" }
                 
             </div>
           </div>
