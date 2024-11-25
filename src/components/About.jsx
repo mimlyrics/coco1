@@ -1,5 +1,4 @@
 
-
 const About = () => {
   return (
     <section className="mt-1 mr-2 md:ml-[20%]">

@@ -15,12 +15,40 @@ const IMAGE_URL = "/api/v1/upload/avatar";
 import axios from "./api/axios";
 import AudioLogo from "../assets/audiologo.png"
 import { selectCurrentUser } from "../slices/auth/authSlice";
+import logo from "../assets/logo.png";
+
+
 const Navbar = () => {
   const [showModal, setShowModal] = useState(false);
   const [errMsg, setErrMsg] = useState("");
   const location = useLocation();
   const {pathname} = location;
   const {isActiveModalNavbar, setIsActiveModalNavbar} = useMimlyrics();
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    const onScrollHeaderEvent = (e) => {
+      const header = document.getElementById("header");
+      if(window.scrollY <= 0)
+      {
+        header.style.backgroundColor = "transparent";
+        header.classList.remove("text-white");
+        header.classList.add("text-blue-600");
+      } else {
+        header.classList.add("text-white");
+        header.classList.remove("text-blue-600");
+        header.style.backgroundColor = "brown";
+      }
+    };
+  
+    window.addEventListener("scroll", (e) => {
+      onScrollHeaderEvent(e);
+    });
+
+    document.getElementById("logo").addEventListener("click", (e) => {
+      navigate("/");
+    });
+  }, []);
 
   const handleModalNavbar = async () => {
     setShowModal(!showModal); 
@@ -40,21 +68,28 @@ const Navbar = () => {
  
 
    return (    
-      <div className=" z-50 md:w-[75%] lg:w-[65%]   ">
-       <nav className=" w-[100vw] md:py-1 z-50 shadow shadow-amber-900 border 
-       bg-[rgba(119,85,84)] h-16 relative md:flex-row md:justify-between">
-        <div className=" mx-16 md:mx-32 mt-4 md:mt-3 text-[17px] flex md:text-lg">
-          <FaMusic className=" mr-[2px] text-cyan-100 w-5 h-5"/>
-          <h1 className=" text-cyan-200 mt-1 font-serif font-semibold shadow-sky-100 ">COCO</h1>
-        </div>
+      <div className="fixed top-0 left-0 right-0 text-blue-600 z-[1100]">
+       <nav id="header" className=" transition-all md:py-1 bg-transparent relative md:flex-row md:justify-between flex items-center">
+          <img src={logo} id="logo" className="cursor-pointer w-20 h-20 md:w-28 md:h-28 ml-5 md:ml-20"></img>
+
+          <div className="flex flex-row flex-1 justify-end mr-5 items-center">
+              <Link className="flex flex-row items-center justify-center mr-4 transition-transform hover:scale-110 hover:text-green-300" to="/register "> 
+                <IoMdLogIn className="mr-2 text-xl md:text-3xl"/>
+                <div>Inscription</div>
+              </Link>
+              <Link className="flex flex-row items-center justify-center ml-4 transition-transform hover:scale-110 hover:text-green-300" to="/login "> 
+                <IoMdLogIn className="mr-2 text-xl md:text-3xl"/>
+                <div>Connexion</div>
+              </Link>
+          </div>
          {showModal ? (
-           <div className=" absolute top-5 left-2 md:invisible">
+           <div className=" absolute top-1/2 -translate-y-1/2 left-3 md:invisible">
              <button className="" onClick={() => handleModalNavbar()}>
                <FaX />
              </button>
            </div>
          ) : (
-           <div className="absolute top-5 left-2 md:invisible">
+           <div className="absolute top-1/2 -translate-y-1/2 left-3 md:invisible">
              <button className="" onClick={() => handleModalNavbar()}>
                <FaAlignJustify />
              </button>
@@ -62,7 +97,7 @@ const Navbar = () => {
          )}
         
             
-         <div className=" invisible md:visible">
+         {/* <div className=" invisible md:visible">
            <ul className=" mx-1 mt-1 px-3 absolute top-16
                flex-col lg:text-lg bg-zinc-100 shadow-lg shadow-zinc-500">              
              <Link className="flex py-2 hover:bg-slate-200 " to="/">
@@ -112,7 +147,7 @@ const Navbar = () => {
              <span className="border-b-2"></span>
              {pathname.startsWith("/language") ? <p className=" mx-2 border-b-4 border-blue-200  "></p> : null }
            </ul>          
-         </div>
+         </div> */}
 
         </nav>
 
@@ -186,7 +221,7 @@ const Navbar = () => {
            </ul>
           
          ) : null}
-        </section>
+       </section>
         <Outlet/>
       </div>    
    );

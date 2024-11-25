@@ -118,7 +118,7 @@ const Register = () => {
   }
 
   return (
-    <section className={ isActiveModalNavbar ? " relative opacity-60 -z-50 " : " -z-50 "}>
+    <section className={ isActiveModalNavbar ? " relative opacity-60 -z-50 mt-24 p-auto" : " -z-50 mt-24 p-auto"}>
     {errMsg ? 
       <div className=" animate transition ease-in-out duration-500 absolute -top-9 right-2 
       border-b-4 border-b-white-700 shadow font-semibold rounded text-center text-lg bg-amber-500 h-9 w-60 ">
@@ -137,18 +137,18 @@ const Register = () => {
         onSubmit={handleSubmit}
       >
         <h2 className="text-center font-medium mt-2 mb-3 italic text-2xl">
-          Sign Up to Mimlyrics
+          Créer un compte
         </h2>
 
         <p className=" my-2 text-center">
-          Already have an account ?{" "}
-          <Link to="/login" className="bg-purple-200 rounded">
-            Login
+          Vous avez déjà un compte ?{" "}
+          <Link to="/login" className="bg-amber-200 rounded">
+            Connexion
           </Link>
         </p>
 
         <div className="form-group p-2">
-          <label className="flex" htmlFor="email">Username
+          <label className="flex" htmlFor="email">Nom d'utilisateur
               <span className={validUsername ? "visible": "hidden"}><FaCheck className="w-11 h-7 text-purple-500"/></span>
               <span className={validUsername || (!username) ? "hidden": "visible"}><FaX className="w-7 h-5 text-red-400"/></span>
           </label>
@@ -207,7 +207,7 @@ const Register = () => {
         </div>
 
         <div className="ml-2">
-          <h1>Phone Number</h1>
+          <h1>Numéro de téléphone</h1>
           <div className="">
             <PhoneInput
               className=" "
@@ -223,7 +223,7 @@ const Register = () => {
         <div className="form-group p-2">
           {showPassword ? (
             <div className="">
-              <label className="flex" htmlFor="password">Password
+              <label className="flex" htmlFor="password">Mot de passe
               <span className={validPassword ? "visible": "hidden"}><FaCheck className="w-11 h-7 text-purple-500"/></span>
               <span className={validPassword || (!password) ? "hidden": "visible"}><FaX className="w-7 h-5 text-red-400"/></span>
               </label>
@@ -251,7 +251,7 @@ const Register = () => {
             </div>
           ) : (
             <div className="">
-              <label className="flex" htmlFor="password">Password
+              <label className="flex" htmlFor="password">Mot de passe
               <span className={validPassword ? "visible": "hidden"}><FaCheck className="w-11 h-7 text-purple-500"/></span>
               <span className={validPassword || (!password) ? "hidden": "visible"}><FaX className="w-7 h-5 text-red-400"/></span>
               </label>

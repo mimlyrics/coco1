@@ -7,6 +7,7 @@ import Login from "./components/Login";
 import { Navigate } from "react-router-dom";
 import "./index.css";
 import Home from "./components/Home";
+import Map from "./components/Map";
 import { useSelector } from "react-redux";
 import Test from "./components/Test";
 import AdminUser from "./components/admin/AdminUser";
@@ -47,17 +48,22 @@ import Profile from "./components/Profile";
 import AdminExporter from "./components/admin/exporter/AdminExporter";
 import AdminEditExporter from "./components/admin/exporter/AdminEditExporter";
 import AdminAddExporter from "./components/admin/exporter/AdminAddExporter";
+
+import 'leaflet/dist/leaflet.css';
+
 function App() {
   const {userInfo} = useSelector(state => state.auth);
   const [isAdmin, setIsAdmin] = useState(false);
   const [isEditor, setIsEditor] = useState(false);
+  
   //console.log(isAdmin, isEditor);
   return (
     <Router>    
-        <Navbar/>
+      <Navbar/>
       <Routes>        
       {/**Public routes */}    
         <Route path="/" element={<Home/>} />       
+        <Route path="/map" element={<Map/>}/>
         <Route path="/assistance" element={<Assistance/>}/>
         <Route path="/about" element={<About/>}/>
         <Route path="/termsofuse" element={<Termsofuse/>}/>

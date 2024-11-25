@@ -69,21 +69,20 @@ const Home = () => {
 
   return ( 
     <div className="">
-
-        <div className="h-[60vh] relative">
+        <div className="h-[60vh] md:h-[400px] relative">
           {/* <img className="w-[100%] h-[100%]" src={coco1} alt="x"/> */}
-          <div className="w-[100%] h-[100%]" 
+          <div className="w-[100%] h-[100%] rounded-bl-[100px]" 
             style={{ backgroundImage: `url(${coco1})`, backgroundSize: `cover`, backgroundAttachment: `fixed`, backgroundPosition: `center` }}>
-            <div className="text-white font-bold text-center font-mono text-4xl">
-              <h1>COCOC Cameroun</h1>
+            <div className="text-white font-bold text-center font-mono text-4xl flex items-center justify-center w-full h-full">
+              <h1 className="text-4xl md:text-[80px] text-[#00000067]">CACAO Cameroun</h1>
             </div>
           </div>
-          <div className="  bg-[rgba(119,85,84)] absolute top-0 left-0 bottom-0 right-0 opacity-20">
+          <div className=" bg-[rgba(119,85,84)] absolute top-0 left-0 bottom-0 right-0 opacity-40 rounded-bl-[100px]">
 
           </div>
         </div>
         
-      <nav className=" ml-[90%]">
+      {/* <nav className="md:w-[80%]">
         {isLoading ? <h1 className=" items-center font-mono mt-40 text-center h-36 ">LOADING...</h1> : null}
 
         {userInfo ? 
@@ -138,26 +137,91 @@ const Home = () => {
         </div>
         </div> : null}
         </div>}         
-      </nav>
+      </nav> */}
 
-      <section className={ isActiveModalNavbar ? " relative opacity-60 -z-50 " :  "  z-50 font-medium space-x-1 mx-1 mt-1 md:ml-[17%] lg:ml-[14%] xl:ml-[12%]" }>
-        <div className=' mt-2 md:mt-2 pl-2 pr-14 md:pr-20 py-1'>
+      <section className={ isActiveModalNavbar ? " relative opacity-60 -z-50 " :  "flex flex-col z-50 font-medium space-x-1 mx-1 mt-5" }>
+        <div className=' mt-2 md:mt-2 pl-2 pr-14 py-1'>
           <div className=" ">
-            <p className="text-gray-900 ">
-              Welcome to coco ! a web app where you can watch and get lyrics video in four languages (english, french, spanish, german)
-              for entertainment or post .
-            </p>
+            <h1 className="border-l text-4xl md:text-[2.5rem]">Bienvenue sur  <strong>Trace Cocoa</strong></h1>
+              <p className="text-gray-900 ">
+              Plateforme de vente et d'achat de cacao en ligne chez des commerçants de confiance<br/>
 
-          <p className=" pt-2 ">
-            This web app is subdivided into categories 
-          </p>
+              Que souhaitez vous faire ?
+              </p>
+
+            <div id="operations"
+              className="w-[90vw] m-auto md:w-4/5 p-5 relative">
+
+                <div className="flex flex-row border-y-2 py-3 float-end my-3 items-center justify-between">
+                  <img src={ coco1 } className="border mr-8 w-20 h-20 md:w-40 md:h-40"/>
+                  <div>
+                    <h1 className="text-center text-black text-lg md:text-2xl"><strong>Effectuer un achat</strong></h1>
+                    Vous êtes un producteur et vous souhaitez acheter des parcelles à une coopérative pour débuter votre activité. Alors, cette rubrique est faite pour vous.<br/>
+                    <a href="/admin/purchase" className="text-blue-700 underline font-bold">Plus...</a>
+                  </div>
+                </div>
+
+                <div className="flex flex-row border-y-2 py-3 float-end my-3 items-center justify-between">
+                  <div>
+                    <h1 className="text-center text-black text-lg md:text-2xl"><strong>Effectuer une vente</strong></h1>
+                    Vous êtes un producteur et vous souhaitez vendre vos produits. Cette rubrique est faite pour vous.<br/>
+                    <a href="" className="text-blue-700 underline font-bold">Plus...</a>
+                  </div>
+                  <img src={ coco1 } className="border mr-8 w-20 h-20 md:w-40 md:h-40"/>
+                </div>
+
+                <div className="flex flex-row w-full border-y-2 py-3 float-end my-3 items-center justify-between">
+                  <img src={ coco1 } className="border mr-8 w-20 h-20 md:w-40 md:h-40"/>
+                  <div>
+                    <h1 className="text-center text-black text-lg md:text-2xl"><strong>Voir les parcelles</strong></h1>
+                    Ici vous pourrez visualiser les données de votre parcelle dans une carte. <br/>
+                    <a href="/map" className="text-blue-700 underline font-bold">Plus...</a>
+                  </div>
+                </div>
+
+                <div className="flex flex-row border-y-2 py-3 float-end my-3 items-center justify-between">
+                  <div>
+                    <h1 className="text-center text-black text-lg md:text-2xl"><strong>Module Statistique</strong></h1>
+                    Ici vous aurez un compte rendu de votre activité (nombre/quantité de ventes, nombre/quantité d'achats, ...).<br/>
+                    <a href="/map" className="text-blue-700 underline font-bold">Plus...</a>
+                  </div>
+                  <img src={ coco1 } className="border mr-8 w-20 h-20 md:w-40 md:h-40"/>
+                </div>
+
+
+            </div>
+            {/* <p className=" pt-2 ">
+              This web app is subdivided into categories 
+            </p> */}
+          </div>
         </div>
-        </div>
 
 
 
-        <div className=" flex flex-col md:text-lg md:py-1 ">
-          <div className=" text-sky-950 font-mono w-[40%] flex flex-col mx-2 mb-1">
+        <div className="m-0 box-border flex flex-col md:text-lg md:py-1 text-white bg-[brown]">
+          <div className="flex justify-around text-gray-100 jus p-4 flex-wrap">
+            <div className="mx-2">
+              <h2 className="text-center text-gray-300 mt-3">Contacts</h2>
+              (+237) 6xx xx xx xx<br/>
+              (+237) 6xx xx xx xx<br/>
+            </div>
+            <div className="mx-2">
+                <h2 className="text-center text-gray-300 mt-3">Adresses email</h2>
+                tracecocoa.camer@gmail.com<br/>
+                adresseemail2@gmail.com<br/>
+            </div>
+            <div className="mx-2">
+                <h2 className="text-center text-gray-300 mt-3">Infos supplémentaires</h2>
+                Ministère de l'agriculture<br/>
+
+                <h2 className="text-center text-gray-300 mt-2">QR Code producteur</h2>
+                
+            </div>
+          </div>
+          <div className="text-center border-t">
+            Copyright © 2024 Tous droits reservés
+          </div>
+          {/* <div className=" text-sky-950 font-mono w-[40%] flex flex-col mx-2 mb-1">
             <p className=''> _______</p>
             <Link to="/producer" className="">
               Producer
@@ -221,7 +285,7 @@ const Home = () => {
                 <Link>Github</Link>
               </div>
             </div>
-          </div>
+          </div> */}
         </div>
       </section>
     </div>

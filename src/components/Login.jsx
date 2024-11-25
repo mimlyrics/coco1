@@ -6,7 +6,7 @@ import GithubLogo from "../assets/github.png";
 import {useDispatch, useSelector} from "react-redux";
 import { useLoginMutation } from "../slices/auth/usersApiSlice";
 import { setCredentials } from "../slices/auth/authSlice";
-import { FaRegEyeSlash, FaRegEye, FaX } from "react-icons/fa6";
+import { FaRegEyeSlash, FaRegEye, FaX, FaUser } from "react-icons/fa6";
 import { useMimlyrics } from "./context/AppProvider";
 import axios from "./api/axios";
 
@@ -70,69 +70,70 @@ const Login = () => {
   }
 
   return (
-    <section className={ isActiveModalNavbar ? " relative -z-50 " : " relative my-1 h-screen"}>
+    <section className={ isActiveModalNavbar ? " relative -z-50 mt-24" : " relative my-1 h-screen mt-24"}>
       <form
         className=" py-6 md:w-6/12 md:ml-64 bg-white mx-3 shadow-2xl shadow-indigo-300 rounded flex-col "
         onSubmit={handleSubmit}
       >
-        <div className=" ml-[30%] flex space-x-32">
           <h2 className="text-center italic text-2xl">
-            Choose a Login Method
+            Connexion
           </h2>
-          <FaX onClick={() => CloseLogin()} className=" cursor-pointer w-6 h-6 text-cyan-500 hover:text-cyan-900 "/>  
-        </div>   
+          {/* <FaX onClick={() => CloseLogin()} className=" cursor-pointer w-6 h-6 text-cyan-500 hover:text-cyan-900 "/>   */}
       {errMessage ? <h1 className="font-medium text-center my-3 text-xl text-red-400 md:text-lg ">{errMessage}</h1> : null}
       {success ? <h1 className="font-medium text-center my-3 text-xl text-blue-800 md:text-lg ">{success}</h1> : null}
       {hi ? null : null}
         <p className="mb-3 mt-2 text-center">
-          Don't have an account ?{" "}
-          <Link to="/register" className="bg-purple-200 rounded">
-            Sign Up
+          Vous n'avez pas de compte ?{" "}
+          <Link to="/register" className="bg-amber-200 rounded">
+            Créer un compte
           </Link>
         </p>
 
       <div className="form-group p-2">
-        <label htmlFor="email">Username</label>
-        <input
-          type="text"
-          autoComplete="off"
-          value={username}
-          onChange={(e) => setUsername(e.target.value)}
-          className=" p-2 border rounded w-full text-blue-600"
-        />
+        <label htmlFor="email">Nom d'utilisateur</label>
+        <div className="relative">
+          <FaUser className="absolute text-black top-1/2 left-2 -translate-y-1/2"/>
+          <input
+            type="text"
+            autoComplete="off"
+            value={username}
+            onChange={(e) => setUsername(e.target.value)}
+            className=" p-2 pl-8 border rounded w-full text-amber-600 border-black"
+          />
+        </div>
       </div>
 
       <div className="form-group p-2">
         {showPassword ? (
           <div className="">
-            <label htmlFor="password">Password</label>
+            <label htmlFor="password">Mot de passe</label>
             <div className="relative">
               <input
                 type="text"
                 autoComplete="off"
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
-                className=" p-2 border rounded w-full text-blue-600"
+                className=" p-2 border rounded w-full text-amber-600 border-black"
                 placeholder="Password"
               />
 
               <div className="absolute top-2 ml-[93%] md:ml-[93%] ">
                 <button type="button" onClick={handleShowPassword}>
-                  <FaRegEye className="w-5 h-5 md:w-6 md:h-6" />
+                  <FaRegEye className="w-5 h-5 md:w-6 md:h-6 " />
                 </button>
               </div>
             </div>
           </div>
           ) : (
           <div className="">
-            <label htmlFor="password">Password</label>
+            <label htmlFor="password">Mot de passe</label>
               <div className="relative">
               <input
                 type="password"
                 autoComplete="off"
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
-                className=" p-2 border rounded w-full text-blue-600"
+                className=" p-2 pl-8 border rounded w-full text-amber-600 border-black"
               />
               <div className="absolute top-2 ml-[93%] md:ml-[93%]">
                 <button type="button" onClick={handleShowPassword}>
@@ -146,9 +147,9 @@ const Login = () => {
 
         <button
           type="submit"
-          className="ml-3 p-2 mt-3 transition ease-in-out delay-150 duration-300 w-48 shadow-lg bg-blue-300 rounded hover:scale-103 hover:translate-y-1 hover:bg-indigo-500"
+          className="ml-3 p-2 mt-3 transition ease-in-out delay-150 duration-300 w-48 shadow-lg bg-amber-300  rounded hover:scale-103 hover:translate-y-1 hover:bg-amber-500"
         >
-          Login
+          Se connecter
         </button>
       </form>
     </section>
