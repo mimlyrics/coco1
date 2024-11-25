@@ -50,14 +50,22 @@ const Map = () => {
   const [tel, setTel] = useState("");
   const [sex, setSex] = useState("");
 
-  const [lat, setLat] = useState(4.16934);
-  const [long, setLong] = useState(10.632949);
-  const [zoom, setZoom] = useState(13);
+  // Parse query parameters
+  const searchParams = new URLSearchParams(location.search);
+  const userCode = searchParams.get("code");
+
   useEffect(() => {
     // Remplacez l'URL par celle de votre fichier GeoJSON
     fetch('http://localhost:5000/api/v1/static/geodatas-gps.geojson')
       .then((response) => response.json())
-      .then((data) => setGeojsonData(data))
+      .then((data) => {
+        let finalDatas = null;
+        if(userCode !== null && userCode !== undefined)
+          finalDatas = data.features.filter((feature) => feature.properties.CODE_PRODUCTEUR == userCode)
+        else finalDatas = data;
+
+        setGeojsonData(finalDatas);
+      })
       .catch((error) => console.error('Erreur lors du chargement du GeoJSON:', error));
   }, []);
 
