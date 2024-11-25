@@ -1,11 +1,11 @@
 import {useState, useEffect} from "react";
-const PLOT_URL = "/api/v1/plots/plots";
 import axios from "../../api/axios";
 import { Link } from "react-router-dom";
 import { IoIosArrowDropup, IoMdArrowDropdown, IoMdArrowDropup } from "react-icons/io";
 import { useSelector } from "react-redux";
 import { selectCurrentToken } from "../../../slices/auth/authSlice";
 import { useLocation } from "react-router-dom";
+import { COOPERATIVE_URL, USERS_URL, PLOT_URL } from "../../routes/serverRoutes";
 const AdminPlot = () => {
 
   const token = useSelector(selectCurrentToken);

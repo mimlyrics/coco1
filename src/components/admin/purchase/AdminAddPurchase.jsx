@@ -4,13 +4,7 @@ import { Link } from "react-router-dom";
 import { IoIosArrowDropup, IoMdArrowDropdown, IoMdArrowDropup } from "react-icons/io";
 import { useSelector } from "react-redux";
 import { selectCurrentToken } from "../../../slices/auth/authSlice";
-const USERS_URL = "/api/v1/users/users";
-const COOPERATIVES_URL = "/api/v1/cooperatives/cooperatives";
-
-const USER_PROFILE_URL = "/api/v1/users/users";
-
-const COOPERATIVE_URL = "/api/v1/cooperatives/cooperatives";
-const PURCHASE_URL = "/api/v1/purchases/purchases";
+import { COOPERATIVE_URL, USERS_URL, PURCHASE_URL} from "../../routes/serverRoutes";
 const AdminAddPurchase = () => {
     const [errMsg, setErrMsg] = useState("");
 
@@ -44,7 +38,7 @@ const AdminAddPurchase = () => {
 
   const searchUser = async () => {
     try {
-        const res = await axios.get(`${USER_PROFILE_URL}`, {headers: {Authorization: `Bearer ${token}`,withCredentials: true}});
+        const res = await axios.get(`${USERS_URL}`, {headers: {Authorization: `Bearer ${token}`,withCredentials: true}});
         setUsersCode(res.data);
         setUserCode(res.data[0].code);
         console.log(code);

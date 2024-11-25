@@ -7,12 +7,10 @@ import axios from "../../api/axios";
 import { BsArrowDown, BsX } from "react-icons/bs";
 import { Link } from "react-router-dom";
 import { selectCurrentToken } from "../../../slices/auth/authSlice";
-const PLOT_URL = "/api/v1/plots/plots";
-const USER_PROFILE_URL = "/api/v1/users/users";
-
+import { COOPERATIVE_URL, USERS_URL, PLOT_URL } from "../../routes/serverRoutes";
 const regions = ["centre", "littoral", "Ouest", "Est", "ngoundere", "sud est", "north ouest"];
 const codes = ["r435", "5678j", "657krf"];
-const COOPERATIVE_URL = "api/v1/cooperatives/cooperatives";
+
 const AdminAddPlot = () => {
 
   const [code, setCode] = useState("");
@@ -50,7 +48,7 @@ const AdminAddPlot = () => {
 
   const searchUser = async () => {
     try {
-        const res = await axios.get(`${USER_PROFILE_URL}`, {headers: {Authorization: `Bearer ${token}`,withCredentials: true}});
+        const res = await axios.get(`${USERS_URL}`, {headers: {Authorization: `Bearer ${token}`,withCredentials: true}});
         setUsersCode(res.data);
         setUserCode(res.data[0].code);
         console.log(code);

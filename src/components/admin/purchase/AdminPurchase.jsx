@@ -4,8 +4,7 @@ import { Link } from "react-router-dom";
 import { IoIosArrowDropup, IoMdArrowDropdown, IoMdArrowDropup } from "react-icons/io";
 import { useSelector } from "react-redux";
 import { selectCurrentToken } from "../../../slices/auth/authSlice";
-const PURCHASE_URL = "/api/v1/purchases/purchases";
-
+import { PURCHASE_URL } from "../../routes/serverRoutes";
 const AdminPurchase = () => {
 
   const salesJson = [

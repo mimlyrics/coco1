@@ -1,6 +1,6 @@
 import{useState, useRef, useEffect} from "react";
 import axios from "../api/axios";
-const COOPERATIVE_URL = "/api/v1/cooperatives/cooperatives";
+import { COOPERATIVE_URL } from "../routes/serverRoutes";
 import { selectCurrentToken } from "../../slices/auth/authSlice";
 import { useSelector } from "react-redux";
 const AdminAddCooperative = () => {

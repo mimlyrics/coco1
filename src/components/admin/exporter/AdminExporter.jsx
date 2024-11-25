@@ -3,8 +3,7 @@ import { Link } from "react-router-dom";
 import axios from "../../api/axios";
 import { useSelector } from "react-redux";
 import { selectCurrentToken } from "../../../slices/auth/authSlice";
-const COOPERATIVE_URL = "/api/v1/exporters/exporters";
-
+import { EXPORTER_URL } from "../../routes/serverRoutes";
 const AdminExporter = () => {
   const [name, setName] = useState("");
   const [cooperatives, setCooperatives] = useState([]);
@@ -15,7 +14,7 @@ const AdminExporter = () => {
   useEffect(() => {
     const getCooperativeData = async () => {
         try {
-            const res = await axios.get(COOPERATIVE_URL, {headers: {Authorization: `Bearer ${token}`,withCredentials: true}});
+            const res = await axios.get(EXPORTER_URL, {headers: {Authorization: `Bearer ${token}`,withCredentials: true}});
             console.log(res?.data);
             setCooperatives(res?.data);
         }catch(err) {
@@ -28,7 +27,7 @@ const AdminExporter = () => {
   const searchCooperative = async (e, name) => {
     e.preventDefault();
     try { 
-        const res = await axios.get(`${COOPERATIVE_URL}`, {headers: {Authorization: `Bearer ${token}`, withCredentials: true, "Content-Type": "application/json"}});
+        const res = await axios.get(`${EXPORTER_URL}`, {headers: {Authorization: `Bearer ${token}`, withCredentials: true, "Content-Type": "application/json"}});
         setSearchCooperatives(res?.data.filter(el => el.name.toLowerCase().includes(name.toLowerCase())));
     }catch(err) {
         console.log(err?.data?.message);
@@ -40,7 +39,7 @@ const AdminExporter = () => {
 
   const deleteCooperative = async (cooperativeId) => {    
     try {
-        await axios.delete(`${COOPERATIVE_URL}/${cooperativeId}`, {headers: {Authorization: `Bearer ${token}`,withCredentials: true}});
+        await axios.delete(`${EXPORTER_URL}/${cooperativeId}`, {headers: {Authorization: `Bearer ${token}`,withCredentials: true}});
         setCooperatives(cooperatives.filter(cooperative => cooperative.id !== cooperativeId));
     }catch(err) {
         console.log(err);

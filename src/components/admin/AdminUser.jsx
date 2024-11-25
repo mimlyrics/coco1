@@ -3,8 +3,7 @@ import { Link } from "react-router-dom";
 import { selectCurrentToken } from "../../slices/auth/authSlice";
 import { useSelector } from "react-redux";
 import axios from "../api/axios";
-const USER_PROFILE_URL = "/api/v1/users/users";
-const DELETE_USER_URL = "/api/v1/users/users"
+import { USERS_URL } from "../routes/serverRoutes";
 const AdminUser = () => {
   const [username, setUsername] = useState("");
   const [email, setEmail] = useState("");
@@ -16,10 +15,11 @@ const AdminUser = () => {
   const [errMsg, setErrMsg] = useState("");
   const [searchUsers, setSearchUsers] = useState(null);
   const token = useSelector(selectCurrentToken);
+
   useEffect(() => {
     const getUserData = async () => {
         try {
-            const res = await axios.get(USER_PROFILE_URL, {headers: {Authorization: `Bearer ${token}`,withCredentials: true, 
+            const res = await axios.get(USERS_URL, {headers: {Authorization: `Bearer ${token}`,withCredentials: true, 
                }});
             console.log(res?.data);
             setUsers(res?.data);
@@ -35,7 +35,7 @@ const AdminUser = () => {
   const searchUser = async (e, code) => {
     e.preventDefault();
     try {
-        const searchuser = await axios.get(`${USER_PROFILE_URL}/${code}`, {Authorization: `Bearer ${token}`,headers: {withCredentials: true}});
+        const searchuser = await axios.get(`${USERS_URL}/${code}`, {Authorization: `Bearer ${token}`,headers: {withCredentials: true}});
         console.log(searchuser.data);
         setSearchUsers(searchuser.data.users);
     }catch(err) {
@@ -48,7 +48,7 @@ const AdminUser = () => {
   const deleteUser = async (code) => {  
     console.log(code);  
     try {
-        await axios.delete(`${DELETE_USER_URL}/${code}`, {Authorization: `Bearer ${token}`,headers: {withCredentials: true}});
+        await axios.delete(`${USERS_URL}/${code}`, {Authorization: `Bearer ${token}`,headers: {withCredentials: true}});
         setUsers(users.filter(user => user.code !== code));
     }catch(err) {
         console.log(err);
