@@ -64,9 +64,7 @@ const Home = () => {
               <h1 className="text-4xl md:text-[80px] text-[#00000067]">CACAO Cameroun</h1>
             </div>
           </div>
-          <div className=" bg-[rgba(119,85,84)] absolute top-0 left-0 bottom-0 right-0 opacity-40 rounded-bl-[100px]">
-
-          </div>
+          <div className=" bg-[rgba(119,85,84)] absolute top-0 left-0 bottom-0 right-0 opacity-40 rounded-bl-[100px]"> </div>
         </div>
         
       {/* <nav className="md:w-[80%]">
