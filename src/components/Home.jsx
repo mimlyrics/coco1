@@ -4,7 +4,7 @@ import { FaExclamation, FaUser, FaUpload, FaFacebook, FaSnapchat, FaWhatsapp } f
 import { FaInstagram, FaTiktok, FaYoutube, FaGithub, FaTwitter } from "react-icons/fa6";;
 import { useMimlyrics } from "./context/AppProvider";
 
-import { logout } from "../slices/auth/authSlice";
+import { logout, selectCurrentToken } from "../slices/auth/authSlice";
 import { useSelector, useDispatch } from "react-redux";
 import { useNavigate, Link, useLocation } from "react-router-dom";
 import { useLogoutMutation } from "../slices/auth/usersApiSlice";
@@ -25,18 +25,6 @@ const Home = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const [userInfo ,setUserInfo] = useState(null);
-  var user = null;
-
-  if(localStorage.getItem('userInfo')) {
-    console.log('userinfo');
-    var {user} = useSelector(selectCurrentUser);
-    console.log(user);
-  }
-
-  useEffect(() => {
-      setUserInfo(user);
-      console.log(userInfo);
-  }, [userInfo])
 
   const [isRun, setIsRun] = useState(true);  
   const [logOutApiCall, {isLoading}] = useLogoutMutation();
@@ -196,7 +184,7 @@ const Home = () => {
                   <div>
                     <h1 className="text-center text-black text-lg md:text-2xl"><strong>Module Statistique</strong></h1>
                     Ici vous aurez un compte rendu de votre activité (nombre/quantité de ventes, nombre/quantité d'achats, ...).<br/>
-                    <a href="/map" className="text-blue-700 underline font-bold">Plus...</a>
+                    <a href="/admin/dashboard" className="text-blue-700 underline font-bold">Plus...</a>
                   </div>
                   <img src={ coco1 } className="border mr-8 w-20 h-20 md:w-40 md:h-40"/>
                 </div>

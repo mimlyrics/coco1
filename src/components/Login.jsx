@@ -39,7 +39,6 @@ const Login = () => {
   }, [navigate, token]);
 
 
-
   async function handleSubmit(e) {
     e.preventDefault();
     try {
@@ -48,7 +47,7 @@ const Login = () => {
       //console.log(res);
       dispatch(setCredentials({...res}));
       if(res) {
-        navigate("/");
+        window.location.href = "http://localhost:3000"
       }
     }catch(error) {
       //console.log(error?.data?.message || error.error);

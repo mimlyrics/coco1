@@ -16,14 +16,14 @@ import axios from "./api/axios";
 import AudioLogo from "../assets/audiologo.png"
 import { selectCurrentUser } from "../slices/auth/authSlice";
 import logo from "../assets/logo.png";
-
-
 const Navbar = () => {
   const [showModal, setShowModal] = useState(false);
   const [errMsg, setErrMsg] = useState("");
   const location = useLocation();
   const {pathname} = location;
   const {isActiveModalNavbar, setIsActiveModalNavbar} = useMimlyrics();
+  const [logOutApiCall, {isLoading}] = useLogoutMutation();
+  const dispatch = useDispatch();
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -55,6 +55,25 @@ const Navbar = () => {
     setIsActiveModalNavbar(!showModal);        
   }
 
+const {token} = useSelector(selectCurrentUser) || {};
+  useEffect(() => {
+    //console.log(token);
+  }, [token])
+
+  const handleLogout = async (e) => {
+    e.preventDefault();
+    try {
+      await logOutApiCall().unwrap();
+      dispatch(logout());      
+      navigate("/");
+    }catch(err) {
+      //console.log("huumm");
+      console.log(err?.data?.message);
+      setErrMsg(err?.data?.message);
+    }
+  }
+
+
 
   /*(function getUserInfo () {
     if(localStorage.getItem('userInfo')) {
@@ -72,6 +91,8 @@ const Navbar = () => {
        <nav id="header" className=" transition-all md:py-1 bg-transparent relative md:flex-row md:justify-between flex items-center">
           <img src={logo} id="logo" className="cursor-pointer w-20 h-20 md:w-28 md:h-28 ml-5 md:ml-20"></img>
 
+          {!token ? 
+
           <div className="flex flex-row flex-1 justify-end mr-5 items-center">
               <Link className="flex flex-row items-center justify-center mr-4 transition-transform hover:scale-110 hover:text-green-300" to="/register "> 
                 <IoMdLogIn className="mr-2 text-xl md:text-3xl"/>
@@ -81,7 +102,16 @@ const Navbar = () => {
                 <IoMdLogIn className="mr-2 text-xl md:text-3xl"/>
                 <div>Connexion</div>
               </Link>
-          </div>
+          </div> : 
+          <div onClick={handleLogout} className=" relative flex z-50 flex-row flex-1 justify-end mr-5 items-center">
+              <button className="flex flex-row items-center justify-center mr-4 transition-transform hover:scale-110 hover:text-red-300"  > 
+                <IoMdLogOut className="mr-2 text-xl md:text-3xl"/>
+                <div>Deconnexion</div>
+              </button>
+          </div>       
+          }
+
+
          {showModal ? (
            <div className=" absolute top-1/2 -translate-y-1/2 left-3 md:invisible">
              <button className="" onClick={() => handleModalNavbar()}>
