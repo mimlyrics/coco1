@@ -19,8 +19,8 @@ const AdminUser = () => {
   useEffect(() => {
     const getUserData = async () => {
         try {
-            const res = await axios.get(USER_PROFILE_URL, {headers: {withCredentials: true, 
-                Authorization: `Bearer ${token}`}});
+            const res = await axios.get(USER_PROFILE_URL, {headers: {Authorization: `Bearer ${token}`,withCredentials: true, 
+               }});
             console.log(res?.data);
             setUsers(res?.data);
             console.log(users);
@@ -35,7 +35,7 @@ const AdminUser = () => {
   const searchUser = async (e, code) => {
     e.preventDefault();
     try {
-        const searchuser = await axios.get(`${USER_PROFILE_URL}/${code}`, {headers: {withCredentials: true}});
+        const searchuser = await axios.get(`${USER_PROFILE_URL}/${code}`, {Authorization: `Bearer ${token}`,headers: {withCredentials: true}});
         console.log(searchuser.data);
         setSearchUsers(searchuser.data.users);
     }catch(err) {
@@ -48,7 +48,7 @@ const AdminUser = () => {
   const deleteUser = async (code) => {  
     console.log(code);  
     try {
-        await axios.delete(`${DELETE_USER_URL}/${code}`, {headers: {withCredentials: true}});
+        await axios.delete(`${DELETE_USER_URL}/${code}`, {Authorization: `Bearer ${token}`,headers: {withCredentials: true}});
         setUsers(users.filter(user => user.code !== code));
     }catch(err) {
         console.log(err);

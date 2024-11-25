@@ -44,6 +44,7 @@ const Login = () => {
     e.preventDefault();
     try {
       const res = await login({username, password}).unwrap();
+      console.log(res);
       //console.log(res);
       dispatch(setCredentials({...res}));
       if(res) {

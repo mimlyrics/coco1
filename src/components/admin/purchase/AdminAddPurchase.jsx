@@ -1,10 +1,16 @@
 import {useState, useEffect} from "react";
-const PURCHASE_URL = "api/purchases/purchases";
 import axios from "../../api/axios";
 import { Link } from "react-router-dom";
 import { IoIosArrowDropup, IoMdArrowDropdown, IoMdArrowDropup } from "react-icons/io";
+import { useSelector } from "react-redux";
+import { selectCurrentToken } from "../../../slices/auth/authSlice";
 const USERS_URL = "/api/v1/users/users";
 const COOPERATIVES_URL = "/api/v1/cooperatives/cooperatives";
+
+const USER_PROFILE_URL = "/api/v1/users/users";
+
+const COOPERATIVE_URL = "/api/v1/cooperatives/cooperatives";
+const PURCHASE_URL = "/api/v1/purchases/purchases";
 const AdminAddPurchase = () => {
     const [errMsg, setErrMsg] = useState("");
 
@@ -22,53 +28,91 @@ const AdminAddPurchase = () => {
     const [cooperativeId, setCooperativeId] = useState("");
     const [price, setPrice] = useState("");
     const [quantity, setQuantity] = useState("");
+    const [cooperatives, setCooperatives] = useState(null);
 
-    const [date, setDate] = useState("");
+    const [code, setCode] = useState("");
+
+    const [date, setDate] = useState(new Date(0));
+    const [success, setSuccess] = useState(false);
 
     const [usersCode, setUsersCode] = useState([]);
     const [cooperativesId, setCooperativesId] = useState([]);
+    const token = useSelector(selectCurrentToken);
+  
+  useEffect(() => {
 
-    useEffect(() => {
-      const getUsersCode = async () => {
-        try {
-          const res = await axios.get(USERS_URL, {});
-          if(res) {
-            setUsersCode(res?.data?.users);
-          }
-        }catch(err) {
-          setErrMsg(err?.data?.message);
-        }
+
+  const searchUser = async () => {
+    try {
+        const res = await axios.get(`${USER_PROFILE_URL}`, {headers: {Authorization: `Bearer ${token}`,withCredentials: true}});
+        setUsersCode(res.data);
+        setUserCode(res.data[0].code);
+        console.log(code);
+    }catch(err) {
+        console.log(err?.data?.message);
+        setErrMsg(err?.data?.message);
+    }
+  }
+
+  searchUser()
+  }, [])
+
+  useEffect(() => {
+
+  const searchCooperative = async () => {
+    try {
+        const res = await axios.get(`${COOPERATIVE_URL}`, {headers: {Authorization: `Bearer ${token}`,withCredentials: true}});
+        console.log(res.data);
+        setCooperativesId(res.data);
+        setCooperativeId(res.data[0].id);
+    }catch(err) {
+        console.log(err?.data?.message);
+        setErrMsg(err?.data?.message);
+    }
+  }
+
+  searchCooperative()
+  }, [])
+
+
+  const handlePostSubmit = async (e) => {
+    e.preventDefault();
+
+    try {
+      const res = await axios.post(PURCHASE_URL, {code: code,
+           userCode: userCode, cooperativeId: cooperativeId, quantity, price    
+      }, {headers: {Authorization: `Bearer ${token}`, "Content-Type": "application/json"}});
+      console.log(res?.data?.plot);
+      if(res) {
+        setSuccess(res?.data?.message);
+        setTimeout(()=> {
+          window.location.href = "http://localhost:3000/admin/purchase"
+        }, [2000])
+        
       }
-
-      getUsersCode();
-    }, [])
-
-    useEffect(() => {
-      const getCooperativesId = async () => {
-        try {
-          const res = await axios.get(COOPERATIVES_URL, {});
-          if(res) {
-            setCooperativesId(res?.data?.cooperatives);
-          }
-        }catch(err) {
-          setErrMsg(err?.data?.message);
-        }
-      }
-
-      getCooperativesId();
-    }, [])
+    }catch(err) {
+      console.log(err);
+      setErrMsg(err?.response?.data?.message);
+        setTimeout(()=> {
+          setErrMsg(false);
+        }, [3000])
+      window.scrollTo(0,50);
+    }
+  }
 
   return (
     <>
     <section className=" md:ml-[21%] md:w-[55vw] bg-gradient-to-r from-amber-200 to-amber-300 md:bg-zinc-200
         px-1">
       <div className=" my-2 mt-1 bg-gradient-to-l from-amber-400 ">
-        <h1 className="text-2xl text-center ">Admin Plot DashBoard</h1>
+        <h1 className="text-2xl text-center ">Admin Purchase DashBoard</h1>
       </div>
-            
+
+        {errMsg? <div className=" animate-bounce font-bold text-lg text-red-500"><h1>{errMsg}</h1></div> : null}
+        {success? <div className=" animate-bounce font-bold text-lg text-green-500"><h1>{success}</h1></div> : null}            
 
         <div className="my-3 text-lg ">
-          <label htmlFor='code'>Code</label>
+          <label htmlFor='code'>User Code</label>
           <select className="h-11 px-5 text-gray-700 font-semibold rounded-md shadow-sm border outline-none
             w-[80%] block" value={userCode} onChange={e=>setUserCode(e.target.value)}
           > 
@@ -84,12 +128,12 @@ const AdminAddPurchase = () => {
           </select>
         </div>
         <div className="my-3 text-lg ">
-          <label htmlFor='region'>Region</label>
+          <label htmlFor='region'>Cooperative ID</label>
           <select className="h-11 px-5 text-gray-700 font-semibold rounded-md shadow-sm border outline-none
-            w-[80%] block" value={cooperativeId} onChange={e=>setCooperativesId(e.target.value)}
+            w-[80%] block" value={cooperativeId} onChange={e=>setCooperativeId(e.target.value)}
           > 
             {cooperativesId ? cooperativesId.map((cooperative,i) => {
-              return (<option className=" rounded-lg font-sans m-3" key={i} value={cooperative}>{cooperative}</option>)
+              return (<option className=" rounded-lg font-sans m-3" key={cooperative.id} value={cooperative.id}>{cooperative.id}</option>)
             }) : null}
           </select>
         </div>
@@ -113,11 +157,17 @@ const AdminAddPurchase = () => {
             />
         </div>
 
-        <div>
+        {/*<div>
            <DatePicker selected={startDate} onChange={(date) => setStartDate(date)} />
+        </div>*/}
+
+        <div onClick={(e) => handlePostSubmit(e)} className="w-48 my-2 md:my-1 ">
+          <button className=" p-2 w-40 text-lg animation delay-150 duration-300 
+            border rounded-md shadow-sm bg-amber-300 hover:bg-amber-400 
+            hover:translate-y-[2px]" 
+            type="submit">Post
+          </button>
         </div>
-
-
 
     </section> 
     </>

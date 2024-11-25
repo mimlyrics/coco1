@@ -2,17 +2,19 @@ import {useState, useEffect} from "react";
 import { Link } from "react-router-dom";
 import axios from "../api/axios";
 const COOPERATIVE_URL = "/api/v1/cooperatives/cooperatives";
-
+import { selectCurrentToken } from "../../slices/auth/authSlice";
+import { useSelector } from "react-redux";
 const AdminCooperative = () => {
   const [name, setName] = useState("");
   const [cooperatives, setCooperatives] = useState([]);
   const [searchId, setSearchId] = useState("");
   const [errMsg, setErrMsg] = useState("");
   const [searchCooperatives, setSearchCooperatives] = useState(null);
+  const token = useSelector(selectCurrentToken);
   useEffect(() => {
     const getCooperativeData = async () => {
         try {
-            const res = await axios.get(COOPERATIVE_URL, {headers: {withCredentials: true}});
+            const res = await axios.get(COOPERATIVE_URL, {headers: {Authorization: `Bearer ${token}`, withCredentials: true}});
             console.log(res?.data);
             setCooperatives(res?.data);
         }catch(err) {
@@ -25,7 +27,7 @@ const AdminCooperative = () => {
   const searchCooperative = async (e, name) => {
     e.preventDefault();
     try { 
-        const res = await axios.get(`${COOPERATIVE_URL}`, {headers: {withCredentials: true, "Content-Type": "application/json"}});
+        const res = await axios.get(`${COOPERATIVE_URL}`, {headers: {Authorization: `Bearer ${token}`,withCredentials: true, "Content-Type": "application/json"}});
         setSearchCooperatives(res?.data.filter(el => el.name.toLowerCase().includes(name.toLowerCase())));
     }catch(err) {
         console.log(err?.data?.message);
@@ -37,7 +39,7 @@ const AdminCooperative = () => {
 
   const deleteCooperative = async (cooperativeId) => {    
     try {
-        await axios.delete(`${COOPERATIVE_URL}/${cooperativeId}`, {headers: {withCredentials: true}});
+        await axios.delete(`${COOPERATIVE_URL}/${cooperativeId}`, {headers: {Authorization: `Bearer ${token}`,withCredentials: true}});
         setCooperatives(cooperatives.filter(cooperative => cooperative.id !== cooperativeId));
     }catch(err) {
         console.log(err);

@@ -1,6 +1,8 @@
 import {useState, useEffect} from "react";
 import { Link } from "react-router-dom";
 import axios from "../../api/axios";
+import { useSelector } from "react-redux";
+import { selectCurrentToken } from "../../../slices/auth/authSlice";
 const COOPERATIVE_URL = "/api/v1/exporters/exporters";
 
 const AdminExporter = () => {
@@ -9,10 +11,11 @@ const AdminExporter = () => {
   const [searchId, setSearchId] = useState("");
   const [errMsg, setErrMsg] = useState("");
   const [searchCooperatives, setSearchCooperatives] = useState(null);
+  const token = useSelector(selectCurrentToken)
   useEffect(() => {
     const getCooperativeData = async () => {
         try {
-            const res = await axios.get(COOPERATIVE_URL, {headers: {withCredentials: true}});
+            const res = await axios.get(COOPERATIVE_URL, {headers: {Authorization: `Bearer ${token}`,withCredentials: true}});
             console.log(res?.data);
             setCooperatives(res?.data);
         }catch(err) {
@@ -25,7 +28,7 @@ const AdminExporter = () => {
   const searchCooperative = async (e, name) => {
     e.preventDefault();
     try { 
-        const res = await axios.get(`${COOPERATIVE_URL}`, {headers: {withCredentials: true, "Content-Type": "application/json"}});
+        const res = await axios.get(`${COOPERATIVE_URL}`, {headers: {Authorization: `Bearer ${token}`, withCredentials: true, "Content-Type": "application/json"}});
         setSearchCooperatives(res?.data.filter(el => el.name.toLowerCase().includes(name.toLowerCase())));
     }catch(err) {
         console.log(err?.data?.message);
@@ -37,7 +40,7 @@ const AdminExporter = () => {
 
   const deleteCooperative = async (cooperativeId) => {    
     try {
-        await axios.delete(`${COOPERATIVE_URL}/${cooperativeId}`, {headers: {withCredentials: true}});
+        await axios.delete(`${COOPERATIVE_URL}/${cooperativeId}`, {headers: {Authorization: `Bearer ${token}`,withCredentials: true}});
         setCooperatives(cooperatives.filter(cooperative => cooperative.id !== cooperativeId));
     }catch(err) {
         console.log(err);
@@ -123,7 +126,7 @@ const AdminExporter = () => {
                         <p className="flex text-gray-800">Name: <p className="ml-2 text-blue-900">{cooperative.name}</p></p>
                         <div className="mt-3">
                             <button className="  w-20 p-2 border shadow rounded-lg bg-green-200 hover:bg-green-400 hover:-translate-y-[2px] focus:ring-2 focus:ring-green-400">
-                                <Link  to= {`/admin/exporter/edit?cooperativeId=${cooperative.id}`}  >Modifier</Link> </button>
+                                <Link to= {`/admin/exporter/edit?cooperativeId=${cooperative.id}`}  >Modifier</Link> </button>
                             <button className="  w-20 ml-4 p-2 border shadow rounded-lg bg-red-300 hover:bg-red-500 hover:-translate-y-[2px] focus:ring-2 focus:ring-red-400" 
                                 onClick={()=>deleteCooperative(cooperative.id)}  >Supprimer</button>
                         </div>                        

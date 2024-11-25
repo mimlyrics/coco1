@@ -96,7 +96,7 @@ const Register = () => {
       console.log(code);
       if(isChecked && validCode && validEmail && validUsername && validPassword) {
         const res = await register({code, username, phone, email, password}).unwrap();
-        dispatch(setCredentials({ ...res }));
+        /*dispatch(setCredentials({ ...res }));*/
         setSucess(true);
         navigate("/");
       }

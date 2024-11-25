@@ -55,6 +55,18 @@ const Navbar = () => {
     setIsActiveModalNavbar(!showModal);        
   }
 
+
+  /*(function getUserInfo () {
+    if(localStorage.getItem('userInfo')) {
+      let {user} = useSelector(selectCurrentUser); 
+      return {token}
+    }
+  }
+
+   let {user} = getUserInfo() || {};
+   const userInfo = user*/
+ 
+
    return (    
       <div className="fixed top-0 left-0 right-0 text-blue-600 z-[1100]">
        <nav id="header" className=" transition-all md:py-1 bg-transparent relative md:flex-row md:justify-between flex items-center">
