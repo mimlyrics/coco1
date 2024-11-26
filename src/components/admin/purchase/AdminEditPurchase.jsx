@@ -133,7 +133,7 @@ const AdminEditPurchase = () => {
     <section className=" md:ml-[21%] md:w-[55vw] bg-gradient-to-r from-amber-200 to-amber-300 md:bg-zinc-200
         px-1">
       <div className=" my-2 mt-1 bg-gradient-to-l from-amber-400 ">
-        <h1 className="text-2xl text-center ">Admin Purchase DashBoard</h1>
+        <h1 className="text-2xl text-center ">Admin Purchase</h1>
       </div>
 
         {errMsg? <div className=" animate-bounce font-bold text-lg text-red-500"><h1>{errMsg}</h1></div> : null}
@@ -192,7 +192,7 @@ const AdminEditPurchase = () => {
           <button className=" p-2 w-40 text-lg animation delay-150 duration-300 
             border rounded-md shadow-sm bg-amber-300 hover:bg-amber-400 
             hover:translate-y-[2px]" 
-            type="submit">Edit
+            type="submit">Editx
           </button>
         </div>
 
