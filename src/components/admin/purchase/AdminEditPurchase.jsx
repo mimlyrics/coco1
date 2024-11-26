@@ -6,6 +6,7 @@ import { useSelector } from "react-redux";
 import { selectCurrentToken } from "../../../slices/auth/authSlice";
 import queryString  from 'query-string';
 import { COOPERATIVE_URL, PURCHASE_URL, USERS_URL, PLOT_URL } from "../../routes/serverRoutes";
+import CLIENT_URL from "../../routes/clientRoutes";
 const AdminEditPurchase = () => {
     const [errMsg, setErrMsg] = useState("");
 
@@ -66,43 +67,6 @@ const AdminEditPurchase = () => {
 
     }, [idx])
 
-  
-  useEffect(() => {
-
-
-  const searchUser = async () => {
-    try {
-        const res = await axios.get(`${USERS_URL}`, {headers: {Authorization: `Bearer ${token}`,withCredentials: true}});
-        setUsersCode(res.data);
-        setUserCode(res.data[0].code);
-        console.log(code);
-    }catch(err) {
-        console.log(err?.data?.message);
-        setErrMsg(err?.data?.message);
-    }
-  }
-
-  searchUser()
-  }, [])
-
-  useEffect(() => {
-
-  const searchCooperative = async () => {
-    try {
-        const res = await axios.get(`${COOPERATIVE_URL}`, {headers: {Authorization: `Bearer ${token}`,withCredentials: true}});
-        console.log(res.data);
-        setCooperativesId(res.data);
-        setCooperativeId(res.data[0].id);
-    }catch(err) {
-        console.log(err?.data?.message);
-        setErrMsg(err?.data?.message);
-    }
-  }
-
-  searchCooperative()
-  }, [])
-
-
   const handlePostSubmit = async (e) => {
     e.preventDefault();
 
@@ -114,7 +78,7 @@ const AdminEditPurchase = () => {
       if(res) {
         setSuccess(res?.data?.message);
         setTimeout(()=> {
-          //window.location.href = "http://localhost:3000/admin/purchase"
+          window.location.href = `${CLIENT_URL}/#/admin/purchase`;
         }, [2000])
         
       }
@@ -139,31 +103,24 @@ const AdminEditPurchase = () => {
         {errMsg? <div className=" animate-bounce font-bold text-lg text-red-500"><h1>{errMsg}</h1></div> : null}
         {success? <div className=" animate-bounce font-bold text-lg text-green-500"><h1>{success}</h1></div> : null}            
 
-        <div className="my-3 text-lg ">
-          <label htmlFor='code'>User Code</label>
-          <select className="h-11 px-5 text-gray-700 font-semibold rounded-md shadow-sm border outline-none
-            w-[80%] block" value={userCode} onChange={e=>setUserCode(e.target.value)}
-          > 
-
-          {usersCode ? usersCode.map(user => {
-            return (
-              <option key={user.id}>
-                {user.code} {user.username}
-              </option>
-            )
-          }) : null}
-          
-          </select>
+        <div className="my-2 md:my-3 ">
+            <label htmlFor="price">User Code</label>
+            <input className=" rounded-md shadow-sm px-2 py-2
+             md:py-3  w-[80%] block focus:outline 
+             focus:outline-[0.16rem] outline-sky-300
+             border-sky-300 " type="text" value={userCode} 
+             onChange={e=> setUserCode(e.target.value)}  
+            />
         </div>
-        <div className="my-3 text-lg ">
-          <label htmlFor='region'>Cooperative ID</label>
-          <select className="h-11 px-5 text-gray-700 font-semibold rounded-md shadow-sm border outline-none
-            w-[80%] block" value={cooperativeId} onChange={e=>setCooperativeId(e.target.value)}
-          > 
-            {cooperativesId ? cooperativesId.map((cooperative,i) => {
-              return (<option className=" rounded-lg font-sans m-3" key={cooperative.id} value={cooperative.id}>{cooperative.id}</option>)
-            }) : null}
-          </select>
+
+        <div className="my-2 md:my-3 ">
+            <label htmlFor="price">Cooperative Id</label>
+            <input className=" rounded-md shadow-sm px-2 py-2
+             md:py-3  w-[80%] block focus:outline 
+             focus:outline-[0.16rem] outline-sky-300
+             border-sky-300 " type="text" value={cooperativeId} 
+             onChange={e=> setCooperativeId(e.target.value)}  
+            />
         </div>
 
         <div className="my-2 md:my-3 ">

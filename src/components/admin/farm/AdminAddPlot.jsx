@@ -94,7 +94,7 @@ const AdminAddPlot = () => {
       if(res) {
         setSuccess(res?.data?.message);
         setTimeout(()=> {
-          //window.location.href = `${CLIENT_URL}/admin/plot`;
+          window.location.href = `${CLIENT_URL}/#/admin/plot`;
         }, [1000])
         
       }

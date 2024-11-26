@@ -68,7 +68,7 @@ const AdminUser = () => {
         </div>
 
         <div className="my-3">
-            <Link  to= "/admin/user/add"  className=" w-11 h-4 p-2 border shadow rounded-lg bg-blue-500" >Add a Room</Link>
+            <Link  to= "/admin/user/add"  className=" w-11 h-4 p-2 border shadow rounded-lg bg-blue-500" >Add a User</Link>
         </div>
         <ul className="md:hidden">
             {searchUsers.map(user => {

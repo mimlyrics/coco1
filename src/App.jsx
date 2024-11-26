@@ -49,7 +49,7 @@ import AdminExporter from "./components/admin/exporter/AdminExporter";
 import AdminEditExporter from "./components/admin/exporter/AdminEditExporter";
 import AdminAddExporter from "./components/admin/exporter/AdminAddExporter";
 import 'leaflet/dist/leaflet.css';
-
+import { HashRouter } from "react-router-dom";
 function App() {
   const {userInfo} = useSelector(state => state.auth);
   const [isAdmin, setIsAdmin] = useState(false);
@@ -57,7 +57,8 @@ function App() {
   
   //console.log(isAdmin, isEditor);
   return (
-    <Router>    
+    
+    <HashRouter basename="/">    
       <Navbar/>
       <Routes>        
       {/**Public routes */}    
@@ -119,7 +120,7 @@ function App() {
           <Route element={<RequireEditor/>}>  
           </Route>
         </Routes>
-    </Router>
+    </HashRouter>
   );
 }
 
