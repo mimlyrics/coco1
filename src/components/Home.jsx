@@ -1,6 +1,6 @@
 import {useState, useEffect} from "react"
 import "./css/index.css";
-import { FaExclamation, FaUser, FaUpload, FaFacebook, FaSnapchat, FaWhatsapp } from "react-icons/fa6";
+import { FaExclamation, FaUser, FaUpload, FaFacebook, FaSnapchat, FaWhatsapp, FaDownload } from "react-icons/fa6";
 import { FaInstagram, FaTiktok, FaYoutube, FaGithub, FaTwitter } from "react-icons/fa6";;
 import { useMimlyrics } from "./context/AppProvider";
 
@@ -81,6 +81,16 @@ const Home = () => {
   const handleShowProfile = () => {
     setShowProfile(!showProfile);
   }
+
+  const handleDownload = () => {
+    // Sélectionner le canvas contenant le QR Code
+    const canvas = document.querySelector("canvas");
+    const pngUrl = canvas.toDataURL("image/png"); // Convertir en URL d'image PNG
+    const downloadLink = document.createElement("a");
+    downloadLink.href = pngUrl;
+    downloadLink.download = "qrcode.png"; // Nom du fichier téléchargé
+    downloadLink.click(); // Simuler un clic pour déclencher le téléchargement
+  };
 
   console.log(showProfile, userInfo);
 
@@ -176,7 +186,7 @@ const Home = () => {
                   <img src={ purchase } className="border mr-8 w-20 h-20 md:w-40 md:h-40"/>
                   <div>
                     <h1 className="text-center text-black text-lg md:text-2xl"><strong>Effectuer un achat</strong></h1>
-                    Vous êtes un producteur et vous souhaitez acheter des parcelles à une coopérative pour débuter votre activité. Alors, cette rubrique est faite pour vous.<br/>
+                    Vous êtes une coopérative ou un exportateur de cacao et vous souhaitez acheter du cacao à un producteur, alors cette rubrique est faite pour vous.<br/>
                     <Link to="/admin/purchase" className="text-blue-700 underline font-bold">Plus...</Link>
                   </div>
                 </div>
@@ -250,7 +260,15 @@ const Home = () => {
                           bgColor="white"
                           fgColor="brown"
                           className="border rounded mt-2 m-auto"
+                          id="qr-canvas"
                         />
+                        <div className="mt-3"> 
+                          <button id="save-qr" onClick={ handleDownload } className="bg-white m-auto text-black text-lg py-1 px-2 border rounded mt-2 md:mt-0 md:ml-2 active:bg-amber-200
+                          flex flex-row">
+                            <FaDownload className="mr-2"/>
+                            Enregistrer le QR
+                            </button>
+                        </div>
                       </div>
                     </div>
                   : "" }
