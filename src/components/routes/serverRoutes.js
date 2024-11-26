@@ -1,7 +1,7 @@
 
 
-const BASE_URL =  "http://localhost:5000";
-const SU = "http://localhost:5000/api/v1";
+const BASE_URL =  'https://tracecocoa-api.onrender.com';
+const SU = 'https://tracecocoa-api.onrender.com/api/v1';
 
 const SERVER_URL = {
     USERS_URL : `${SU}/users/users`,
