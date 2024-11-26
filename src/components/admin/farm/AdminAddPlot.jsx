@@ -10,7 +10,7 @@ import { selectCurrentToken } from "../../../slices/auth/authSlice";
 import { COOPERATIVE_URL, USERS_URL, PLOT_URL } from "../../routes/serverRoutes";
 const regions = ["centre", "littoral", "Ouest", "Est", "ngoundere", "sud est", "north ouest"];
 const codes = ["r435", "5678j", "657krf"];
-
+import CLIENT_URL from "../../routes/clientRoutes";
 const AdminAddPlot = () => {
 
   const [code, setCode] = useState("");
@@ -94,7 +94,7 @@ const AdminAddPlot = () => {
       if(res) {
         setSuccess(res?.data?.message);
         setTimeout(()=> {
-          window.location.href = "http://localhost:3000/admin/plot"
+          window.location.href = `${CLIENT_URL}/admin/plot`;
         }, [1000])
         
       }

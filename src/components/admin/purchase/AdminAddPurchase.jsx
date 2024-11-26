@@ -5,6 +5,7 @@ import { IoIosArrowDropup, IoMdArrowDropdown, IoMdArrowDropup } from "react-icon
 import { useSelector } from "react-redux";
 import { selectCurrentToken } from "../../../slices/auth/authSlice";
 import { COOPERATIVE_URL, USERS_URL, PURCHASE_URL} from "../../routes/serverRoutes";
+import CLIENT_URL from "../../routes/clientRoutes";
 const AdminAddPurchase = () => {
     const [errMsg, setErrMsg] = useState("");
 
@@ -80,7 +81,7 @@ const AdminAddPurchase = () => {
       if(res) {
         setSuccess(res?.data?.message);
         setTimeout(()=> {
-          window.location.href = "http://localhost:3000/admin/purchase"
+          window.location.href = `${CLIENT_URL}/admin/purchase`;
         }, [2000])
         
       }
