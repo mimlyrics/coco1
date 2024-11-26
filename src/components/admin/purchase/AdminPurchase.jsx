@@ -5,8 +5,7 @@ import { IoIosArrowDropup, IoMdArrowDropdown, IoMdArrowDropup } from "react-icon
 import { useSelector } from "react-redux";
 import { selectCurrentToken } from "../../../slices/auth/authSlice";
 import { FaPlus } from "react-icons/fa6";
-const PURCHASE_URL = "/api/v1/purchases/purchases";
-
+import { PURCHASE_URL } from "../../routes/serverRoutes";
 const AdminPurchase = () => {
 
   const salesJson = [

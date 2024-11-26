@@ -5,14 +5,7 @@ import { IoIosArrowDropup, IoMdArrowDropdown, IoMdArrowDropup } from "react-icon
 import { useSelector } from "react-redux";
 import { selectCurrentToken } from "../../../slices/auth/authSlice";
 import queryString  from 'query-string';
-const USERS_URL = "/api/v1/users/users";
-const COOPERATIVES_URL = "/api/v1/cooperatives/cooperatives";
-
-const USER_PROFILE_URL = "/api/v1/users/users";
-import CLIENT_URL from "../../routes/clientRoutes";
-const COOPERATIVE_URL = "/api/v1/cooperatives/cooperatives";
-const SALE_URL = "/api/v1/sales/sales";
-const EXPORTER_URL = "/api/v1/exporters/exporters";
+import { COOPERATIVE_URL, CLIENT_URL, SALE_URL, EXPORTER_URL } from "../../routes/serverRoutes";
 const AdminEditSale = () => {
     const [errMsg, setErrMsg] = useState("");
 
