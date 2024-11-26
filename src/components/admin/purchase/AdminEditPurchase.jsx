@@ -42,7 +42,6 @@ const AdminEditPurchase = () => {
       setIdx(searchId);
       console.log(idx);
     }, [idx])
-    
 
     useEffect(() => {
         const getSales = async () => {
@@ -66,6 +65,45 @@ const AdminEditPurchase = () => {
         getSales();
 
     }, [idx])
+
+
+  useEffect(() => {
+
+
+  const searchUser = async () => {
+    try {
+        const res = await axios.get(`${USERS_URL}`, {headers: {Authorization: `Bearer ${token}`,withCredentials: true}});
+        setUsersCode(res.data);
+        setUserCode(res.data[0].code);
+        console.log(code);
+    }catch(err) {
+        console.log(err?.data?.message);
+        setErrMsg(err?.data?.message);
+    }
+  }
+
+  searchUser()
+  }, [])
+
+  useEffect(() => {
+
+  const searchCooperative = async () => {
+    try {
+        const res = await axios.get(`${COOPERATIVE_URL}`, {headers: {Authorization: `Bearer ${token}`,withCredentials: true}});
+        console.log(res.data);
+        setCooperativesId(res.data);
+        setCooperativeId(res.data[0].id);
+    }catch(err) {
+        console.log(err?.data?.message);
+        setErrMsg(err?.data?.message);
+    }
+  }
+
+  searchCooperative()
+  }, [])
+
+    
+
 
   const handlePostSubmit = async (e) => {
     e.preventDefault();
@@ -103,7 +141,7 @@ const AdminEditPurchase = () => {
         {errMsg? <div className=" animate-bounce font-bold text-lg text-red-500"><h1>{errMsg}</h1></div> : null}
         {success? <div className=" animate-bounce font-bold text-lg text-green-500"><h1>{success}</h1></div> : null}            
         <div className="my-3 text-lg ">
-          <label htmlFor='code'>User Code</label>
+          <label htmlFor='code'>Code utilisateur</label>
           <select className="h-11 px-5 text-gray-700 font-semibold rounded-md shadow-sm border outline-none
             w-[80%] block" value={userCode} onChange={e=>setUserCode(e.target.value)}
           > 
@@ -119,12 +157,12 @@ const AdminEditPurchase = () => {
           </select>
         </div>
         <div className="my-3 text-lg ">
-          <label htmlFor='region'>Cooperative ID</label>
+          <label htmlFor='region'>Cooperative</label> {/* cooperative ID*/}
           <select className="h-11 px-5 text-gray-700 font-semibold rounded-md shadow-sm border outline-none
             w-[80%] block" value={cooperativeId} onChange={e=>setCooperativeId(e.target.value)}
           > 
             {cooperativesId ? cooperativesId.map((cooperative,i) => {
-              return (<option className=" rounded-lg font-sans m-3" key={cooperative.id} value={cooperative.id}>{cooperative.id}</option>)
+              return (<option className=" rounded-lg font-sans m-3" key={cooperative.id} value={cooperative.id}>{cooperative.name}</option>)
             }) : null}
           </select>
         </div>
