@@ -37,6 +37,7 @@ const AdminEditSale = () => {
       const {searchId} =  queryString.parse(location.search);
       setIdx(searchId);
       console.log(idx);
+      console.log(searchId);
     }, [idx])
     
 
