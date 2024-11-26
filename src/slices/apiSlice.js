@@ -4,6 +4,7 @@ import BASE_URL from "../components/routes/serverRoutes";
 const baseQuery = fetchBaseQuery({
     //baseUrl: "https://mimlyricstest5-api.onrender.com",
     baseUrl: BASE_URL,
+    credentials: 'include',
     prepareHeaders: (headers, {getState}) => {
         const token = getState().auth.token;
         console.log("Heyyy token: ", token);
@@ -12,7 +13,7 @@ const baseQuery = fetchBaseQuery({
         }
         return headers;
     },
-    credentials: 'include'
+
 });
 
 const baseQueryWithReauth = async (args, api, extraOptions) => {
