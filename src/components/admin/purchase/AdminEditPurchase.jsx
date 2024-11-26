@@ -12,8 +12,6 @@ const AdminEditPurchase = () => {
 
     const [searchplots, setSearchplots] = useState(null);
 
-    const [searchId, setSearchId] = useState("");
-
     const [successMsg, setSuccessMsg] = useState("");
     const [showMore, setShowMore]  = useState(false);
 
