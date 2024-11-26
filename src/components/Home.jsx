@@ -17,7 +17,8 @@ import { selectCurrentUser } from "../slices/auth/authSlice";
 import coco1 from "../../assets/cocoa-1529746_1920.jpg";
 import { QRCodeCanvas } from "qrcode.react";
 import CLIENT_URL from './routes/clientRoutes';
-
+import coco2 from "../../assets/cacao-pod-4469207_1920.jpg";
+import coco3 from "../../assets/martinique-4900895_1920.jpg"
 const Home = () => {
   const [showProfile, setShowProfile] = useState(false);
   const [file, setFile] = useState();
@@ -161,7 +162,7 @@ const Home = () => {
                   <div>
                     <h1 className="text-center text-black text-lg md:text-2xl"><strong>Effectuer un achat</strong></h1>
                     Vous êtes un producteur et vous souhaitez acheter des parcelles à une coopérative pour débuter votre activité. Alors, cette rubrique est faite pour vous.<br/>
-                    <a href="/admin/purchase" className="text-blue-700 underline font-bold">Plus...</a>
+                    <Link to="/admin/purchase" className="text-blue-700 underline font-bold">Plus...</Link>
                   </div>
                 </div>
 
@@ -169,17 +170,17 @@ const Home = () => {
                   <div>
                     <h1 className="text-center text-black text-lg md:text-2xl"><strong>Effectuer une vente</strong></h1>
                     Vous êtes un producteur et vous souhaitez vendre vos produits. Cette rubrique est faite pour vous.<br/>
-                    <a href="" className="text-blue-700 underline font-bold">Plus...</a>
+                    <Link to="/admin/sale" className="text-blue-700 underline font-bold">Plus...</Link>
                   </div>
-                  <img src={ coco1 } className="border mr-8 w-20 h-20 md:w-40 md:h-40"/>
+                  <img src={ coco2 } className="border mr-8 w-20 h-20 md:w-40 md:h-40"/>
                 </div>
 
                 <div className="flex flex-row w-full border-y-2 py-3 float-end my-3 items-center justify-between">
-                  <img src={ coco1 } className="border mr-8 w-20 h-20 md:w-40 md:h-40"/>
+                  <img src={ coco3 } className="border mr-8 w-20 h-20 md:w-40 md:h-40"/>
                   <div>
                     <h1 className="text-center text-black text-lg md:text-2xl"><strong>Voir les parcelles</strong></h1>
                     Ici vous pourrez visualiser les données de votre parcelle dans une carte. <br/>
-                    <a href="/map" className="text-blue-700 underline font-bold">Plus...</a>
+                    <Link to="/map" className="text-blue-700 underline font-bold">Plus...</Link>
                   </div>
                 </div>
 
@@ -187,9 +188,9 @@ const Home = () => {
                   <div>
                     <h1 className="text-center text-black text-lg md:text-2xl"><strong>Module Statistique</strong></h1>
                     Ici vous aurez un compte rendu de votre activité (nombre/quantité de ventes, nombre/quantité d'achats, ...).<br/>
-                    <a href="/admin/dashboard" className="text-blue-700 underline font-bold">Plus...</a>
+                    <Link to="/admin/dashboard" className="text-blue-700 underline font-bold">Plus...</Link>
                   </div>
-                  <img src={ coco1 } className="border mr-8 w-20 h-20 md:w-40 md:h-40"/>
+                  <img src={ coco2 } className="border mr-8 w-20 h-20 md:w-40 md:h-40"/>
                 </div>
 
 
