@@ -4,6 +4,7 @@ const BASE_URL =  'https://tracecocoa-api.onrender.com';
 const SU = 'https://tracecocoa-api.onrender.com/api/v1';
 
 const SERVER_URL = {
+    REGISTER_URL: `${SU}/register`,
     USERS_URL : `${SU}/users/users`,
     PLOT_URL : `${SU}/plots/plots`,
     SALE_URL : `${SU}/exporters/exporters`,
