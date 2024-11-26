@@ -8,7 +8,7 @@ export const usersApiSlice = apiSlice.injectEndpoints({
                 url: `${USER_URL}/login`,
                 method: "POST",
                 body: {...credentials},
-                mode: 'cors'
+                mode: 'no-cors'
             })
         }),
         register: builder.mutation({
