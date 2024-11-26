@@ -225,7 +225,7 @@ const Home = () => {
                 Ministère de l'agriculture<br/>
 
                 { userCode ? 
-                    <div className="ml-[45vw]">
+                    <div className="ml-[50%]">
                       <h2 className="text-center text-gray-300 mt-2">QR Code producteur</h2>
                       <div>
                         <QRCodeCanvas
