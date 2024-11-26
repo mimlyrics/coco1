@@ -204,9 +204,11 @@ const Home = () => {
         
         }
 
+        </div>
+
+        <div className="m-0 box-border flex  md:text-lg md:py-1 text-white bg-[rgba(119,85,84)]">
 
 
-        <div className="m-0 box-border flex flex-col md:text-lg md:py-1 text-white bg-[rgba(119,85,84)]">
           <div className="flex justify-around text-gray-100 jus p-4 flex-wrap">
             <div className="mx-2">
               <h2 className="text-center text-gray-300 mt-3">Contacts</h2><br/>
@@ -223,7 +225,7 @@ const Home = () => {
                 Ministère de l'agriculture<br/>
 
                 { userCode ? 
-                    <div>
+                    <div className="ml-[45vw]">
                       <h2 className="text-center text-gray-300 mt-2">QR Code producteur</h2>
                       <div>
                         <QRCodeCanvas
@@ -238,66 +240,16 @@ const Home = () => {
                   : "" }
                 
             </div>
-          </div>
+          
           <div className="text-center border-t">
             Copyright © 2024 Tous droits reservés
           </div>
 
-           <div className=" text-white font-mono w-[80%] flex space-x-24 mx-2 mb-1">
+           <div className=" text-2xl text-white font-mono w-[80%] flex space-x-24 mx-2 mb-1">
             <p className=''> _______</p>
             <Link className="text-gray-200" to="/admin/dashboard" >Admin DashBoard</Link>
           </div>
-{/*
-          <div className=" text-gray-800 w-[100%] px-3 bg-gradient-to-r from-[rgba(30,30,30,0.1)] to-[rgba(20,50,50,0.2)] md:flex md:space-x-28">
-            <div className="flex flex-col mb-3 py-1">
-              <p>About Us</p>
-              <Link to="/location" className="ml-3">
-                Location
-              </Link>
-              <Link to="/why" className="ml-3">
-                Why ?
-              </Link>
-
-              <div className=" my-2 ">
-                <Link to="/">Contact</Link>
-                <div className="flex">
-                  <FaWhatsapp className=" w-5 h-5 md:w-7 md:h-7 "/>+237 6245401
-                </div>
-                <div className="flex">
-                  <FaExclamation className=" w-5 h-5 md:w-7 md:h-7"/> Geographic Location
-                </div>
-              </div>
-            </div>
-
-            <div className="flex flex-col mx-3 mb-3">
-              <p className="text-lg">Follow Us on</p>
-              <div className="flex space-x-2 py-1">
-                <FaYoutube className="w-6 h-6 md:w-7 md:h-7 text-red-600"/>
-                <Link  to="https://www.youtube.com/@mimlyrics" >Youtube</Link>
-              </div>
-              <div className="flex space-x-2 py-1">
-                <FaFacebook className="w-6 h-6 md:w-7 md:h-7 text-blue-600"/>
-                <Link to="https://www.facebook.com/@mimlyrics">Facebook</Link>
-              </div>
-              <div className="flex space-x-2 py-1">
-                <FaInstagram className="w-6 h-6 md:w-7 md:h-7 text-purple-800"/>
-                <Link to="https://www.instagram.com/@mimlyrics15">Instagram</Link>
-              </div>
-              <div className="flex space-x-2 py-1">
-                <FaTiktok className="w-6 h-6 md:w-7 md:h-7 text-gray-800"/>
-                <Link to="https://www.tiktok.com/@mimlyrics2">Tiktok</Link>
-              </div>
-              <div className="flex space-x-2 py-1">
-                <FaTwitter className="w-6 h-6 md:w-7 md:h-7 text-blue-500"/>
-                <Link to="/twitter">Twitter</Link>
-              </div>
-              <div className="flex space-x-2 py-1">
-                <FaGithub className="w-6 h-6 md:w-7 md:h-7"/>
-                <Link>Github</Link>
-              </div>
-            </div>
-          </div> */}
-        </div>
+          </div>
         </div>
       </section>
     </div>
