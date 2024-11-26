@@ -70,7 +70,7 @@ const AdminAddPurchase = () => {
         {success? <div className=" animate-bounce font-bold text-lg text-green-500"><h1>{success}</h1></div> : null}            
 
         <div className="my-2 md:my-3 ">
-            <label htmlFor="price">User Code</label>
+            <label htmlFor="price">Code producteur</label>
             <input className=" rounded-md shadow-sm px-2 py-2
              md:py-3  w-[80%] block focus:outline 
              focus:outline-[0.16rem] outline-sky-300
@@ -80,7 +80,7 @@ const AdminAddPurchase = () => {
         </div>
 
         <div className="my-2 md:my-3 ">
-            <label htmlFor="price">Cooperative Id</label>
+            <label htmlFor="price">Cooperative/Exportateur</label>
             <input className=" rounded-md shadow-sm px-2 py-2
              md:py-3  w-[80%] block focus:outline 
              focus:outline-[0.16rem] outline-sky-300

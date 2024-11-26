@@ -240,9 +240,9 @@ const Home = () => {
                     <div>
                       <h2 className="text-center text-gray-300 mt-2">QR Code producteur</h2><br/>
                       <div>
-                        <div className=""> 
+                        <div className="flex flex-col md:flex-row"> 
                           <input type="text" id="qr-id-value" placeholder="Code..." className="text-black text-lg px-2 py-1 border rounded mx-1"/>
-                          <button id="gen-qr-btn" onClick={ genNewCode } className="bg-white text-black text-lg py-1 px-2 border rounded ml-2 active:bg-amber-200">Générer</button>
+                          <button id="gen-qr-btn" onClick={ genNewCode } className="bg-white text-black text-lg py-1 px-2 border rounded mt-2 md:mt-0 md:ml-2 active:bg-amber-200">Générer</button>
                         </div>
                         <QRCodeCanvas
                           value={ url }
