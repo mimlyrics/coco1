@@ -145,7 +145,7 @@ const Home = () => {
       <section className={ isActiveModalNavbar ? " relative opacity-60 -z-50 " :  "flex flex-col z-50 font-medium space-x-1 mx-1 mt-5" }>
       
         <div className=' mt-2 md:mt-2 pl-2 pr-14 py-1'>
-          {!userCode ? 
+          {userCode ? 
           <div className=" ">
             <h1 className="border-l text-4xl md:text-[2.5rem]">Bienvenue sur  <strong>Trace Cocoa</strong></h1>
               <p className="text-gray-900 ">
