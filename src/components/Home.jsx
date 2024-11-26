@@ -206,7 +206,7 @@ const Home = () => {
 
 
 
-        <div className="m-0 box-border flex flex-col md:text-lg md:py-1 text-white bg-[brown]">
+        <div className="m-0 box-border flex flex-col md:text-lg md:py-1 text-white bg-[rgba(119,85,84)]">
           <div className="flex justify-around text-gray-100 jus p-4 flex-wrap">
             <div className="mx-2">
               <h2 className="text-center text-gray-300 mt-3">Contacts</h2><br/>
