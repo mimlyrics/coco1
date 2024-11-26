@@ -50,7 +50,7 @@ const AdminCooperative = () => {
     <>
     { searchCooperatives ?
 
-    <section className=" w-[80vw] md:absolute md:left-1/2 md:-translate-x-1/2 ">
+    <section className=" w-[80vw] md:absolute md:left-1/2 md:-translate-x-1/2 mt-28">
         <h1 className="text-center font-bold py-3 text-blue-600 bg-amber-200">Cooperative trouve</h1>
         <button className=" m-1 p-3 bg-amber-300 rounded-md" onClick={()=>setSearchCooperatives(null)}>All Cooperative</button>
         <div className="mx-1">
@@ -96,7 +96,7 @@ const AdminCooperative = () => {
         </table>    
     </section>
     :
-    <section className="mx-1 w-[80vw] md:absolute md:left-1/2 md:-translate-x-1/2">
+    <section className="mx-1 w-[80vw] md:absolute md:left-1/2 md:-translate-x-1/2 mt-28">
         <div className="my-1 md:w-[50%]">
             <h1 className=" text-lg md:text-xl text-center bg-amber-200 font-semibold">Admin Cooperative Management*</h1>
         </div>

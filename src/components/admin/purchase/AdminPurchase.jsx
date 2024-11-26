@@ -4,6 +4,8 @@ import { Link } from "react-router-dom";
 import { IoIosArrowDropup, IoMdArrowDropdown, IoMdArrowDropup } from "react-icons/io";
 import { useSelector } from "react-redux";
 import { selectCurrentToken } from "../../../slices/auth/authSlice";
+import { FaPlusCircle } from "react-icons/fa";
+import { FaPlus } from "react-icons/fa6";
 const PURCHASE_URL = "/api/v1/purchases/purchases";
 
 const AdminPurchase = () => {
@@ -76,45 +78,48 @@ const AdminPurchase = () => {
 
   return (
     <>
-    <section className=" md:absolute md:top-16 md:w-[90vw] mx-1 md:ml-[19%] xl:ml-[9%] mt-24">
+    <section className=" md:relative md:top-16 md:w-[90vw] mx-1 md:ml-[19%] xl:ml-[9%] mt-24">
         <div className="my-1 md:w-[90vw]">
             {/* <h1 className=" text-lg md:text-xl text-center bg-amber-200 font-semibold">Achats</h1> */}
             <h1 className="border-l text-4xl md:text-[2.5rem]"><strong>Achats</strong></h1>
         </div>
 
-        {searchSales ? <h1 className="text-center font-bold py-3 text-amber-600 bg-amber-200">Achats trouves</h1> : null}
-        <button className=" m-1 p-3 bg-amber-300 rounded-md" onClick={()=>setSearchSales(null)}>All Achats</button>
+        {searchSales ? <h1 className="text-center font-bold py-3 text-amber-800 bg-amber-200">Achats trouves</h1> : null}
+        {/* <button className=" m-1 p-3 bg-amber-300 rounded-md" onClick={()=>setSearchSales(null)}>Tout afficher</button> */}
 
-        <div className="md:w-[100%]">
+        <div className="w-full md:w-[500px] m-auto flex">
             <input 
               onKeyDown={(e)=>(e.key === "Enter" ? SearchPurchase(e,searchId) : null)} 
-              placeholder="search..." className=" w-96 text-lg p-2 h-11 bg-amber-200 text-gray-700" 
+              placeholder="Rechercher..." className=" w-96 text-lg p-2 h-11 rounded  border px-4 text-black flex-1" 
               type="text" value={searchId} onChange={e=>setSearchId(e.target.value)}/>
             <button 
              onClick={(e) => SearchPurchase(e, searchId)} 
-             className="h-11 py-2 px-3 md:px-10 ml-1 text-lg bg-amber-300 rounded-md text-gray-700 hover:bg-blue-500 hover:translate-y-[1px] ">
-              Search
+             className="h-11 py-2 px-3 md:px-10 ml-1 text-lg bg-amber-300 rounded-md text-black hover:bg-blue-500 hover:translate-y-[1px] ">
+              Rechercher
             </button>
         </div>
 
-        <div className="my-3">
-            <Link  to= "/admin/purchase/add"  className=" w-11 h-4 p-2 border shadow rounded-lg bg-blue-100 hover:bg-blue-300 hover:translate-y-1" >Ajouter achats</Link>
+        <div className="my-3 py-4 px-8 m-auto text-center">
+            <Link  to= "/admin/purchase/add"  className="w-11 h-4 p-2 border shadow rounded-lg bg-blue-100 hover:bg-blue-300 hover:translate-y-1" >
+              Ajouter achats
+            </Link>
+            {/* <a href="/admin/purchase/add" className="w-full h-full text-center"> Ajouter Achat </a>  */}
         </div>
 
-        <div className="font-bold text-lg ">
-            <h1>Plot Info</h1>
+        <div className="font-bold text-lg">
+            <h1 className="text-2xl"><b>Détails Achats</b></h1>
         </div>
 
 
         {searchSales ?
         <div>
-          <table className=" border-4">
+          <table className="border-4 my-3 py-4 px-8 m-auto text-center">
             <thead>
               
-              <th>User Code</th>
-              <th>Cooperative Id</th>
-              <th>quantity</th>
-              <th>price</th>
+              <th>Code producteur</th>
+              <th>Cooperative</th>
+              <th>quantité</th>
+              <th>prix</th>
               <th>date</th>
             </thead>
             <tbody>
@@ -143,15 +148,14 @@ const AdminPurchase = () => {
         </div>        
         
          : 
-        <div>
-          <table className=" border-4">
+         <div>
+          <table className="border-4 my-3 py-4 px-8 m-auto text-center">
             <thead>
-              
-              <th>User Code</th>
-              <th>Cooperative Id</th>
-              <th>quantity</th>
-              <th>price</th>
-              <th>date</th>
+              <th className="mx-2">Code producteur</th>
+              <th className="mx-2">Cooperative</th>
+              <th className="mx-2">quantité</th>
+              <th className="mx-2">prix</th>
+              <th className="mx-2">date</th>
             </thead>
             <tbody>
             {sales? sales.map((sale, i) => {

@@ -17,6 +17,11 @@ import { selectCurrentUser } from "../slices/auth/authSlice";
 import coco1 from "../../assets/cocoa-1529746_1920.jpg";
 import { QRCodeCanvas } from "qrcode.react";
 
+import administration from "../../assets/administration.png";
+import map from "../../assets/map.png";
+import buy from "../../assets/buy.png";
+import purchase from "../../assets/purchase.png";
+
 
 const Home = () => {
   const [showProfile, setShowProfile] = useState(false);
@@ -154,7 +159,7 @@ const Home = () => {
               className="w-[90vw] m-auto md:w-4/5 p-5 relative">
 
                 <div className="flex flex-row border-y-2 py-3 float-end my-3 items-center justify-between">
-                  <img src={ coco1 } className="border mr-8 w-20 h-20 md:w-40 md:h-40"/>
+                  <img src={ purchase } className="border mr-8 w-20 h-20 md:w-40 md:h-40"/>
                   <div>
                     <h1 className="text-center text-black text-lg md:text-2xl"><strong>Effectuer un achat</strong></h1>
                     Vous êtes un producteur et vous souhaitez acheter des parcelles à une coopérative pour débuter votre activité. Alors, cette rubrique est faite pour vous.<br/>
@@ -166,13 +171,13 @@ const Home = () => {
                   <div>
                     <h1 className="text-center text-black text-lg md:text-2xl"><strong>Effectuer une vente</strong></h1>
                     Vous êtes un producteur et vous souhaitez vendre vos produits. Cette rubrique est faite pour vous.<br/>
-                    <a href="" className="text-blue-700 underline font-bold">Plus...</a>
+                    <a href="/admin/sale" className="text-blue-700 underline font-bold">Plus...</a>
                   </div>
-                  <img src={ coco1 } className="border mr-8 w-20 h-20 md:w-40 md:h-40"/>
+                  <img src={ sale } className="border mr-8 w-20 h-20 md:w-40 md:h-40"/>
                 </div>
 
                 <div className="flex flex-row w-full border-y-2 py-3 float-end my-3 items-center justify-between">
-                  <img src={ coco1 } className="border mr-8 w-20 h-20 md:w-40 md:h-40"/>
+                  <img src={ Map } className="border mr-8 w-20 h-20 md:w-40 md:h-40"/>
                   <div>
                     <h1 className="text-center text-black text-lg md:text-2xl"><strong>Voir les parcelles</strong></h1>
                     Ici vous pourrez visualiser les données de votre parcelle dans une carte. <br/>
@@ -182,11 +187,12 @@ const Home = () => {
 
                 <div className="flex flex-row border-y-2 py-3 float-end my-3 items-center justify-between">
                   <div>
-                    <h1 className="text-center text-black text-lg md:text-2xl"><strong>Module Statistique</strong></h1>
-                    Ici vous aurez un compte rendu de votre activité (nombre/quantité de ventes, nombre/quantité d'achats, ...).<br/>
+                    <h1 className="text-center text-black text-lg md:text-2xl"><strong>Module Administration</strong></h1>
+                    {/* Ici vous aurez un compte rendu de votre activité (nombre/quantité de ventes, nombre/quantité d'achats, ...).<br/> */}
+                    Ici vous pourrez gérer des modules supplémentaires comme l'enregistrement des nouveaux exportateurs, ...<br/> 
                     <a href="/admin/dashboard" className="text-blue-700 underline font-bold">Plus...</a>
                   </div>
-                  <img src={ coco1 } className="border mr-8 w-20 h-20 md:w-40 md:h-40"/>
+                  <img src={ administration } className="border mr-8 w-20 h-20 md:w-40 md:h-40"/>
                 </div>
 
 
@@ -203,21 +209,21 @@ const Home = () => {
           <div className="flex justify-around text-gray-100 jus p-4 flex-wrap">
             <div className="mx-2">
               <h2 className="text-center text-gray-300 mt-3">Contacts</h2><br/>
-              (+237) 6xx xx xx xx<br/><br/>
+              (+237) 6xx xx xx xx<br/>
               (+237) 6xx xx xx xx<br/>
             </div>
             <div className="mx-2">
                 <h2 className="text-center text-gray-300 mt-3">Adresses email</h2><br/>
-                tracecocoa.camer@gmail.com<br/><br/>
+                tracecocoa.camer@gmail.com<br/>
                 adresseemail2@gmail.com<br/>
+
+                <h2 className="text-center text-gray-300 mt-3">Infos supplémentaires</h2><br/>
+                Ministère de l'agriculture<br/>
             </div>
             <div className="mx-2">
-                <h2 className="text-center text-gray-300 mt-3">Infos supplémentaires</h2>
-                Ministère de l'agriculture<br/>
-
                 { userCode ? 
                     <div>
-                      <h2 className="text-center text-gray-300 mt-2">QR Code producteur</h2>
+                      <h2 className="text-center text-gray-300 mt-2">QR Code producteur</h2><br/>
                       <div>
                         <QRCodeCanvas
                           value={ url }
@@ -237,8 +243,8 @@ const Home = () => {
           </div>
 
            <div className=" text-white font-mono w-[80%] flex space-x-24 mx-2 mb-1">
-            <p className=''> _______</p>
-            <Link className="text-gray-200" to="/admin/dashboard" >Admin DashBoard</Link>
+            {/* <p className=''> _______</p> */}
+            {/* <Link className="text-gray-200" to="/admin/dashboard" >Admin DashBoard</Link> */}
           </div>
 {/*
           <div className=" text-gray-800 w-[100%] px-3 bg-gradient-to-r from-[rgba(30,30,30,0.1)] to-[rgba(20,50,50,0.2)] md:flex md:space-x-28">
