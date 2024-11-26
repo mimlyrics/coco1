@@ -78,7 +78,7 @@ const Home = () => {
           <div className="w-[100%] h-[100%] rounded-bl-[100px]" 
             style={{ backgroundImage: `url(${coco1})`, backgroundSize: `cover`, backgroundAttachment: `fixed`, backgroundPosition: `center` }}>
             <div className="text-white font-bold text-center font-mono text-4xl flex items-center justify-center w-full h-full">
-              <h1 className="text-4xl md:text-[80px] text-[#00000067]">CACAO Cameroun</h1>
+              <h1 className="text-4xl font-bold font-sans shadow-2xl shadow-gray-300 md:text-[100px] text-white">CACAO Cameroun</h1>
             </div>
           </div>
           <div className=" bg-[rgba(119,85,84)] absolute top-0 left-0 bottom-0 right-0 opacity-40 rounded-bl-[100px]"> </div>
