@@ -197,7 +197,7 @@ const Home = () => {
           </div>
         </div> : 
         
-        <div className="text-center my-96">
+        <div className="text-center my-12">
           <Link className="text-9xl text-teal-900 font-bold font-mono hover:text-amber-900" to="/login">Login</Link>
         </div>
          
