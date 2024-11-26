@@ -95,7 +95,7 @@ const Register = () => {
   async function handleSubmit(e) {
     e.preventDefault();
     try {
-      console.log(code, username);
+      console.log(code, username, phone, username, password);
       if(isChecked && validCode && validEmail && validUsername && validPassword) {
         //const res = await register({code, username, phone, email, password}).unwrap();
         /*dispatch(setCredentials({ ...res }));*/
@@ -117,9 +117,9 @@ const Register = () => {
     }catch(error) {
       console.log('herre');
       console.log(error);
-      console.log(error?.data?.message || error.error);
+      console.log(error?.response?.data?.message || error.error);
       setSucess(false);
-      setErrMsg(error?.data?.message);
+      setErrMsg(error?.response?.data?.message);
     }
   }
 
