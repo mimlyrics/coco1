@@ -81,7 +81,7 @@ const AdminAddPurchase = () => {
       if(res) {
         setSuccess(res?.data?.message);
         setTimeout(()=> {
-          window.location.href = `${CLIENT_URL}/admin/purchase`;
+          //window.location.href = `${CLIENT_URL}/admin/purchase`;
         }, [2000])
         
       }

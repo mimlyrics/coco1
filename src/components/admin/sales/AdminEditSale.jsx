@@ -120,7 +120,7 @@ const AdminEditSale = () => {
       if(res) {
         setSuccess(res?.data?.message);
         setTimeout(()=> {
-          window.location.href = "http://localhost:3000/admin/sale"
+          //window.location.href = "http://localhost:3000/admin/sale"
         }, [1000])
         
       }

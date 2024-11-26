@@ -114,7 +114,7 @@ const AdminEditPurchase = () => {
       if(res) {
         setSuccess(res?.data?.message);
         setTimeout(()=> {
-          window.location.href = "http://localhost:3000/admin/purchase"
+          //window.location.href = "http://localhost:3000/admin/purchase"
         }, [2000])
         
       }
