@@ -11,6 +11,7 @@ import { selectCurrentToken } from "../../../slices/auth/authSlice";
 const PLOT_URL = "/api/v1/plots/plots";
 const COOPERATIVE_URL = "api/v1/cooperatives/cooperatives";
 const USER_PROFILE_URL = "/api/v1/users/users";
+import CLIENT_URL from "../../routes/clientRoutes";
 const regions = ["centre", "littoral", "Ouest", "Est", "ngoundere", "sud est", "north ouest", "extreme norde"];
 const AdminEditPlot = () => {
 
@@ -147,7 +148,7 @@ const AdminEditPlot = () => {
         window.scrollTo(0,50);
         setTimeout(() => {
           
-         //window.location.href = "http://localhost:3000/admin/plot"
+         window.location.href = `${CLIENT_URL}/#/admin/plot`;
         }, [1000]) 
       }
     }catch(err) {
