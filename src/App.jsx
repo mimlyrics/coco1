@@ -88,7 +88,7 @@ function App() {
 
         {/** Protected Admin routes */}
         <Routes>
-            <Route element={<RequireAuth/>}>
+            <Route >
               <Route path="/profile" element={<Profile/>}/>
               <Route path="/admin/user" element={<AdminUser/>}/>
               <Route path="/admin/dashboard" element={<AdminDashBoard/>}/>

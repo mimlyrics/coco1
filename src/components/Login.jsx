@@ -41,13 +41,14 @@ const Login = () => {
 
   async function handleSubmit(e) {
     e.preventDefault();
+    console.log(username);
     try {
       const res = await login({username, password}).unwrap();
       console.log(res);
       //console.log(res);
       dispatch(setCredentials({...res}));
       if(res) {
-        window.location.href = "http://localhost:3000"
+        window.location.href = "https//tracecocoa.onrender.com";
       }
     }catch(error) {
       //console.log(error?.data?.message || error.error);

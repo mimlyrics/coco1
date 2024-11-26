@@ -93,7 +93,7 @@ const Register = () => {
   async function handleSubmit(e) {
     e.preventDefault();
     try {
-      console.log(code);
+      console.log(code, username);
       if(isChecked && validCode && validEmail && validUsername && validPassword) {
         const res = await register({code, username, phone, email, password}).unwrap();
         /*dispatch(setCredentials({ ...res }));*/

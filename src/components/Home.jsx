@@ -16,7 +16,7 @@ import AudioLogo from "../assets/audiologo.png"
 import { selectCurrentUser } from "../slices/auth/authSlice";
 import coco1 from "../../assets/cocoa-1529746_1920.jpg";
 import { QRCodeCanvas } from "qrcode.react";
-
+import CLIENT_URL from './routes/clientRoutes';
 
 const Home = () => {
   const [showProfile, setShowProfile] = useState(false);
@@ -45,7 +45,7 @@ const Home = () => {
   }, []); //http://localhost:3000/map/${userCode}
 
   useEffect(() => {
-    setUrl(`http://localhost:3000/map?code=${userCode}`);
+    setUrl(`${CLIENT_URL}/map?code=${userCode}`);
   }, [userCode]);
   //console.log("IS: ", isActiveModalNavbar);
 
@@ -140,8 +140,11 @@ const Home = () => {
         </div>}         
       </nav> */}
 
+      
       <section className={ isActiveModalNavbar ? " relative opacity-60 -z-50 " :  "flex flex-col z-50 font-medium space-x-1 mx-1 mt-5" }>
+      
         <div className=' mt-2 md:mt-2 pl-2 pr-14 py-1'>
+          {userCode ? 
           <div className=" ">
             <h1 className="border-l text-4xl md:text-[2.5rem]">Bienvenue sur  <strong>Trace Cocoa</strong></h1>
               <p className="text-gray-900 ">
@@ -190,12 +193,8 @@ const Home = () => {
                 </div>
 
 
-            </div>
-            {/* <p className=" pt-2 ">
-              This web app is subdivided into categories 
-            </p> */}
           </div>
-        </div>
+        </div> : <Link className="text-9xl text-teal-900 font-bold font-mono hover:text-amber-900" to="/login">Login</Link> }
 
 
 
