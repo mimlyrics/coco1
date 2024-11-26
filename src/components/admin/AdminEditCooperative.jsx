@@ -1,7 +1,7 @@
 import queryString from "query-string"
 import {useState, useEffect, useRef} from "react";
 import axios from "../api/axios";
-const COOPERATIVE_URL = "/api/v1/cooperatives/cooperatives";
+import { COOPERATIVE_URL } from "../routes/serverRoutes";
 const AdminEditCooperative = () => {
   const [name, setName] = useState("");
   const [errMsg, setErrMsg] = useState("");

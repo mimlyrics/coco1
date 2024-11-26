@@ -12,6 +12,8 @@ import { useMimlyrics } from "../context/AppProvider";
 import Cookiepolicy from "../policy/Cookiepolicy";
 import Privacy from "../policy/Privacy";
 import Termsofuse from "../policy/Termsofuse";
+import axios from "axios";
+import { USERS_URL, REGISTER_URL } from "../routes/serverRoutes";
 
 const FIRSTNAME_REGEX = /^[a-zA-Z0-9]+$/;
 const CODE_REGEX = /^[a-zA-Z0-9]+$/;
@@ -93,10 +95,14 @@ const Register = () => {
   async function handleSubmit(e) {
     e.preventDefault();
     try {
-      console.log(code);
+      console.log(code, username, phone, username, password);
       if(isChecked && validCode && validEmail && validUsername && validPassword) {
         const res = await register({code, username, phone, email, password}).unwrap();
         /*dispatch(setCredentials({ ...res }));*/
+        //const res = await axios.post(REGISTER_URL, {code, username, phone, email, password }, {headers: {"Content-Type": "application/json", withCredentials: true}});
+        if(res) {
+          console.log(res.data);
+        }
         setSucess(true);
         navigate("/");
       }
@@ -111,9 +117,9 @@ const Register = () => {
     }catch(error) {
       console.log('herre');
       console.log(error);
-      console.log(error?.data?.message || error.error);
+      console.log(error?.response?.data?.message || error.error);
       setSucess(false);
-      setErrMsg(error?.data?.message);
+      setErrMsg(error?.response?.data?.message);
     }
   }
 

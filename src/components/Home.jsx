@@ -21,8 +21,9 @@ import administration from "../../assets/administration.png";
 import map from "../../assets/map.png";
 import buy from "../../assets/buy.png";
 import purchase from "../../assets/purchase.png";
-
-
+import CLIENT_URL from './routes/clientRoutes';
+import coco2 from "../../assets/cacao-pod-4469207_1920.jpg";
+import coco3 from "../../assets/martinique-4900895_1920.jpg"
 const Home = () => {
   const [showProfile, setShowProfile] = useState(false);
   const [file, setFile] = useState();
@@ -50,7 +51,7 @@ const Home = () => {
   }, []); //http://localhost:3000/map/${userCode}
 
   useEffect(() => {
-    setUrl(`http://localhost:3000/map?code=${userCode}`);
+    setUrl(`${CLIENT_URL}/map?code=${userCode}`);
   }, [userCode]);
   //console.log("IS: ", isActiveModalNavbar);
 
@@ -82,7 +83,7 @@ const Home = () => {
           <div className="w-[100%] h-[100%] rounded-bl-[100px]" 
             style={{ backgroundImage: `url(${coco1})`, backgroundSize: `cover`, backgroundAttachment: `fixed`, backgroundPosition: `center` }}>
             <div className="text-white font-bold text-center font-mono text-4xl flex items-center justify-center w-full h-full">
-              <h1 className="text-4xl md:text-[80px] text-[#00000067]">CACAO Cameroun</h1>
+              <h1 className="text-2xl font-bold font-mono shadow-2xl shadow-gray-100 md:text-[80px] text-white">CACAO Cameroun</h1>
             </div>
           </div>
           <div className=" bg-[rgba(119,85,84)] absolute top-0 left-0 bottom-0 right-0 opacity-40 rounded-bl-[100px]"> </div>
@@ -145,8 +146,11 @@ const Home = () => {
         </div>}         
       </nav> */}
 
+      
       <section className={ isActiveModalNavbar ? " relative opacity-60 -z-50 " :  "flex flex-col z-50 font-medium space-x-1 mx-1 mt-5" }>
+      
         <div className=' mt-2 md:mt-2 pl-2 pr-14 py-1'>
+          {userCode ? 
           <div className=" ">
             <h1 className="border-l text-4xl md:text-[2.5rem]">Bienvenue sur  <strong>Trace Cocoa</strong></h1>
               <p className="text-gray-900 ">
@@ -163,7 +167,7 @@ const Home = () => {
                   <div>
                     <h1 className="text-center text-black text-lg md:text-2xl"><strong>Effectuer un achat</strong></h1>
                     Vous êtes un producteur et vous souhaitez acheter des parcelles à une coopérative pour débuter votre activité. Alors, cette rubrique est faite pour vous.<br/>
-                    <a href="/admin/purchase" className="text-blue-700 underline font-bold">Plus...</a>
+                    <Link to="/admin/purchase" className="text-blue-700 underline font-bold">Plus...</Link>
                   </div>
                 </div>
 
@@ -171,41 +175,45 @@ const Home = () => {
                   <div>
                     <h1 className="text-center text-black text-lg md:text-2xl"><strong>Effectuer une vente</strong></h1>
                     Vous êtes un producteur et vous souhaitez vendre vos produits. Cette rubrique est faite pour vous.<br/>
-                    <a href="/admin/sale" className="text-blue-700 underline font-bold">Plus...</a>
+                    <Link to="/admin/sale" className="text-blue-700 underline font-bold">Plus...</Link>
                   </div>
                   <img src={ sale } className="border mr-8 w-20 h-20 md:w-40 md:h-40"/>
                 </div>
 
                 <div className="flex flex-row w-full border-y-2 py-3 float-end my-3 items-center justify-between">
-                  <img src={ Map } className="border mr-8 w-20 h-20 md:w-40 md:h-40"/>
+                  <img src={ map } className="border mr-8 w-20 h-20 md:w-40 md:h-40"/>
                   <div>
                     <h1 className="text-center text-black text-lg md:text-2xl"><strong>Voir les parcelles</strong></h1>
                     Ici vous pourrez visualiser les données de votre parcelle dans une carte. <br/>
-                    <a href="/map" className="text-blue-700 underline font-bold">Plus...</a>
+                    <Link to="/map" className="text-blue-700 underline font-bold">Plus...</Link>
                   </div>
                 </div>
 
                 <div className="flex flex-row border-y-2 py-3 float-end my-3 items-center justify-between">
                   <div>
-                    <h1 className="text-center text-black text-lg md:text-2xl"><strong>Module Administration</strong></h1>
-                    {/* Ici vous aurez un compte rendu de votre activité (nombre/quantité de ventes, nombre/quantité d'achats, ...).<br/> */}
-                    Ici vous pourrez gérer des modules supplémentaires comme l'enregistrement des nouveaux exportateurs, ...<br/> 
-                    <a href="/admin/dashboard" className="text-blue-700 underline font-bold">Plus...</a>
+                    <h1 className="text-center text-black text-lg md:text-2xl"><strong>Module Statistique</strong></h1>
+                    Ici vous aurez un compte rendu de votre activité (nombre/quantité de ventes, nombre/quantité d'achats, ...).<br/>
+                    <Link to="/admin/dashboard" className="text-blue-700 underline font-bold">Plus...</Link>
                   </div>
                   <img src={ administration } className="border mr-8 w-20 h-20 md:w-40 md:h-40"/>
                 </div>
 
 
-            </div>
-            {/* <p className=" pt-2 ">
-              This web app is subdivided into categories 
-            </p> */}
           </div>
+        </div> : 
+        
+        <div className="text-center my-12">
+          <Link className="text-9xl text-teal-900 font-bold font-mono hover:text-amber-900" to="/login">Login</Link>
+        </div>
+         
+        
+        }
+
         </div>
 
+        <div className="m-0 box-border flex  md:text-lg md:py-1 text-white bg-[rgba(119,85,84)]">
 
 
-        <div className="m-0 box-border flex flex-col md:text-lg md:py-1 text-white bg-[brown]">
           <div className="flex justify-around text-gray-100 jus p-4 flex-wrap">
             <div className="mx-2">
               <h2 className="text-center text-gray-300 mt-3">Contacts</h2><br/>
@@ -222,8 +230,8 @@ const Home = () => {
             </div>
             <div className="mx-2">
                 { userCode ? 
-                    <div>
-                      <h2 className="text-center text-gray-300 mt-2">QR Code producteur</h2><br/>
+                    <div className="ml-[50%]">
+                      <h2 className="text-center text-gray-300 mt-2">QR Code producteur</h2>
                       <div>
                         <QRCodeCanvas
                           value={ url }
@@ -237,7 +245,7 @@ const Home = () => {
                   : "" }
                 
             </div>
-          </div>
+          
           <div className="text-center border-t">
             Copyright © 2024 Tous droits reservés
           </div>

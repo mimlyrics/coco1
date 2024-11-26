@@ -4,7 +4,6 @@ import { Link } from "react-router-dom";
 import { IoIosArrowDropup, IoMdArrowDropdown, IoMdArrowDropup } from "react-icons/io";
 import { useSelector } from "react-redux";
 import { selectCurrentToken } from "../../../slices/auth/authSlice";
-import { FaPlusCircle } from "react-icons/fa";
 import { FaPlus } from "react-icons/fa6";
 const PURCHASE_URL = "/api/v1/purchases/purchases";
 

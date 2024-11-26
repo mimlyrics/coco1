@@ -5,13 +5,7 @@ import { IoIosArrowDropup, IoMdArrowDropdown, IoMdArrowDropup } from "react-icon
 import { useSelector } from "react-redux";
 import { selectCurrentToken } from "../../../slices/auth/authSlice";
 import queryString  from 'query-string';
-const USERS_URL = "/api/v1/users/users";
-const COOPERATIVES_URL = "/api/v1/cooperatives/cooperatives";
-
-const USER_PROFILE_URL = "/api/v1/users/users";
-
-const COOPERATIVE_URL = "/api/v1/cooperatives/cooperatives";
-const PURCHASE_URL = "/api/v1/purchases/purchases";
+import { COOPERATIVE_URL, PURCHASE_URL, USERS_URL, PLOT_URL } from "../../routes/serverRoutes";
 const AdminEditPurchase = () => {
     const [errMsg, setErrMsg] = useState("");
 
@@ -78,7 +72,7 @@ const AdminEditPurchase = () => {
 
   const searchUser = async () => {
     try {
-        const res = await axios.get(`${USER_PROFILE_URL}`, {headers: {Authorization: `Bearer ${token}`,withCredentials: true}});
+        const res = await axios.get(`${USERS_URL}`, {headers: {Authorization: `Bearer ${token}`,withCredentials: true}});
         setUsersCode(res.data);
         setUserCode(res.data[0].code);
         console.log(code);
@@ -120,7 +114,7 @@ const AdminEditPurchase = () => {
       if(res) {
         setSuccess(res?.data?.message);
         setTimeout(()=> {
-          window.location.href = "http://localhost:3000/admin/purchase"
+          //window.location.href = "http://localhost:3000/admin/purchase"
         }, [2000])
         
       }

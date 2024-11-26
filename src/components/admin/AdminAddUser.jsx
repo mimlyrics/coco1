@@ -18,8 +18,6 @@ const FIRSTNAME_REGEX = /^[a-zA-Z0-9]+$/;
 const LASTNAME_REGEX = /^[a-zA-Z0-9]+$/;
 const PASSWORD_REGEX =  /^[A-Za-z]\w{7,14}$/;  /*/^(?=.*[0-9]+.*)(?=.*[a-zA-z]+.*)[0-9a-zA-Z]{6,}$/;*/
 const EMAIL_REGEX = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
-
-
 const AdminAddUser = () => {
   const [firstName, setFirstName] = useState("");
   const [lastName, setLastName] = useState("");

@@ -37,10 +37,10 @@ const Navbar = () => {
       } else {
         header.classList.add("text-white");
         header.classList.remove("text-blue-600");
-        header.style.backgroundColor = "brown";
+        header.style.backgroundColor = "rgba(119,85,84)";
       }
     };
-  
+ 
     window.addEventListener("scroll", (e) => {
       onScrollHeaderEvent(e);
     });
@@ -87,13 +87,13 @@ const {token} = useSelector(selectCurrentUser) || {};
  
 
    return (    
-      <div className="fixed top-0 left-0 right-0 text-blue-600 z-[1100]">
+      <div className="fixed top-0 left-0 right-0 text-white font-bold font-mono z-[1100]">
        <nav id="header" className=" transition-all md:py-1 bg-transparent relative md:flex-row md:justify-between flex items-center">
           <img src={logo} id="logo" className="cursor-pointer w-20 h-20 md:w-28 md:h-28 ml-5 md:ml-20"></img>
 
           {!token ? 
 
-          <div className="flex flex-row flex-1 justify-end mr-5 items-center">
+          <div className="text-2xl flex flex-row flex-1 justify-end mr-5 items-center">
               <Link className="flex flex-row items-center justify-center mr-4 transition-transform hover:scale-110 hover:text-green-300" to="/register "> 
                 <IoMdLogIn className="mr-2 text-xl md:text-3xl"/>
                 <div>Inscription</div>
@@ -103,7 +103,7 @@ const {token} = useSelector(selectCurrentUser) || {};
                 <div>Connexion</div>
               </Link>
           </div> : 
-          <div onClick={handleLogout} className=" relative flex z-50 flex-row flex-1 justify-end mr-5 items-center">
+          <div onClick={handleLogout} className=" text-xl text-white font-bold font-mono relative flex z-50 flex-row flex-1 justify-end mr-5 items-center">
               <button className="flex flex-row items-center justify-center mr-4 transition-transform hover:scale-110 hover:text-red-300"  > 
                 <IoMdLogOut className="mr-2 text-xl md:text-3xl"/>
                 <div>Deconnexion</div>
@@ -180,78 +180,6 @@ const {token} = useSelector(selectCurrentUser) || {};
          </div> */}
 
         </nav>
-
-       <section className="md:hidden ">
-         {/** Hero section */}
-         {showModal ? (
-           <ul onClick={() => setShowModal(false)} className="absolute h-screen flex w-80 text-white font-medium text-lg flex-col shadow bg-blue-700 ">
-            
-            <div className=" py-3 hover:bg-blue-800">
-             <Link className=" ml-20 " to="/">
-               <FaHouse className="absolute left-14 "/>Home
-             </Link> 
-            </div>
-            <p className=" w-80 h-[2px] bg-slate-100 "></p>
-
-            <div className=" py-3 hover:bg-blue-800">
-             <Link className="ml-20 " to="/plot">
-              <FaMessage className="absolute left-14  "/>Plot
-             </Link><span className="border-b-2"></span>
-           </div>
-           <p className="w-80 h-[2px] bg-slate-100 "></p>
-
-            <div className=" py-3 hover:bg-blue-800">
-             <Link className="ml-20  " to="/users">
-               <FaMusic className="absolute left-14  "/>Producteur
-             </Link><span className="border-b-2"></span>
-             </div>
-            <p className="w-80 h-[2px] bg-slate-100 "></p>
-
-            <div className=" py-3 hover:bg-blue-800">
-             <Link className="ml-20  " to="/cooperative">
-               <IoMdAlbums className="absolute left-14  "/>Cooperative
-             </Link><span className="border-b-2"></span>
-             </div>
-            <p className="w-80 h-[2px] bg-slate-100 "></p>
-
-            <div className=" py-3 hover:bg-blue-800">
-             <Link className=" ml-20 " to="/exporter">
-               <FaVideo className="absolute left-14 "/>Exporter
-             </Link><span className="border-b-2"></span>
-             </div>
-            <p className="w-80 h-[2px] bg-slate-100 "></p>
-
-            <div className=" py-3  hover:bg-blue-800">
-             <Link className="ml-20" to="/assistance">
-               <IoMdHelp className="absolute left-14"/> Assistance
-             </Link><span className="border-b-2"></span>
-            </div>
-            <p className="w-80 h-[2px] bg-slate-100 "></p>
-
-            <div className=" py-3 hover:bg-blue-800">
-             <Link className="ml-20" to="/settings">
-               <IoMdSettings className="absolute left-14"/> Settings
-             </Link><span className="border-b-2"></span>
-            </div>
-            <p className="w-80 h-[2px] bg-slate-100 "></p>
-
-            <div className=" py-3 hover:bg-blue-800">
-             <Link className="ml-20" to="/help">
-              <FaExclamation className="absolute left-14  "/> Help
-             </Link><span className="border-b-2"></span>
-            </div>
-            <p className="w-80 h-[2px] bg-slate-100 "></p>
-
-            <div className=" py-3 hover:bg-blue-800">
-             <Link to="/language" className=" ml-20  py-3">
-             <FaLanguage className=" absolute left-14"/>Language</Link>
-             <span className="border-b-2"></span>
-             </div>
-            <p className="w-80 h-[2px] bg-slate-100 "></p>
-           </ul>
-          
-         ) : null}
-       </section>
         <Outlet/>
       </div>    
    );

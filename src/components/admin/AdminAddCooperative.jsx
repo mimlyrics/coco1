@@ -1,6 +1,6 @@
 import{useState, useRef, useEffect} from "react";
 import axios from "../api/axios";
-const COOPERATIVE_URL = "/api/v1/cooperatives/cooperatives";
+import { COOPERATIVE_URL } from "../routes/serverRoutes";
 import { selectCurrentToken } from "../../slices/auth/authSlice";
 import { useSelector } from "react-redux";
 const AdminAddCooperative = () => {
@@ -28,7 +28,7 @@ const AdminAddCooperative = () => {
     //formData.append("name", name);
     console.log(name);
     try {
-        const postCooperative = await axios.post(COOPERATIVE_URL, {name: name} , {Authorization: `Bearer ${token}`,headers: {withCredentials: true}});
+        const postCooperative = await axios.post(COOPERATIVE_URL, {name: name} , {headers: {Authorization: `Bearer ${token}`,withCredentials: true}});
         if(postCooperative) {
             setSuccess(`${name} has been added successfully`);
             setName("");

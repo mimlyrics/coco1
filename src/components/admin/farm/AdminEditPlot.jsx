@@ -147,7 +147,7 @@ const AdminEditPlot = () => {
         window.scrollTo(0,50);
         setTimeout(() => {
           
-          window.location.href = "http://localhost:3000/admin/plot"
+         //window.location.href = "http://localhost:3000/admin/plot"
         }, [1000]) 
       }
     }catch(err) {

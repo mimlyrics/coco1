@@ -1,8 +1,8 @@
 import {useState, useEffect} from "react";
 import { Link } from "react-router-dom";
 import axios from "../api/axios";
-const COOPERATIVE_URL = "/api/v1/cooperatives/cooperatives";
 import { selectCurrentToken } from "../../slices/auth/authSlice";
+import { COOPERATIVE_URL, USERS_URL, PLOT_URL } from "../routes/serverRoutes";
 import { useSelector } from "react-redux";
 const AdminCooperative = () => {
   const [name, setName] = useState("");

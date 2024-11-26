@@ -9,7 +9,7 @@ import { setCredentials } from "../slices/auth/authSlice";
 import { FaRegEyeSlash, FaRegEye, FaX, FaUser } from "react-icons/fa6";
 import { useMimlyrics } from "./context/AppProvider";
 import axios from "./api/axios";
-
+import CLIENT_URL from "./routes/clientRoutes";
 const Login = () => {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
@@ -41,13 +41,14 @@ const Login = () => {
 
   async function handleSubmit(e) {
     e.preventDefault();
+    console.log(username);
     try {
       const res = await login({username, password}).unwrap();
       console.log(res);
       //console.log(res);
       dispatch(setCredentials({...res}));
       if(res) {
-        window.location.href = "http://localhost:3000"
+        window.location.href = CLIENT_URL;
       }
     }catch(error) {
       //console.log(error?.data?.message || error.error);
