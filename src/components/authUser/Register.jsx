@@ -99,7 +99,7 @@ const Register = () => {
       if(isChecked && validCode && validEmail && validUsername && validPassword) {
         //const res = await register({code, username, phone, email, password}).unwrap();
         /*dispatch(setCredentials({ ...res }));*/
-        const res = await axios.post(USERS_URL, {code, username, phone, email, password, }, {headers: {"Content-Type": "application.json", withCredentials: true}});
+        const res = await axios.post(USERS_URL, {code, username, phone, email, password, }, {headers: {"Content-Type": "application/json", withCredentials: true}});
         if(res) {
           console.log(res.data);
         }
