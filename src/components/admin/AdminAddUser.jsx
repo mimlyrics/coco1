@@ -109,7 +109,7 @@ const AdminAddUser = () => {
 
   //console.log("bonjourr: X");
   return (
-    <section className="relative ">
+    <section className="relative mt-28">
     <div className="text-center mx-3 mt-1 bg-indigo-300 py-2 font-bold text-lg md:mx-48 lg:mx-64 md:w-[51%]">
         <h1>*Admin_ Add User*</h1>
     </div>

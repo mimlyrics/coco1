@@ -41,6 +41,7 @@ const Home = () => {
   //console.log(location);
   let userStorage = JSON.parse(window.localStorage.getItem("userInfo"));
   let [userCode, setUserCode] = useState(null);
+  let [userGenCode, setUserGenCode] = useState(null);
   const [url, setUrl] = useState(null);
 
   useEffect(() => {
@@ -52,8 +53,16 @@ const Home = () => {
   }, []); //http://localhost:3000/map/${userCode}
 
   useEffect(() => {
-    setUrl(`${CLIENT_URL}/map?code=${userCode}`);
+    setUrl(`${CLIENT_URL}/#/map?code=${userCode}`);
   }, [userCode]);
+
+  const genNewCode = () => {
+    let genBtn = document.getElementById("gen-qr-btn");
+    let genValue = document.getElementById("qr-id-value").value;
+
+    if(genValue != null && genValue != undefined)  
+      setUserCode(genValue);
+  }
   //console.log("IS: ", isActiveModalNavbar);
 
   const handleLogout = async (e) => {
@@ -84,7 +93,7 @@ const Home = () => {
           <div className="w-[100%] h-[100%] rounded-bl-[100px]" 
             style={{ backgroundImage: `url(${coco1})`, backgroundSize: `cover`, backgroundAttachment: `fixed`, backgroundPosition: `center` }}>
             <div className="text-white font-bold text-center font-mono text-4xl flex items-center justify-center w-full h-full">
-              <h1 className="text-2xl font-bold font-mono shadow-2xl shadow-gray-100 md:text-[80px] text-white">CACAO Cameroun</h1>
+              <h1 className="text-2xl font-bold font-mono shadow-2xl shadow-gray-300 md:text-[80px] text-white opacity-40">CACAO CAMEROUN</h1>
             </div>
           </div>
           <div className=" bg-[rgba(119,85,84)] absolute top-0 left-0 bottom-0 right-0 opacity-40 rounded-bl-[100px]"> </div>
@@ -215,29 +224,32 @@ const Home = () => {
         <div className="m-0 box-border flex flex-col md:text-lg md:py-1 text-white bg-[brown]">
           <div className="flex justify-around text-gray-100 jus p-4 flex-wrap">
             <div className="mx-2">
-              <h2 className="text-center text-gray-300 mt-3">Contacts</h2><br/>
-              (+237) 6xx xx xx xx<br/>
-              (+237) 6xx xx xx xx<br/>
+              <h2 className="text-center text-gray-300 mt-3">Contacts</h2>
+              <h3 className="text-center">(+237) 656 10 10 91</h3>
+              <h3 className="text-center">(+237) 671 96 39 41</h3>
             </div>
             <div className="mx-2">
-                <h2 className="text-center text-gray-300 mt-3">Adresses email</h2><br/>
-                tracecocoa.camer@gmail.com<br/>
-                adresseemail2@gmail.com<br/>
+                <h2 className="text-center text-gray-300 mt-3">Adresses email</h2>
+                <h3 className="text-center">hornelamane@gmail.com</h3>
 
-                <h2 className="text-center text-gray-300 mt-3">Infos supplémentaires</h2><br/>
-                Ministère de l'agriculture<br/>
+                <h2 className="text-center text-gray-300 mt-3">Infos supplémentaires</h2>
+                <h3 className="text-center">Ingénieure en Topographie et Cadastres</h3>
             </div>
             <div className="mx-2">
                 { userCode ? 
                     <div>
                       <h2 className="text-center text-gray-300 mt-2">QR Code producteur</h2><br/>
                       <div>
+                        <div className=""> 
+                          <input type="text" id="qr-id-value" placeholder="Code..." className="text-black text-lg px-2 py-1 border rounded mx-1"/>
+                          <button id="gen-qr-btn" onClick={ genNewCode } className="bg-white text-black text-lg py-1 px-2 border rounded ml-2 active:bg-amber-200">Générer</button>
+                        </div>
                         <QRCodeCanvas
                           value={ url }
                           size={200}
                           bgColor="white"
                           fgColor="brown"
-                          className="border rounded mt-2"
+                          className="border rounded mt-2 m-auto"
                         />
                       </div>
                     </div>

@@ -59,7 +59,7 @@ const AdminUser = () => {
     <div>
     { searchUsers ?
 
-    <section>
+    <section className=" mt-28">
         <h1 className="text-center font-bold py-3 text-blue-600 bg-indigo-200">User found</h1>
         <button className="p-3 bg-indigo-300 rounded-md" onClick={()=>setSearchUsers(null)}>All Users</button>
         <div className="mx-1">
@@ -113,7 +113,7 @@ const AdminUser = () => {
         </table>    
     </section>
     :
-    <section className={errMsg? " flex flex-col h-[100vh] items-center justify-center ": " w-[80vw] mx-1 md:ml-[18%] lg:ml-[12%]"}>
+    <section className={errMsg? " flex flex-col h-[100vh] items-center justify-center  mt-28": " w-[80vw] mx-1 md:ml-[18%] lg:ml-[12%] mt-28"}>
         {errMsg ? 
             <div className="text-center border shadow rounded-md text-lg 
                 md:text-2xl font-bold text-gray-800 bg-violet-100">
