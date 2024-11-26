@@ -16,9 +16,15 @@ import AudioLogo from "../assets/audiologo.png"
 import { selectCurrentUser } from "../slices/auth/authSlice";
 import coco1 from "../../assets/cocoa-1529746_1920.jpg";
 import { QRCodeCanvas } from "qrcode.react";
+
+import administration from "../assets/administration.png";
+import map from "../assets/map.png";
+import buy from "../assets/buy.png";
+import purchase from "../assets/purchase.png";
 import CLIENT_URL from './routes/clientRoutes';
 import coco2 from "../../assets/cacao-pod-4469207_1920.jpg";
 import coco3 from "../../assets/martinique-4900895_1920.jpg"
+
 const Home = () => {
   const [showProfile, setShowProfile] = useState(false);
   const [file, setFile] = useState();
@@ -158,7 +164,7 @@ const Home = () => {
               className="w-[90vw] m-auto md:w-4/5 p-5 relative">
 
                 <div className="flex flex-row border-y-2 py-3 float-end my-3 items-center justify-between">
-                  <img src={ coco1 } className="border mr-8 w-20 h-20 md:w-40 md:h-40"/>
+                  <img src={ purchase } className="border mr-8 w-20 h-20 md:w-40 md:h-40"/>
                   <div>
                     <h1 className="text-center text-black text-lg md:text-2xl"><strong>Effectuer un achat</strong></h1>
                     Vous êtes un producteur et vous souhaitez acheter des parcelles à une coopérative pour débuter votre activité. Alors, cette rubrique est faite pour vous.<br/>
@@ -172,11 +178,11 @@ const Home = () => {
                     Vous êtes un producteur et vous souhaitez vendre vos produits. Cette rubrique est faite pour vous.<br/>
                     <Link to="/admin/sale" className="text-blue-700 underline font-bold">Plus...</Link>
                   </div>
-                  <img src={ coco2 } className="border mr-8 w-20 h-20 md:w-40 md:h-40"/>
+                  <img src={ buy } className="border mr-8 w-20 h-20 md:w-40 md:h-40"/>
                 </div>
 
                 <div className="flex flex-row w-full border-y-2 py-3 float-end my-3 items-center justify-between">
-                  <img src={ coco3 } className="border mr-8 w-20 h-20 md:w-40 md:h-40"/>
+                  <img src={ map } className="border mr-8 w-20 h-20 md:w-40 md:h-40"/>
                   <div>
                     <h1 className="text-center text-black text-lg md:text-2xl"><strong>Voir les parcelles</strong></h1>
                     Ici vous pourrez visualiser les données de votre parcelle dans une carte. <br/>
@@ -190,7 +196,7 @@ const Home = () => {
                     Ici vous aurez un compte rendu de votre activité (nombre/quantité de ventes, nombre/quantité d'achats, ...).<br/>
                     <Link to="/admin/dashboard" className="text-blue-700 underline font-bold">Plus...</Link>
                   </div>
-                  <img src={ coco2 } className="border mr-8 w-20 h-20 md:w-40 md:h-40"/>
+                  <img src={ administration } className="border mr-8 w-20 h-20 md:w-40 md:h-40"/>
                 </div>
 
 
@@ -206,27 +212,25 @@ const Home = () => {
 
         </div>
 
-        <div className="m-0 box-border flex  md:text-lg md:py-1 text-white bg-[rgba(119,85,84)]">
-
-
+        <div className="m-0 box-border flex flex-col md:text-lg md:py-1 text-white bg-[brown]">
           <div className="flex justify-around text-gray-100 jus p-4 flex-wrap">
             <div className="mx-2">
               <h2 className="text-center text-gray-300 mt-3">Contacts</h2><br/>
-              (+237) 6xx xx xx xx<br/><br/>
+              (+237) 6xx xx xx xx<br/>
               (+237) 6xx xx xx xx<br/>
             </div>
             <div className="mx-2">
                 <h2 className="text-center text-gray-300 mt-3">Adresses email</h2><br/>
-                tracecocoa.camer@gmail.com<br/><br/>
+                tracecocoa.camer@gmail.com<br/>
                 adresseemail2@gmail.com<br/>
+
+                <h2 className="text-center text-gray-300 mt-3">Infos supplémentaires</h2><br/>
+                Ministère de l'agriculture<br/>
             </div>
             <div className="mx-2">
-                <h2 className="text-center text-gray-300 mt-3">Infos supplémentaires</h2>
-                Ministère de l'agriculture<br/>
-
                 { userCode ? 
-                    <div className="ml-[50%]">
-                      <h2 className="text-center text-gray-300 mt-2">QR Code producteur</h2>
+                    <div>
+                      <h2 className="text-center text-gray-300 mt-2">QR Code producteur</h2><br/>
                       <div>
                         <QRCodeCanvas
                           value={ url }
@@ -240,17 +244,67 @@ const Home = () => {
                   : "" }
                 
             </div>
-          
+          </div>
           <div className="text-center border-t">
             Copyright © 2024 Tous droits reservés
           </div>
 
-           <div className=" text-2xl text-white font-mono w-[80%] flex space-x-24 mx-2 mb-1">
-            <p className=''> _______</p>
-            <Link className="text-gray-200" to="/admin/dashboard" >Admin DashBoard</Link>
+           <div className=" text-white font-mono w-[80%] flex space-x-24 mx-2 mb-1">
+            {/* <p className=''> _______</p> */}
+            {/* <Link className="text-gray-200" to="/admin/dashboard" >Admin DashBoard</Link> */}
           </div>
-          </div>
+{/*
+          <div className=" text-gray-800 w-[100%] px-3 bg-gradient-to-r from-[rgba(30,30,30,0.1)] to-[rgba(20,50,50,0.2)] md:flex md:space-x-28">
+            <div className="flex flex-col mb-3 py-1">
+              <p>About Us</p>
+              <Link to="/location" className="ml-3">
+                Location
+              </Link>
+              <Link to="/why" className="ml-3">
+                Why ?
+              </Link>
+
+              <div className=" my-2 ">
+                <Link to="/">Contact</Link>
+                <div className="flex">
+                  <FaWhatsapp className=" w-5 h-5 md:w-7 md:h-7 "/>+237 6245401
+                </div>
+                <div className="flex">
+                  <FaExclamation className=" w-5 h-5 md:w-7 md:h-7"/> Geographic Location
+                </div>
+              </div>
+            </div>
+
+            <div className="flex flex-col mx-3 mb-3">
+              <p className="text-lg">Follow Us on</p>
+              <div className="flex space-x-2 py-1">
+                <FaYoutube className="w-6 h-6 md:w-7 md:h-7 text-red-600"/>
+                <Link  to="https://www.youtube.com/@mimlyrics" >Youtube</Link>
+              </div>
+              <div className="flex space-x-2 py-1">
+                <FaFacebook className="w-6 h-6 md:w-7 md:h-7 text-blue-600"/>
+                <Link to="https://www.facebook.com/@mimlyrics">Facebook</Link>
+              </div>
+              <div className="flex space-x-2 py-1">
+                <FaInstagram className="w-6 h-6 md:w-7 md:h-7 text-purple-800"/>
+                <Link to="https://www.instagram.com/@mimlyrics15">Instagram</Link>
+              </div>
+              <div className="flex space-x-2 py-1">
+                <FaTiktok className="w-6 h-6 md:w-7 md:h-7 text-gray-800"/>
+                <Link to="https://www.tiktok.com/@mimlyrics2">Tiktok</Link>
+              </div>
+              <div className="flex space-x-2 py-1">
+                <FaTwitter className="w-6 h-6 md:w-7 md:h-7 text-blue-500"/>
+                <Link to="/twitter">Twitter</Link>
+              </div>
+              <div className="flex space-x-2 py-1">
+                <FaGithub className="w-6 h-6 md:w-7 md:h-7"/>
+                <Link>Github</Link>
+              </div>
+            </div>
+          </div> */}
         </div>
+
       </section>
     </div>
 

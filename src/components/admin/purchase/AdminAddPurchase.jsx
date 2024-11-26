@@ -98,9 +98,9 @@ const AdminAddPurchase = () => {
   return (
     <>
     <section className=" md:ml-[21%] md:w-[55vw] bg-gradient-to-r from-amber-200 to-amber-300 md:bg-zinc-200
-        px-1">
+        px-1 mt-28 mx-2 pb-4">
       <div className=" my-2 mt-1 bg-gradient-to-l from-amber-400 ">
-        <h1 className="text-2xl text-center ">Admin Purchase DashBoard</h1>
+        <h1 className="text-2xl text-center ">Effectuer un nouvel achat</h1>
       </div>
 
         {errMsg? <div className=" animate-bounce font-bold text-lg text-red-500"><h1>{errMsg}</h1></div> : null}
@@ -123,12 +123,12 @@ const AdminAddPurchase = () => {
           </select>
         </div>
         <div className="my-3 text-lg ">
-          <label htmlFor='region'>Cooperative ID</label>
+          <label htmlFor='region'>Cooperative</label> {/* cooperative ID*/}
           <select className="h-11 px-5 text-gray-700 font-semibold rounded-md shadow-sm border outline-none
             w-[80%] block" value={cooperativeId} onChange={e=>setCooperativeId(e.target.value)}
           > 
             {cooperativesId ? cooperativesId.map((cooperative,i) => {
-              return (<option className=" rounded-lg font-sans m-3" key={cooperative.id} value={cooperative.id}>{cooperative.id}</option>)
+              return (<option className=" rounded-lg font-sans m-3" key={cooperative.id} value={cooperative.id}>{cooperative.name}</option>)
             }) : null}
           </select>
         </div>
