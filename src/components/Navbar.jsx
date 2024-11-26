@@ -37,7 +37,8 @@ const Navbar = () => {
       } else {
         header.classList.add("text-white");
         header.classList.remove("text-blue-600");
-        header.style.backgroundColor = "rgba(119,85,84)";
+        //header.style.backgroundColor = "rgba(119,85,84)";
+        header.style.backgroundColor = "brown";
       }
     };
  

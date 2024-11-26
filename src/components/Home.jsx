@@ -17,13 +17,14 @@ import { selectCurrentUser } from "../slices/auth/authSlice";
 import coco1 from "../../assets/cocoa-1529746_1920.jpg";
 import { QRCodeCanvas } from "qrcode.react";
 
-import administration from "../../assets/administration.png";
-import map from "../../assets/map.png";
-import buy from "../../assets/buy.png";
-import purchase from "../../assets/purchase.png";
+import administration from "../assets/administration.png";
+import map from "../assets/map.png";
+import buy from "../assets/buy.png";
+import purchase from "../assets/purchase.png";
 import CLIENT_URL from './routes/clientRoutes';
 import coco2 from "../../assets/cacao-pod-4469207_1920.jpg";
 import coco3 from "../../assets/martinique-4900895_1920.jpg"
+
 const Home = () => {
   const [showProfile, setShowProfile] = useState(false);
   const [file, setFile] = useState();
@@ -177,7 +178,7 @@ const Home = () => {
                     Vous êtes un producteur et vous souhaitez vendre vos produits. Cette rubrique est faite pour vous.<br/>
                     <Link to="/admin/sale" className="text-blue-700 underline font-bold">Plus...</Link>
                   </div>
-                  <img src={ sale } className="border mr-8 w-20 h-20 md:w-40 md:h-40"/>
+                  <img src={ buy } className="border mr-8 w-20 h-20 md:w-40 md:h-40"/>
                 </div>
 
                 <div className="flex flex-row w-full border-y-2 py-3 float-end my-3 items-center justify-between">
@@ -211,9 +212,7 @@ const Home = () => {
 
         </div>
 
-        <div className="m-0 box-border flex  md:text-lg md:py-1 text-white bg-[rgba(119,85,84)]">
-
-
+        <div className="m-0 box-border flex flex-col md:text-lg md:py-1 text-white bg-[brown]">
           <div className="flex justify-around text-gray-100 jus p-4 flex-wrap">
             <div className="mx-2">
               <h2 className="text-center text-gray-300 mt-3">Contacts</h2><br/>
@@ -230,8 +229,8 @@ const Home = () => {
             </div>
             <div className="mx-2">
                 { userCode ? 
-                    <div className="ml-[50%]">
-                      <h2 className="text-center text-gray-300 mt-2">QR Code producteur</h2>
+                    <div>
+                      <h2 className="text-center text-gray-300 mt-2">QR Code producteur</h2><br/>
                       <div>
                         <QRCodeCanvas
                           value={ url }
@@ -245,7 +244,7 @@ const Home = () => {
                   : "" }
                 
             </div>
-          
+          </div>
           <div className="text-center border-t">
             Copyright © 2024 Tous droits reservés
           </div>
@@ -305,6 +304,7 @@ const Home = () => {
             </div>
           </div> */}
         </div>
+
       </section>
     </div>
 

@@ -1,13 +1,14 @@
 import {useState, useEffect} from "react"
 import "./css/index.css";
 import { useMimlyrics } from "./context/AppProvider";
-
+import CLIENT_URL from "./routes/clientRoutes";
 import { logout } from "../slices/auth/authSlice";
 import { useSelector, useDispatch } from "react-redux";
 import { useNavigate, Link, useLocation } from "react-router-dom";
 import { useLogoutMutation } from "../slices/auth/usersApiSlice";
 import { selectCurrentUser } from "../slices/auth/authSlice";
 import { MapContainer, Marker, Popup, TileLayer, GeoJSON } from "react-leaflet";
+import BASE_URL from "./routes/serverRoutes";
 
 const Map = () => {
   const [showProfile, setShowProfile] = useState(false);
@@ -65,7 +66,7 @@ const Map = () => {
 
   useEffect(() => {
     // Remplacez l'URL par celle de votre fichier GeoJSON
-    fetch('http://localhost:5000/api/v1/static/geodatas-gps.geojson')
+    fetch(`${BASE_URL}/api/v1/static/geodatas-gps.geojson`)
       .then((response) => response.json())
       .then((data) => {
         let finalDatas = null;
