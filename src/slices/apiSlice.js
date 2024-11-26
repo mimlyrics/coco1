@@ -4,7 +4,7 @@ import BASE_URL from "../components/routes/serverRoutes";
 const baseQuery = fetchBaseQuery({
     //baseUrl: "https://mimlyricstest5-api.onrender.com",
     baseUrl: BASE_URL,
-    credentials: 'include',
+    credentials: 'same-origin',
     prepareHeaders: (headers, {getState}) => {
         const token = getState().auth.token;
         console.log("Heyyy token: ", token);
