@@ -60,7 +60,6 @@ function App() {
     
     <Router>   
       <Navbar/>
-      <HashRouter basename="/">
       <Routes>        
       {/**Public routes */}    
         <Route path="/" element={<Home/>} />       
@@ -95,37 +94,31 @@ function App() {
               <Route path="/admin/user" element={<AdminUser/>}/>
               <Route path="/admin/dashboard" element={<AdminDashBoard/>}/>
               <Route path="/admin/user/add" element={<AdminAddUser/>}/>
-
+              <Route path="/admin/user/edit" element={<AdminEditUser/>}/>
               <Route path="/admin/cooperative" element={<AdminCooperative/>}/>
               <Route path="/admin/cooperative/add" element={<AdminAddCooperative/>}/>
-              
+              <Route path="/admin/cooperative/edit" element={<AdminEditCooperative/>}/>
               <Route path="/admin/plot/add" element={<AdminAddPlot/>}/>
-              
+              <Route path="/admin/plot/edit" element={<AdminEditPlot/>}/>
               <Route path="/admin/plot" element={<AdminPlot/>}/>
               <Route path="/admin/sale" element={<AdminSale/>}/>
-              
+              <Route path="/admin/sale/edit" element={<AdminEditSale/>}/>
               <Route path="/admin/sale/add" element={<AdminAddSale/>}/>    
               <Route path="/admin/purchase" element={<AdminPurchase/>}/>  
               <Route path="/admin/purchase/add" element={<AdminAddPurchase/>}/>  
-               
+              <Route path="/admin/purchase/edit" element={<AdminEditPurchase/>}/>    
               <Route path="/admin/role" element={<AdminRole/>}/>  
               <Route path="/admin/exporter" element={<AdminExporter/>} />
               <Route path="/admin/exporter/add" element={<AdminAddExporter/>} />
               <Route path="/admin/exporter/edit" element={<AdminEditExporter/>} />
 
             </Route>      
-        </Routes>     
-      
-      </HashRouter>
-
+        </Routes>
 
         {/**Protected Editor routes */}
         <Routes >
-            <Route path="/admin/purchase/edit" element={<AdminEditPurchase/>}/>  
-            <Route path="/admin/cooperative/edit" element={<AdminEditCooperative/>}/>
-            <Route path="/admin/plot/edit" element={<AdminEditPlot/>}/>
-            <Route path="/admin/sale/edit" element={<AdminEditSale/>}/>
-            <Route path="/admin/user/edit" element={<AdminEditUser/>}/>
+          <Route element={<RequireEditor/>}>  
+          </Route>
         </Routes>
     </Router>
   );
