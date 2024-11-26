@@ -1,6 +1,6 @@
 import { apiSlice } from '../apiSlice';
 import BASE_URL from '../../components/routes/serverRoutes';
-const USER_URL = `${BASE_URL}/api/v1`;
+const USER_URL = `${BASE_URL}/api/v1/auth`;
 export const usersApiSlice = apiSlice.injectEndpoints({
     endpoints: (builder) => ({
         login: builder.mutation({

@@ -97,9 +97,9 @@ const Register = () => {
     try {
       console.log(code, username, phone, username, password);
       if(isChecked && validCode && validEmail && validUsername && validPassword) {
-        //const res = await register({code, username, phone, email, password}).unwrap();
+        const res = await register({code, username, phone, email, password}).unwrap();
         /*dispatch(setCredentials({ ...res }));*/
-        const res = await axios.post(REGISTER_URL, {code, username, phone, email, password }, {headers: {"Content-Type": "application/json", withCredentials: true}});
+        //const res = await axios.post(REGISTER_URL, {code, username, phone, email, password }, {headers: {"Content-Type": "application/json", withCredentials: true}});
         if(res) {
           console.log(res.data);
         }
