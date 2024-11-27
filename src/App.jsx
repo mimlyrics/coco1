@@ -58,7 +58,7 @@ function App() {
   //console.log(isAdmin, isEditor);
   return (
     
-    <HashRouter basename="/">    
+    <HashRouter basename="/">   
       <Navbar/>
       <Routes>        
       {/**Public routes */}    

@@ -3,6 +3,10 @@
 const BASE_URL =  'https://tracecocoa-api.onrender.com';
 const SU = 'https://tracecocoa-api.onrender.com/api/v1';
 
+
+//const BASE_URL = "http://localhost:3000";
+//const SU = "http://localhost:3000/api/v1";
+
 const SERVER_URL = {
     REGISTER_URL: `${SU}/register`,
     LOGIN_URL: `${SU}/login`,

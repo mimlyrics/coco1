@@ -2,11 +2,15 @@ import queryString from "query-string"
 import {useState, useEffect, useRef} from "react";
 import axios from "../api/axios";
 import { COOPERATIVE_URL } from "../routes/serverRoutes";
+import { useSelector } from "react-redux";
+import { selectCurrentToken } from "../../slices/auth/authSlice";
 const AdminEditCooperative = () => {
   const [name, setName] = useState("");
   const [errMsg, setErrMsg] = useState("");
   const [success, setSuccess] = useState(false);
   const [id, setId] = useState("");
+
+  const token = useSelector(selectCurrentToken);
   useEffect(() => {
     const {cooperativeId} = queryString.parse(location.search);
     setId(cooperativeId);
@@ -32,7 +36,7 @@ const AdminEditCooperative = () => {
     e.preventDefault();
     
     try {
-        const editCooperative = await axios.put(`${COOPERATIVE_URL}/${id}`, {name:name},  {headers: {withCredentials: true, "Content-Type": "application/json"}});
+        const editCooperative = await axios.put(`${COOPERATIVE_URL}/${id}`, {name:name},  { headers: {Authorization: `Bearer ${token}`,withCredentials: true, "Content-Type": "application/json"}});
         if(editCooperative) {
             setSuccess(`${name} has been edited successfully`);
             setErrMsg("");

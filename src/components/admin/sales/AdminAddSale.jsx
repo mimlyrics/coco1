@@ -12,6 +12,7 @@ import CLIENT_URL from "../../routes/clientRoutes";
 const COOPERATIVE_URL = "/api/v1/cooperatives/cooperatives";
 const SALE_URL = "/api/v1/sales/sales";
 const EXPORTER_URL = "/api/v1/exporters/exporters";
+
 const AdminAddSale = () => {
     const [errMsg, setErrMsg] = useState("");
 

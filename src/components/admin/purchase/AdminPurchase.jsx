@@ -5,9 +5,7 @@ import { IoIosArrowDropup, IoMdArrowDropdown, IoMdArrowDropup } from "react-icon
 import { useSelector } from "react-redux";
 import { selectCurrentToken } from "../../../slices/auth/authSlice";
 import { FaPlus } from "react-icons/fa6";
-const PURCHASE_URL = "/api/v1/purchases/purchases";
-const COOPS_URL = "/api/v1/cooperatives/cooperatives";
-
+import { PURCHASE_URL, COOPERATIVE_URL } from "../../routes/serverRoutes";
 const AdminPurchase = () => {
 
   const salesJson = [
@@ -38,7 +36,7 @@ const AdminPurchase = () => {
                 const res = await axios.get(PURCHASE_URL, {headers:{Authorization: `Bearer ${token}`, withCredentials: true}});
                 console.log(res);
 
-                const coopsDt = await axios.get(COOPS_URL, {headers:{Authorization: `Bearer ${token}`, withCredentials: true}});
+                const coopsDt = await axios.get(COOPERATIVE_URL, {headers:{Authorization: `Bearer ${token}`, withCredentials: true}});
                 
                 console.log("\n\n");
                 console.log({ "coopsDt" : coopsDt , "salesDt": res });

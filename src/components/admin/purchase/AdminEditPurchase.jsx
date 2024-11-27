@@ -12,8 +12,6 @@ const AdminEditPurchase = () => {
 
     const [searchplots, setSearchplots] = useState(null);
 
-    const [searchId, setSearchId] = useState("");
-
     const [successMsg, setSuccessMsg] = useState("");
     const [showMore, setShowMore]  = useState(false);
 
@@ -42,7 +40,6 @@ const AdminEditPurchase = () => {
       setIdx(searchId);
       console.log(idx);
     }, [idx])
-    
 
     useEffect(() => {
         const getSales = async () => {
@@ -66,6 +63,45 @@ const AdminEditPurchase = () => {
         getSales();
 
     }, [idx])
+
+
+  useEffect(() => {
+
+
+  const searchUser = async () => {
+    try {
+        const res = await axios.get(`${USERS_URL}`, {headers: {Authorization: `Bearer ${token}`,withCredentials: true}});
+        setUsersCode(res.data);
+        setUserCode(res.data[0].code);
+        console.log(code);
+    }catch(err) {
+        console.log(err?.data?.message);
+        setErrMsg(err?.data?.message);
+    }
+  }
+
+  searchUser()
+  }, [])
+
+  useEffect(() => {
+
+  const searchCooperative = async () => {
+    try {
+        const res = await axios.get(`${COOPERATIVE_URL}`, {headers: {Authorization: `Bearer ${token}`,withCredentials: true}});
+        console.log(res.data);
+        setCooperativesId(res.data);
+        setCooperativeId(res.data[0].id);
+    }catch(err) {
+        console.log(err?.data?.message);
+        setErrMsg(err?.data?.message);
+    }
+  }
+
+  searchCooperative()
+  }, [])
+
+    
+
 
   const handlePostSubmit = async (e) => {
     e.preventDefault();
@@ -97,30 +133,36 @@ const AdminEditPurchase = () => {
     <section className=" md:ml-[21%] md:w-[55vw] bg-gradient-to-r from-amber-200 to-amber-300 md:bg-zinc-200
         px-1">
       <div className=" my-2 mt-1 bg-gradient-to-l from-amber-400 ">
-        <h1 className="text-2xl text-center ">Admin Purchase DashBoard</h1>
+        <h1 className="text-2xl text-center ">Admin Purchase</h1>
       </div>
 
         {errMsg? <div className=" animate-bounce font-bold text-lg text-red-500"><h1>{errMsg}</h1></div> : null}
         {success? <div className=" animate-bounce font-bold text-lg text-green-500"><h1>{success}</h1></div> : null}            
+        <div className="my-3 text-lg ">
+          <label htmlFor='code'>Code utilisateur</label>
+          <select className="h-11 px-5 text-gray-700 font-semibold rounded-md shadow-sm border outline-none
+            w-[80%] block" value={userCode} onChange={e=>setUserCode(e.target.value)}
+          > 
 
-        <div className="my-2 md:my-3 ">
-            <label htmlFor="price">User Code</label>
-            <input className=" rounded-md shadow-sm px-2 py-2
-             md:py-3  w-[80%] block focus:outline 
-             focus:outline-[0.16rem] outline-sky-300
-             border-sky-300 " type="text" value={userCode} 
-             onChange={e=> setUserCode(e.target.value)}  
-            />
+          {usersCode ? usersCode.map(user => {
+            return (
+              <option key={user.id}>
+                {user.code} {user.username}
+              </option>
+            )
+          }) : null}
+          
+          </select>
         </div>
-
-        <div className="my-2 md:my-3 ">
-            <label htmlFor="price">Cooperative Id</label>
-            <input className=" rounded-md shadow-sm px-2 py-2
-             md:py-3  w-[80%] block focus:outline 
-             focus:outline-[0.16rem] outline-sky-300
-             border-sky-300 " type="text" value={cooperativeId} 
-             onChange={e=> setCooperativeId(e.target.value)}  
-            />
+        <div className="my-3 text-lg ">
+          <label htmlFor='region'>Cooperative</label> {/* cooperative ID*/}
+          <select className="h-11 px-5 text-gray-700 font-semibold rounded-md shadow-sm border outline-none
+            w-[80%] block" value={cooperativeId} onChange={e=>setCooperativeId(e.target.value)}
+          > 
+            {cooperativesId ? cooperativesId.map((cooperative,i) => {
+              return (<option className=" rounded-lg font-sans m-3" key={cooperative.id} value={cooperative.id}>{cooperative.name}</option>)
+            }) : null}
+          </select>
         </div>
 
         <div className="my-2 md:my-3 ">
@@ -150,7 +192,7 @@ const AdminEditPurchase = () => {
           <button className=" p-2 w-40 text-lg animation delay-150 duration-300 
             border rounded-md shadow-sm bg-amber-300 hover:bg-amber-400 
             hover:translate-y-[2px]" 
-            type="submit">Edit
+            type="submit">Editx
           </button>
         </div>
 
