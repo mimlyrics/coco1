@@ -6,6 +6,7 @@ import { useSelector } from "react-redux";
 import { selectCurrentToken } from "../../../slices/auth/authSlice";
 import { FaPlus } from "react-icons/fa6";
 const PURCHASE_URL = "/api/v1/purchases/purchases";
+const COOPS_URL = "/api/v1/cooperatives/cooperatives";
 
 const AdminPurchase = () => {
 
@@ -14,6 +15,7 @@ const AdminPurchase = () => {
     {userCode: "2", price: 9000, quantity: 3, date: "Mon 4 20234"},
   ]
     const [sales, setSales] = useState([]);
+    const [cooperatives, setCooperatives] = useState([]);
     const [errMsg, setErrMsg] = useState("");
 
     const [searchId, setSearchId] = useState("");
@@ -35,7 +37,36 @@ const AdminPurchase = () => {
             try {
                 const res = await axios.get(PURCHASE_URL, {headers:{Authorization: `Bearer ${token}`, withCredentials: true}});
                 console.log(res);
-                setSales(res.data);
+
+                const coopsDt = await axios.get(COOPS_URL, {headers:{Authorization: `Bearer ${token}`, withCredentials: true}});
+                
+                console.log("\n\n");
+                console.log({ "coopsDt" : coopsDt , "salesDt": res });
+                console.log("\n\n");
+
+                let datas = [];
+                for(let i = 0; i < res.data.length; i++)
+                {
+                  let sale = res.data[i];
+
+                  let finalDate = new Date(sale.createdAt);
+
+                  console.log({"FILTERED DATAS" : coopsDt.data.filter((elt) => elt.id == sale.cooperativeId)[0].name});
+
+                  let obj = {
+                    "id": sale.id,
+                    "userCode": sale.userCode,
+                    "cooperativeName": coopsDt.data.filter((elt) => elt.id == sale.cooperativeId)[0].name,
+                    "quantity": sale.quantity,
+                    "price": sale.price,
+                    "date": finalDate.toLocaleDateString()
+                  };
+
+                  datas.push(obj);
+                }
+
+                //setSales(res.data);
+                setSales(datas);
             }catch(err) {
               console.log(err);
                 setErrMsg(err?.response?.data?.message);
@@ -86,7 +117,7 @@ const AdminPurchase = () => {
         {searchSales ? <h1 className="text-center font-bold py-3 text-amber-800 bg-amber-200">Achats trouves</h1> : null}
         {/* <button className=" m-1 p-3 bg-amber-300 rounded-md" onClick={()=>setSearchSales(null)}>Tout afficher</button> */}
 
-        <div className="w-full md:w-[500px] m-auto flex">
+        <div className="md:w-[500px] m-auto flex">
             <input 
               onKeyDown={(e)=>(e.key === "Enter" ? SearchPurchase(e,searchId) : null)} 
               placeholder="Rechercher..." className=" w-96 text-lg p-2 h-11 rounded  border px-4 text-black flex-1" 
@@ -115,7 +146,7 @@ const AdminPurchase = () => {
           <table className="border-4 my-3 py-4 px-8 m-auto text-center">
             <thead>
               
-              <th>Code producteur</th>
+              <th>Producteur</th>
               <th>Cooperative</th>
               <th>quantité</th>
               <th>prix</th>
@@ -126,10 +157,10 @@ const AdminPurchase = () => {
               return (
                 <tr className="" key={sale.id}>
                   <td>{sale.userCode}</td>
-                  <td>{sale.cooperativeId}</td>
+                  <td>{sale.cooperativeName}</td>
                   <td>{sale.quantity}</td>
-                  <td>{sale.price}</td>
-                  <td>D{sale.date}</td>    
+                  <td>{sale.price} XAF</td>
+                  <td>{sale.date}</td>    
                   <div className=" flex mt-3">
                       <button><Link onClick={e=> !sale.id ? e.preventDefault(): null}  to= {`/admin/purchase/edit?searchId=${sale.id}`}  
                         className=" p-3 border shadow rounded-lg bg-green-200 hover:bg-green-400" >Edit</Link>
@@ -150,21 +181,21 @@ const AdminPurchase = () => {
          <div>
           <table className="border-4 my-3 py-4 px-8 m-auto text-center">
             <thead>
-              <th className="mx-2">Code producteur</th>
-              <th className="mx-2">Cooperative</th>
-              <th className="mx-2">quantité</th>
-              <th className="mx-2">prix</th>
-              <th className="mx-2">date</th>
+              <th className="mx-2 min-w-32">producteur</th>
+              <th className="mx-2 min-w-32">Cooperative</th>
+              <th className="mx-2 min-w-32">quantité</th>
+              <th className="mx-2 min-w-32">prix</th>
+              <th className="mx-2 min-w-32">date</th>
             </thead>
             <tbody>
             {sales? sales.map((sale, i) => {
               return (
                 <tr className="" key={sale.id}>
                   <td>{sale.userCode}</td>
-                  <td>{sale.cooperativeId}</td>
+                  <td>{sale.cooperativeName}</td>
                   <td>{sale.quantity}</td>
-                  <td>{sale.price}</td>
-                  <td>D{sale.date}</td>    
+                  <td>{sale.price} XAF</td>
+                  <td>{sale.date}</td>
                   <div className=" flex mt-3">
                       <button><Link onClick={e=> !sale.id ? e.preventDefault(): null}  to= {`/admin/purchase/edit?searchId=${sale.id}`}  
                         className=" p-3 border shadow rounded-lg bg-green-200 hover:bg-green-400" >Edit</Link>
