@@ -5,13 +5,10 @@ import { IoIosArrowDropup, IoMdArrowDropdown, IoMdArrowDropup } from "react-icon
 import { useSelector } from "react-redux";
 import { selectCurrentToken } from "../../../slices/auth/authSlice";
 const USERS_URL = "/api/v1/users/users";
-const COOPERATIVES_URL = "/api/v1/cooperatives/cooperatives";
 
 const USER_PROFILE_URL = "/api/v1/users/users";
 import CLIENT_URL from "../../routes/clientRoutes";
-const COOPERATIVE_URL = "/api/v1/cooperatives/cooperatives";
-const SALE_URL = "/api/v1/sales/sales";
-const EXPORTER_URL = "/api/v1/exporters/exporters";
+import { EXPORTER_URL, COOPERATIVE_URL, SALE_URL } from "../../routes/serverRoutes";
 
 const AdminAddSale = () => {
     const [errMsg, setErrMsg] = useState("");
@@ -106,32 +103,32 @@ const AdminAddSale = () => {
   return (
     <>
     <section className=" md:ml-[21%] md:w-[55vw] bg-gradient-to-r from-amber-200 to-amber-300 md:bg-zinc-200
-        px-1">
+        px-1 mt-28">
       <div className=" my-2 mt-1 bg-gradient-to-l from-amber-400 ">
-        <h1 className="text-2xl text-center ">Admin SALE DashBoard</h1>
+        <h1 className="text-2xl text-center ">Ajouter une vente</h1>
       </div>
 
-        {errMsg? <div className=" animate-bounce font-bold text-lg text-red-500"><h1>{errMsg}</h1></div> : null}
+        {errMsg? <div className="animate-bounce font-bold text-lg text-red-500"><h1>{errMsg}</h1></div> : null}
         {success? <div className=" animate-bounce font-bold text-lg text-green-500"><h1>{success}</h1></div> : null}            
 
         <div className="my-3 text-lg ">
-          <label htmlFor='region'>Cooperative ID</label>
+          <label htmlFor='region'>Coopérative</label>
           <select className="h-11 px-5 text-gray-700 font-semibold rounded-md shadow-sm border outline-none
             w-[80%] block" value={cooperativeId} onChange={e=>setCooperativeId(e.target.value)}
           > 
             {cooperativesId ? cooperativesId.map((cooperative,i) => {
-              return (<option className=" rounded-lg font-sans m-3" key={cooperative.id} value={cooperative.id}>{cooperative.id}</option>)
+              return (<option className=" rounded-lg font-sans m-3" key={cooperative.id} value={cooperative.id}>{cooperative.name}</option>)
             }) : null}
           </select>
         </div>
 
         <div className="my-3 text-lg ">
-          <label htmlFor='region'>Exporter ID</label>
+          <label htmlFor='region'>Exportateur</label>
           <select className="h-11 px-5 text-gray-700 font-semibold rounded-md shadow-sm border outline-none
             w-[80%] block" value={exporterId} onChange={e=>setExporterId(e.target.value)}
           > 
-            {exportersId ? exportersId.map((cooperative,i) => {
-              return (<option className=" rounded-lg font-sans m-3" key={cooperative.id} value={cooperative.id}>{cooperative.id}</option>)
+            {exportersId ? exportersId.map((exporter,i) => {
+              return (<option className=" rounded-lg font-sans m-3" key={exporter.id} value={exporter.id}>{exporter.name}</option>)
             }) : null}
           </select>
         </div>
@@ -146,7 +143,7 @@ const AdminAddSale = () => {
             />
         </div>
         <div className="my-2 md:my-3 ">
-            <label htmlFor="dept">Quantity</label>
+            <label htmlFor="dept">Quantité</label>
             <input className=" rounded-md shadow-sm px-2 py-2
              md:py-3  w-[80%] block focus:outline 
              focus:outline-[0.16rem] outline-sky-300

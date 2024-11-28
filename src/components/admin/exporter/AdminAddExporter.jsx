@@ -41,7 +41,7 @@ const AdminAddExporter = () => {
   }
 
   return (
-    <section className=" mx-1 py-1 md:mx-48 lg:mx-64">
+    <section className=" mx-1 py-1 md:mx-48 lg:mx-64 mt-28">
         <div className="text-center bg-amber-300 py-2 ">
             <h1>Admin Add Exporter</h1>
         </div>

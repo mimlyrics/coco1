@@ -60,8 +60,10 @@ const Home = () => {
     let genBtn = document.getElementById("gen-qr-btn");
     let genValue = document.getElementById("qr-id-value").value;
 
-    if(genValue != null && genValue != undefined)  
+    if(genValue != null && genValue != undefined)
+    {
       setUserCode(genValue);
+    }
   }
   //console.log("IS: ", isActiveModalNavbar);
 

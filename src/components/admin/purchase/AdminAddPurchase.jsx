@@ -106,7 +106,7 @@ const AdminAddPurchase = () => {
         {errMsg? <div className=" animate-bounce font-bold text-lg text-red-500"><h1>{errMsg}</h1></div> : null}
         {success? <div className=" animate-bounce font-bold text-lg text-green-500"><h1>{success}</h1></div> : null}            
         <div className="my-3 text-lg ">
-          <label htmlFor='code'>User Code</label>
+          <label htmlFor='code'>Code producteur</label>
           <select className="h-11 px-5 text-gray-700 font-semibold rounded-md shadow-sm border outline-none
             w-[80%] block" value={userCode} onChange={e=>setUserCode(e.target.value)}
           > 
@@ -114,7 +114,7 @@ const AdminAddPurchase = () => {
           {usersCode ? usersCode.map(user => {
             return (
               <option key={user.id}>
-                {user.code} {user.username}
+                {user.code}
               </option>
             )
           }) : null}

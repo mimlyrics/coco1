@@ -37,10 +37,6 @@ const AdminPurchase = () => {
                 console.log(res);
 
                 const coopsDt = await axios.get(COOPERATIVE_URL, {headers:{Authorization: `Bearer ${token}`, withCredentials: true}});
-                
-                console.log("\n\n");
-                console.log({ "coopsDt" : coopsDt , "salesDt": res });
-                console.log("\n\n");
 
                 let datas = [];
                 for(let i = 0; i < res.data.length; i++)
@@ -49,12 +45,15 @@ const AdminPurchase = () => {
 
                   let finalDate = new Date(sale.createdAt);
 
-                  console.log({"FILTERED DATAS" : coopsDt.data.filter((elt) => elt.id == sale.cooperativeId)[0].name});
+                  // console.log({"FILTERED DATAS" : coopsDt.data.filter((elt) => elt.id == sale.cooperativeId)[0].name});
+
+                  let cN = "";
+                  if(coopsDt.data.filter((elt) => elt.id == sale.cooperativeId).length > 0) cN = coopsDt.data.filter((elt) => elt.id == sale.cooperativeId)[0].name;
 
                   let obj = {
                     "id": sale.id,
                     "userCode": sale.userCode,
-                    "cooperativeName": coopsDt.data.filter((elt) => elt.id == sale.cooperativeId)[0].name,
+                    "cooperativeName": cN,
                     "quantity": sale.quantity,
                     "price": sale.price,
                     "date": finalDate.toLocaleDateString()
@@ -106,7 +105,7 @@ const AdminPurchase = () => {
 
   return (
     <>
-    <section className=" md:relative md:top-16 md:w-[90vw] mx-1 md:ml-[19%] xl:ml-[9%] mt-24">
+    <section className=" md:relative md:top-16 md:w-[90vw] mx-1 md:ml-[19%] xl:ml-[9%] mt-28">
         <div className="my-1 md:w-[90vw]">
             {/* <h1 className=" text-lg md:text-xl text-center bg-amber-200 font-semibold">Achats</h1> */}
             <h1 className="border-l text-4xl md:text-[2.5rem]"><strong>Achats</strong></h1>

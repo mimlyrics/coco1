@@ -69,9 +69,21 @@ const Map = () => {
     fetch(`${BASE_URL}/api/v1/static/geodatas-gps.geojson`)
       .then((response) => response.json())
       .then((data) => {
-        let finalDatas = null;
+        let finalDatas = [];
         if(userCode !== null && userCode !== undefined)
-          finalDatas = data.features.filter((feature) => feature.properties.CODE_PRODUCTEUR == userCode)
+        {
+          let values = userCode.split(",");
+          for(let i = 0; i < values.length; i++)
+          {
+            let value = values[i];
+            let feats = data.features.filter((feature) => feature.properties.CODE_PRODUCTEUR == value.trim())
+
+            finalDatas = [...new Set([...finalDatas, ...feats])];
+
+            console.log({"finalDatas" : finalDatas});
+          }
+          // finalDatas = data.features.filter((feature) => feature.properties.CODE_PRODUCTEUR == userCode)
+        }
         else finalDatas = data;
 
         setGeojsonData(finalDatas);

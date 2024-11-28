@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 import { IoIosArrowDropup, IoMdArrowDropdown, IoMdArrowDropup } from "react-icons/io";
 import { useSelector } from "react-redux";
 import { selectCurrentToken } from "../../../slices/auth/authSlice";
-import { SALE_URL } from "../../routes/serverRoutes";
+import { SALE_URL, COOPERATIVE_URL, EXPORTER_URL } from "../../routes/serverRoutes";
 const AdminSale = () => {
 
   const salesJson = [
@@ -28,12 +28,57 @@ const AdminSale = () => {
 
     const token = useSelector(selectCurrentToken);
 
+    /*
+    <th>Exportateur</th>
+              <th>Cooperative</th>
+              <th>quantity</th>
+              <th>price</th>
+              <th>date</th>
+
+              <td>{sale.exporterId}</td>
+                  <td>{sale.cooperativeId}</td>
+                  <td>{sale.quantity}</td>
+                  <td>{sale.price}</td>
+                  <td>D{sale.date}</td>   
+    */
     useEffect(() => {
         const getSales = async () => {
             try {
                 const res = await axios.get(SALE_URL, {headers:{Authorization: `Bearer ${token}`, withCredentials: true}});
                 console.log(res);
-                setSales(res.data);
+
+                const coopsDt = await axios.get(COOPERATIVE_URL, {headers:{Authorization: `Bearer ${token}`, withCredentials: true}});
+                const exportersDt = await axios.get(EXPORTER_URL, {headers:{Authorization: `Bearer ${token}`, withCredentials: true}});
+
+                console.log("\n\n");
+                console.log({"coopsDt" : coopsDt, "exportersDt" : exportersDt});
+                console.log("\n\n");
+
+                let datas = [];
+                for(let i = 0; i < res.data.length; i++)
+                {
+                  let sale = res.data[i];
+
+                  let finalDate = new Date(sale.createdAt);
+
+                  let cN = "", eN = "";
+                  if(coopsDt.data.filter((elt) => elt.id == sale.cooperativeId).length > 0) cN = coopsDt.data.filter((elt) => elt.id == sale.cooperativeId)[0].name;
+                  if(exportersDt.data.filter((elt) => elt.id == sale.exporterId).length > 0) eN = exportersDt.data.filter((elt) => elt.id == sale.exporterId)[0].name;
+
+                  let obj = {
+                    "id": sale.id,
+                    "cooperativeName": cN,
+                    "exporterName": eN,
+                    "quantity": sale.quantity,
+                    "price": sale.price,
+                    "date": finalDate.toLocaleDateString()
+                  };
+
+                  datas.push(obj);
+                }
+
+                //setSales(res.data);
+                setSales(datas);
             }catch(err) {
               console.log(err);
                 setErrMsg(err?.response?.data?.message);
@@ -75,54 +120,54 @@ const AdminSale = () => {
 
   return (
     <>
-    <section className=" md:absolute md:top-16 md:w-[90vw] mx-1 md:ml-[19%] xl:ml-[9%]">
+    <section className=" md:absolute md:top-16 md:w-[90vw] mx-1 md:ml-[19%] xl:ml-[9%] mt-28">
         <div className="my-1 md:w-[90vw]">
-            <h1 className=" text-lg md:text-xl text-center bg-amber-200 font-semibold">Admin Sale DashBoard</h1>
+        <h1 className="border-l text-4xl md:text-[2.5rem]"><strong>Ventes</strong></h1>
         </div>
 
-        {searchSales ? <h1 className="text-center font-bold py-3 text-amber-600 bg-amber-200">ventes trouves</h1> : null}
-        <button className=" m-1 p-3 bg-amber-300 rounded-md" onClick={()=>setSearchSales(null)}>All ventes</button>
+        {searchSales ? <h1 className="text-center font-bold py-3 text-amber-800 bg-amber-200">ventes trouves</h1> : null}
+        {/* <button className=" m-1 p-3 bg-amber-300 rounded-md" onClick={()=>setSearchSales(null)}>All ventes</button> */}
 
-        <div className="md:w-[100%]">
+        <div className="md:w-[500px] m-auto flex">
             <input 
               onKeyDown={(e)=>(e.key === "Enter" ? SearchSale(e,searchId) : null)} 
-              placeholder="search..." className=" w-96 text-lg p-2 h-11 bg-amber-200 text-gray-700" 
+              placeholder="Rechercher..." className=" w-96 text-lg p-2 h-11 rounded  border px-4 text-black flex-1" 
               type="text" value={searchId} onChange={e=>setSearchId(e.target.value)}/>
             <button 
              onClick={(e) => SearchSale(e, searchId)} 
-             className="h-11 py-2 px-3 md:px-10 ml-1 text-lg bg-amber-300 rounded-md text-gray-700 hover:bg-blue-500 hover:translate-y-[1px] ">
-              Search
+             className="h-11 py-2 px-3 md:px-10 ml-1 text-lg bg-amber-300 rounded-md text-black hover:bg-blue-500 hover:translate-y-[1px] ">
+              Rechercher
             </button>
         </div>
 
-        <div className="my-3">
-            <Link  to= "/admin/sale/add"  className=" w-11 h-4 p-2 border shadow rounded-lg bg-blue-100 hover:bg-blue-300 hover:translate-y-1" >Ajouter ventes</Link>
+        <div className="my-3 py-4 px-8 m-auto text-center">
+            <Link  to= "/admin/sale/add"  className="w-11 h-4 p-2 border shadow rounded-lg bg-blue-100 hover:bg-blue-300 hover:translate-y-1" >Ajouter ventes</Link>
         </div>
 
         <div className="font-bold text-lg ">
-            <h1>Ventes Info</h1>
+            <h1 className="text-2xl">Détails ventes</h1>
         </div>
 
 
         {searchSales ?
         <div>
-          <table className=" border-4">
+          <table className="border-4 my-3 py-4 px-8 m-auto text-center">
             <thead>
               
-              <th>Exporter Id</th>
-              <th>Cooperative Id</th>
-              <th>quantity</th>
-              <th>price</th>
-              <th>date</th>
+              <th className="mx-2 min-w-32">Exportateur</th>
+              <th className="mx-2 min-w-32">Cooperative</th>
+              <th className="mx-2 min-w-32">quantité</th>
+              <th className="mx-2 min-w-32">prix</th>
+              <th className="mx-2 min-w-32">date</th>
             </thead>
             <tbody>
             {searchSales? searchSales.map((sale, i) => {
               return (
                 <tr className="" key={sale.id}>
-                  <td>{sale.exporterId}</td>
-                  <td>{sale.cooperativeId}</td>
+                  <td>{sale.exporterName}</td>
+                  <td>{sale.cooperativeName}</td>
                   <td>{sale.quantity}</td>
-                  <td>{sale.price}</td>
+                  <td>{sale.price} XAF</td>
                   <td>D{sale.date}</td>    
                   <div className=" flex mt-3">
                       <button><Link onClick={e=> !sale.id ? e.preventDefault(): null}  to= {`/admin/sale/edit?searchId=${sale.id}`}  
@@ -142,23 +187,23 @@ const AdminSale = () => {
         
          : 
         <div>
-          <table className=" border-4">
+          <table className="border-4 my-3 py-4 px-8 m-auto text-center">
             <thead>
               
-              <th>Exporter Id</th>
-              <th>Cooperative Id</th>
-              <th>quantity</th>
-              <th>price</th>
-              <th>date</th>
+              <th className="mx-2 min-w-32">Exportateur</th>
+              <th className="mx-2 min-w-32">Cooperative</th>
+              <th className="mx-2 min-w-32">quantité</th>
+              <th className="mx-2 min-w-32">prix</th>
+              <th className="mx-2 min-w-32">date</th>
             </thead>
             <tbody>
             {sales? sales.map((sale, i) => {
               return (
                 <tr className="" key={sale.id}>
-                  <td>{sale.exporterId}</td>
-                  <td>{sale.cooperativeId}</td>
+                  <td>{sale.exporterName}</td>
+                  <td>{sale.cooperativeName}</td>
                   <td>{sale.quantity}</td>
-                  <td>{sale.price}</td>
+                  <td>{sale.price} XAF</td>
                   <td>D{sale.date}</td>    
                   <div className=" flex mt-3">
                       <button><Link onClick={e=> !sale.id ? e.preventDefault(): null}  to= {`/admin/sale/edit?searchId=${sale.id}`}  
