@@ -233,30 +233,54 @@ const Map = () => {
             </div>
         </div>
         </div>
-        <div className="m-0 mt-8 box-border flex flex-col md:text-lg md:py-1 text-white bg-[brown]">
+        <div className="m-0 box-border flex flex-col md:text-lg md:py-1 text-white bg-[brown]">
           <div className="flex justify-around text-gray-100 jus p-4 flex-wrap">
             <div className="mx-2">
               <h2 className="text-center text-gray-300 mt-3">Contacts</h2>
-              (+237) 6xx xx xx xx<br/>
-              (+237) 6xx xx xx xx<br/>
+              <h3 className="text-center">(+237) 656 10 10 91</h3>
+              <h3 className="text-center">(+237) 671 96 39 41</h3>
             </div>
             <div className="mx-2">
                 <h2 className="text-center text-gray-300 mt-3">Adresses email</h2>
-                tracecocoa.camer@gmail.com<br/>
-                adresseemail2@gmail.com<br/>
-            </div>
-            <div className="mx-2">
-                <h2 className="text-center text-gray-300 mt-3">Infos supplémentaires</h2>
-                Ministère de l&apos;agriculture<br/>
+                <h3 className="text-center">hornelamane@gmail.com</h3>
 
-                {/* <h2 className="text-center text-gray-300 mt-2">QR Code producteur</h2> */}
-                
+                <h2 className="text-center text-gray-300 mt-3">Infos supplémentaires</h2>
+                <h3 className="text-center">Ingénieure en Topographie et Cadastres</h3>
             </div>
+            {/* <div className="mx-2">
+                { userCode ? 
+                    <div>
+                      <h2 className="text-center text-gray-300 mt-2">QR Code producteur</h2><br/>
+                      <div>
+                        <div className="flex flex-col md:flex-row"> 
+                          <input type="text" id="qr-id-value" placeholder="Code..." className="text-black text-lg px-2 py-1 border rounded mx-1"/>
+                          <button id="gen-qr-btn" onClick={ genNewCode } className="bg-white text-black text-lg py-1 px-2 border rounded mt-2 md:mt-0 md:ml-2 active:bg-amber-200">Générer</button>
+                        </div>
+                        <QRCodeCanvas
+                          value={ url }
+                          size={200}
+                          bgColor="white"
+                          fgColor="brown"
+                          className="border rounded mt-2 m-auto"
+                          id="qr-canvas"
+                        />
+                        <div className="mt-3"> 
+                          <button id="save-qr" onClick={ handleDownload } className="bg-white m-auto text-black text-lg py-1 px-2 border rounded mt-2 md:mt-0 md:ml-2 active:bg-amber-200
+                          flex flex-row">
+                            <FaDownload className="mr-2"/>
+                            Enregistrer le QR
+                            </button>
+                        </div>
+                      </div>
+                    </div>
+                  : "" }
+                
+            </div> */}
           </div>
           <div className="text-center border-t">
             Copyright © 2024 Tous droits reservés
           </div>
- 
+
         </div>
       </section>
     </div>

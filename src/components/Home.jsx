@@ -174,7 +174,7 @@ const Home = () => {
         <div className=' mt-2 md:mt-2 pl-2 pr-14 py-1'>
           {userCode ? 
           <div className=" ">
-            <h1 className="border-l text-4xl md:text-[2.5rem]">Bienvenue sur  <strong>Trace Cocoa</strong></h1>
+            <h1 className="border-l text-4xl md:text-[2.5rem]">Bienvenue sur  <strong>Trace Cocoa</strong> <sub>BY MANE</sub></h1>
               <p className="text-gray-900 ">
               Plateforme de vente et d'achat de cacao en ligne chez des commerçants de confiance<br/>
 
@@ -213,8 +213,8 @@ const Home = () => {
 
                 <div className="flex flex-row border-y-2 py-3 float-end my-3 items-center justify-between">
                   <div>
-                    <h1 className="text-center text-black text-lg md:text-2xl"><strong>Module Statistique</strong></h1>
-                    Ici vous aurez un compte rendu de votre activité (nombre/quantité de ventes, nombre/quantité d'achats, ...).<br/>
+                    <h1 className="text-center text-black text-lg md:text-2xl"><strong>Module Administration</strong></h1>
+                    Ici vous pourrez géner les données de l'application (ajouter/supprimer de nouvelles coopératives, ajouter/supprimer les exportateurs,...).<br/>
                     <Link to="/admin/dashboard" className="text-blue-700 underline font-bold">Plus...</Link>
                   </div>
                   <img src={ administration } className="border mr-8 w-20 h-20 md:w-40 md:h-40"/>
