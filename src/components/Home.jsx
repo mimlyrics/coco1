@@ -214,7 +214,7 @@ const Home = () => {
                 <div className="flex flex-row border-y-2 py-3 float-end my-3 items-center justify-between">
                   <div>
                     <h1 className="text-center text-black text-lg md:text-2xl"><strong>Module Administration</strong></h1>
-                    Ici vous pourrez gérer les données de l'application (ajouter/supprimer de nouvelles coopératives, ajouter/supprimer les exportateurs,...).<br/>
+                    Ici vous pourrez gérer les données de l'application (ajouter/supprimer les coopératives, ajouter/supprimer les exportateurs,...).<br/>
                     <Link to="/admin/dashboard" className="text-blue-700 underline font-bold">Plus...</Link>
                   </div>
                   <img src={ administration } className="border mr-8 w-20 h-20 md:w-40 md:h-40"/>
